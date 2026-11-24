@@ -6,12 +6,14 @@ backend or API keys. Progress stays on the device.
 
 This is education, not investment, legal or tax advice. Brew Lane Cafés Ltd is fictional.
 
+**Live app: https://hardikk1233.github.io/twenty/**
+
 ## Put it on your phone
 
-The app must be served over HTTPS before a phone will install it. The simplest permanent
-option is GitHub Pages: push this folder to a GitHub repository and the included workflow
-(`.github/workflows/deploy.yml`) builds and publishes it on every push to `main`. Then turn on
-**Settings, Pages, Source: GitHub Actions** in the repository.
+The app must be served over HTTPS before a phone will install it. This repository publishes
+itself to GitHub Pages: the workflow in `.github/workflows/deploy.yml` runs the tests and the
+content validator, builds, and deploys on every push to `main`. To set up a copy elsewhere,
+push to a new GitHub repository and turn on **Settings, Pages, Source: GitHub Actions**.
 
 Any static HTTPS host also works. Build, then upload `dist/`:
 
