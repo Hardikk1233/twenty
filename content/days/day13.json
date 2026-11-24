@@ -1,0 +1,148 @@
+{
+  "day": 13,
+  "phase": 3,
+  "title": "Risk, return and cost of capital",
+  "pages": {
+    "why": "A private credit fund, which lends directly to companies, offers a café chain a loan at 10% a year. An equity fund looking at the same chain wants 20% a year before it will buy shares. Both are being rational: they stand in different places in the queue for the company's cash.",
+    "idea": "A company is funded by lenders and by shareholders, and they take different risks.\n\n- Lenders are paid first: interest every year and their money back on a set date. Their upside, the gain if things go well, is capped at the agreed interest.\n- Shareholders are paid last, from whatever is left, but keep all of the upside.\n\nMore risk means a higher required return, so equity costs more than debt.\n\nThe **cost of debt** is the interest rate the company pays to borrow. Interest reduces tax, so the after-tax cost is lower: rate × (1 − tax rate).\n\nThe **cost of equity** is the return shareholders require. No statement reports it, so it is estimated, usually with the capital asset pricing model (CAPM):\n\n- Start with the **risk-free rate**, the return on long-term government bonds (tradable loans to the government) in the same currency: Indian government bonds for rupees, US Treasuries for dollars.\n- Add the **equity risk premium**, the extra return investors demand for owning shares instead.\n- Scale that premium by **beta**: how much the share tends to move when the whole market moves. A beta of 1 moves with the market; 1.5 tends to move one and a half times as much.\n\nThe **WACC**, or weighted average cost of capital, blends the two costs in proportion to the market values of equity and debt. It is the discount rate for cash that belongs to lenders and shareholders together.\n\nThe rule that matters: higher risk, higher discount rate, lower value.",
+    "example": {
+      "text": "Brew Lane's cost of debt comes from its statements: interest of ₹3 crore on debt of ₹30 crore is 10%, or 7.5% after 25% tax. Strictly, it is the rate Brew Lane would pay on a new loan today; interest ÷ debt is a common shortcut.\n\nThe cost of equity needs three assumptions, not reported figures: a risk-free rate of 7%, an equity risk premium of 6% and a beta of 1.25. Cost of equity = 7% + 1.25 × 6% = 14.5%.\n\n{table}\n\nThe weights use market values: equity at ₹180 a share × 1 crore shares = ₹180 crore, and debt at the ₹30 crore on its balance sheet, the usual stand-in for its market value. That makes 180 ÷ 210 = 85.7% equity and 14.3% debt.\n\nWACC = 85.7% × 14.5% + 14.3% × 7.5% = 12.4% + 1.1% = 13.5%.\n\nRaise beta to 1.5 and the cost of equity becomes 16%, lifting WACC to 14.8%: every future rupee is worth less today.",
+      "table": {
+        "caption": "%, Brew Lane at FY26; cost of equity uses assumed inputs",
+        "columns": ["Cost %", "Weight %"],
+        "rows": [
+          { "label": "Equity, at market value", "values": [14.5, 85.7] },
+          { "label": "Debt, after tax", "values": [7.5, 14.3] },
+          { "label": "WACC", "values": [13.5, 100], "rule": "total", "highlight": true }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Cost of debt",
+        "aka": ["borrowing cost"],
+        "definition": "The interest rate a company pays to borrow. Interest cuts tax, so the after-tax cost is lower.",
+        "formula": "After tax: interest rate × (1 − tax rate)"
+      },
+      {
+        "term": "Cost of equity",
+        "aka": ["required return on equity"],
+        "definition": "The yearly return shareholders require for owning the shares. Never reported, so it is estimated, usually with CAPM.",
+        "formula": "Risk-free rate + beta × equity risk premium"
+      },
+      {
+        "term": "Risk-free rate",
+        "definition": "The return on an investment that is all but certain to be paid, usually long-term government bonds in the same currency."
+      },
+      {
+        "term": "Equity risk premium",
+        "aka": ["ERP", "market risk premium"],
+        "definition": "The extra yearly return investors demand for holding shares rather than risk-free bonds. Estimates vary, so firms set a house figure."
+      },
+      {
+        "term": "Beta",
+        "definition": "How much a share price tends to move with the whole market. 1 moves with it; above 1 swings more; below 1, less."
+      },
+      {
+        "term": "WACC",
+        "aka": ["weighted average cost of capital", "cost of capital"],
+        "definition": "The blended return lenders and shareholders require, weighted by the market value of each. Used to discount cash that belongs to both.",
+        "formula": "Equity weight × cost of equity + debt weight × after-tax cost of debt"
+      }
+    ],
+    "builder": "None of these inputs is printed in the annual report. The risk-free rate is a market rate on a chosen date. Beta comes from a data vendor, or from past share prices over a period someone picked. The equity risk premium is a house view. Each choice moves the answer: two careful analysts can land points apart on the same company.\n\nSo a system should never bury them inside a formula. Show every input with its source, its date and who chose it. Let a human override any of them, and log the change.\n\n**Check worth building:** before a valuation runs, confirm that each discount-rate input has a source, a date and an approver, and stop the run if one is missing.",
+    "client": {
+      "say": "These rates are judgement calls, so I'd like to use your house inputs and show where each one comes from.",
+      "ask": "Where do your discount rate inputs come from, and who approves them?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d13-concept1",
+      "type": "concept",
+      "concept": "Paid last, so higher return",
+      "kind": "choice",
+      "prompt": "Why do shareholders require a higher return than lenders to the same company?",
+      "options": [
+        "Their money is usually tied up for longer than a typical loan",
+        "Tax rules make companies pay shareholders more than lenders",
+        "Shares trade on a stock exchange, while most loans never do",
+        "They are paid last and promised nothing, so bear more risk"
+      ],
+      "answer": 3,
+      "explain": "Lenders get interest and repayment before shareholders see anything, so shareholders carry more risk and demand more for it. Money tied up for longer is tempting, but a long loan still ranks first for payment: the difference is risk, not time."
+    },
+    {
+      "id": "d13-concept2",
+      "type": "concept",
+      "concept": "Higher risk, lower value",
+      "kind": "choice",
+      "prompt": "An analyst raises a company's beta from 1.0 to 1.4, with nothing else changed. What happens to the present value of its future cash flows?",
+      "options": [
+        "It falls, because a higher discount rate shrinks future cash",
+        "It rises, because riskier companies tend to grow faster than others",
+        "It rises, because shareholders now earn a higher return",
+        "Nothing changes, because beta affects only the share price"
+      ],
+      "answer": 0,
+      "explain": "A higher beta raises the cost of equity and the WACC, and the same future cash divided by a bigger rate is worth less today. 'Shareholders now earn more' is tempting, but the higher return is what they demand, not what the company delivers."
+    },
+    {
+      "id": "d13-calc1",
+      "type": "calc",
+      "concept": "Cost of equity with CAPM",
+      "kind": "number",
+      "prompt": "Assume a risk-free rate of 7% and an equity risk premium of 6%. A water utility, whose shares move less than the market, has a beta of 0.8. What is its cost of equity?",
+      "answer": 11.8,
+      "tolerance": 0.1,
+      "unit": "%",
+      "check": "7 + 0.8 * 6",
+      "explain": "Cost of equity = 7% + 0.8 × 6% = 7% + 4.8% = 11.8%. 13% is the common slip: it adds the full premium and forgets to scale it by beta."
+    },
+    {
+      "id": "d13-calc2",
+      "type": "calc",
+      "concept": "WACC uses after-tax debt",
+      "kind": "choice",
+      "prompt": "A company is funded 60% by equity and 40% by debt, at market values. Its cost of equity is 15%, its cost of debt is 10% before tax, and its tax rate is 25%. What is its WACC?",
+      "options": ["11.25%", "12%", "12.5%", "13%"],
+      "answer": 1,
+      "check": "0.6 * 15 + 0.4 * 10 * (1 - 0.25)",
+      "explain": "After tax, debt costs 10% × 0.75 = 7.5%, so WACC = 0.6 × 15% + 0.4 × 7.5% = 9% + 3% = 12%. 13% is the tempting slip: it uses the 10% cost of debt before tax and misses the tax saving on interest."
+    },
+    {
+      "id": "d13-client1",
+      "type": "client",
+      "concept": "Use the client's approved inputs",
+      "kind": "choice",
+      "prompt": "A portfolio manager says, 'Just use the usual discount rate for this valuation.' Which reply is best?",
+      "options": [
+        "Of course. We'll use 10%, which is the standard for most companies.",
+        "There is no usual rate: every company's WACC is unique to it.",
+        "Of course. Is there a house sheet, and who signs off its inputs?",
+        "Of course. We'll ask our AI model to estimate the right rate."
+      ],
+      "answer": 2,
+      "explain": "Discount-rate inputs are judgement calls, so using the client's approved ones keeps your valuation consistent with theirs, and knowing the approver tells you who to ask. Assuming 10% sounds decisive, but a couple of points of discount rate can move a value a long way."
+    },
+    {
+      "id": "d13-builder1",
+      "type": "builder",
+      "concept": "Watch the inputs, not the maths",
+      "kind": "choice",
+      "prompt": "Overnight, your data feed changes a café chain's beta from 1.25 to 2.6, and your valuation tool's answer drops sharply. Nobody notices until the client asks. Which check would have caught this?",
+      "options": [
+        "Show each input with its source and date, and hold big moves for sign-off",
+        "Recompute the valuation in a second spreadsheet to confirm the arithmetic",
+        "Average the new beta with the old one, and keep the valuation running",
+        "Ask a language model whether a beta of 2.6 sounds reasonable"
+      ],
+      "answer": 0,
+      "explain": "The arithmetic was fine; an input changed, so the check must watch inputs: their source, their date, the size of any move and a human sign-off. Recomputing in a second spreadsheet is tempting, but it repeats the same calculation on the same bad beta."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a fund manager why a riskier company is worth less, even with the same cash flows.",
+    "modelAnswer": "Investors want to be paid for risk. Lenders are paid first, so they accept less; shareholders are paid last, so they want more. We build that into the discount rate: the risk-free rate, plus a premium for owning shares, scaled by beta, which is how much the stock swings with the market. Blend the costs of equity and debt by their weights and you get the WACC: 13.5% for Brew Lane, on our assumptions. Same cash flows, higher discount rate, lower value today."
+  }
+}

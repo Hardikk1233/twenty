@@ -1,0 +1,150 @@
+{
+  "day": 11,
+  "phase": 2,
+  "title": "Business quality and sector language",
+  "pages": {
+    "why": "In one week, a fund analyst reads results from a retailer, a bank and a software company. The retailer leads with same-store sales, the bank with its interest margin and bad loans, the software firm with recurring revenue, and none puts EBITDA on page one. A system that knows only one template will hunt for numbers that are not there and miss the ones that matter.",
+    "idea": "Ratios tell you how a business performed. Business quality asks why, and whether it will last.\n\n**Unit economics** looks at one unit: one cup, one café, one customer. A cup sold for ₹200 that needs ₹80 of beans, milk and packaging contributes ₹120 towards rent and salaries. If each unit makes money, growth adds profit; if not, growth adds losses.\n\nCosts are variable, moving with sales (beans, cups), or fixed (rent, salaried staff). **Operating leverage** is the effect of fixed costs: once they are covered, most of each extra sale becomes profit, so profit swings more than sales, in both directions.\n\n**Pricing power** is the ability to raise prices without losing customers. It shows when input costs rise and gross margins hold.\n\nEach sector also has its own language. Recognise these; you need not master them.\n\n- Lenders: **net interest margin** (interest earned minus interest paid, as a share of loans), bad loans (non-performing assets in India) and capital adequacy (the capital a bank holds against its risks).\n- Software: **annual recurring revenue** (the yearly value of subscriptions in force), churn (the share of customers lost each year), net revenue retention (what last year's customers pay now, as a percentage of what they paid then), and CAC and LTV (customer acquisition cost and lifetime value: what it costs to win a customer, and what one is worth over time).\n- Retail and restaurants: **same-store sales growth** (growth at stores open in both periods).\n- Manufacturing: capacity utilisation (output as a share of what the plants can make).\n- Real estate: pre-sales (the value of homes booked) and collections (the cash received).",
+    "example": {
+      "text": "Assume Brew Lane's cost of goods sold moves in step with sales, while its operating expenses and depreciation stay fixed for the year. What if FY26 sales had been 10% higher?\n\n{table}\n\nSales rise 10%, yet EBIT rises from 15 to 21, or 40%. The extra ₹10 crore of sales brings ₹4 crore of extra cost of goods sold, and the other ₹6 crore reaches EBIT, because rent, salaries and depreciation do not change.\n\n40% ÷ 10% = 4: each 1% change in sales moves EBIT by about 4%. That works in reverse too, which is why high fixed costs make a business riskier in a downturn.\n\nReal costs are rarely all fixed or all variable, so treat this as a sketch, not a forecast.",
+      "table": {
+        "caption": "₹ crore, FY26 and with sales 10% higher (assumed)",
+        "columns": ["FY26", "Sales +10%"],
+        "rows": [
+          { "label": "Revenue", "values": [100, 110] },
+          { "label": "Cost of goods sold", "values": [-40, -44] },
+          { "label": "Gross profit", "values": [60, 66], "rule": "subtotal" },
+          { "label": "Operating expenses", "values": [-40, -40] },
+          { "label": "Depreciation", "values": [-5, -5] },
+          { "label": "EBIT", "values": [15, 21], "rule": "total", "highlight": true }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Unit economics",
+        "definition": "Revenue and costs for a single unit, such as one cup, café or customer, to show whether each one makes money."
+      },
+      {
+        "term": "Operating leverage",
+        "definition": "How strongly operating profit responds to a change in sales. High fixed costs make profit swing more than sales, up and down.",
+        "formula": "% change in EBIT ÷ % change in revenue"
+      },
+      {
+        "term": "Pricing power",
+        "definition": "The ability to raise prices without losing many customers, seen in gross margins that hold when input costs rise."
+      },
+      {
+        "term": "Net interest margin",
+        "aka": ["NIM"],
+        "definition": "A lender's interest earned minus interest paid, as a percentage of the loans and other assets that earn interest.",
+        "formula": "(Interest earned − interest paid) ÷ average interest-earning assets × 100"
+      },
+      {
+        "term": "Annual recurring revenue",
+        "aka": ["ARR"],
+        "definition": "The yearly value of the subscription contracts in force today. A snapshot of contracts, not revenue already earned.",
+        "formula": "Monthly recurring revenue × 12"
+      },
+      {
+        "term": "Same-store sales growth",
+        "aka": ["like-for-like sales growth", "SSSG"],
+        "definition": "Sales growth at stores open in both periods, leaving out new openings and closures."
+      }
+    ],
+    "builder": "Most extraction templates assume a company like Brew Lane: revenue, cost of goods sold, EBITDA, working capital. A bank breaks all of them. Its revenue is mostly interest earned, the interest it pays is its main cost, and its loans are what it sells. Ask a generic template for a bank's EBITDA and it will fail or, worse, return a number that means nothing. A software firm's key figure, annual recurring revenue, is not in the income statement at all; it sits in the investor presentation.\n\nSo schemas and metric dictionaries must be sector-aware: each sector gets its own fields, definitions and likely sources.\n\n**Check worth building:** tag every company with its sector, and refuse to compute any metric not defined for that sector, such as EBITDA for a bank.",
+    "client": {
+      "say": "We'd build a metric dictionary for each sector you cover, so a bank is never forced into a café chain's template.",
+      "ask": "Which sectors do you cover, and which ones do your templates fit badly?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d11-concept1",
+      "type": "concept",
+      "concept": "Operating leverage",
+      "kind": "choice",
+      "prompt": "Two café chains each grow sales by 10%. Chain A pays a fixed rent on long leases. Chain B pays rent as a fixed share of its sales. If everything else is the same, whose operating profit rises faster?",
+      "options": [
+        "Both rise by 10%, since their sales grew by the same amount",
+        "A's, because its rent stays flat while its sales rise",
+        "B's, because its rent falls as a share of its sales",
+        "B's, because its rent is lower when sales are weak"
+      ],
+      "answer": 1,
+      "explain": "A's rent is fixed, so the extra sales reach profit after only variable costs, and its operating profit grows faster than 10%: that is operating leverage. 'Both rise 10%' is tempting, but profit grows in line with sales only when every cost moves with sales."
+    },
+    {
+      "id": "d11-concept2",
+      "type": "concept",
+      "concept": "Same-store sales growth",
+      "kind": "choice",
+      "prompt": "A café chain's total sales grew 30%, but its same-store sales growth was 2%. What does that tell you?",
+      "options": [
+        "Existing cafés grew 30%, while new cafés grew 2%",
+        "Prices across the chain must have fallen by about 28%",
+        "Most of the growth came from new cafés, not existing ones",
+        "One figure is wrong, since the two cannot differ this much"
+      ],
+      "answer": 2,
+      "explain": "Same-store sales growth counts only cafés open in both years, so 2% there against 30% overall means new cafés drove nearly all the growth. Reading 30% as the existing cafés' growth is tempting, but it swaps the two figures: the same-store number is the existing cafés' growth."
+    },
+    {
+      "id": "d11-calc1",
+      "type": "calc",
+      "concept": "Operating leverage cuts both ways",
+      "kind": "number",
+      "prompt": "Assume, as in the lesson, that Brew Lane's cost of goods sold moves with sales, while operating expenses and depreciation are fixed. If FY26 sales had been 20% lower, what would EBIT have been?",
+      "answer": 3,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "revenue * 0.8 - cogs * 0.8 - opex - depreciation",
+      "explain": "Sales of 80, less cost of goods sold of 32, operating expenses of 40 and depreciation of 5, leave ₹3 crore: an 80% fall in EBIT from a 20% fall in sales. ₹12 crore is the common slip: it cuts EBIT by 20%, as if every cost moved with sales."
+    },
+    {
+      "id": "d11-calc2",
+      "type": "calc",
+      "concept": "Net interest margin",
+      "kind": "choice",
+      "prompt": "A small lender's only interest-earning assets are loans averaging ₹100 crore over the year. It earns ₹12 crore of interest on them and pays ₹7 crore of interest on its own borrowings. What is its net interest margin?",
+      "options": ["5%", "7%", "12%", "19%"],
+      "answer": 0,
+      "check": "(12 - 7) / 100 * 100",
+      "explain": "Net interest margin = (12 − 7) ÷ 100 = 5%. 12% is the tempting pick, but that is the yield on loans before the interest the lender pays for its own funding."
+    },
+    {
+      "id": "d11-client1",
+      "type": "client",
+      "concept": "Sector-aware templates",
+      "kind": "choice",
+      "prompt": "A credit fund analyst asks, 'Can you reuse the template you built for our consumer companies on our banks and software firms?' Which reply is best?",
+      "options": [
+        "Yes: one template keeps every company comparable, so we can start today.",
+        "No, each company needs its own template, built from scratch.",
+        "Yes, and we'll compute EBITDA for the banks too, so the sectors line up.",
+        "Partly. Which metrics does your team track for banks and software?"
+      ],
+      "answer": 3,
+      "explain": "Banks and software firms need their own metrics, so asking which ones the team tracks is how the template becomes sector-aware. Reusing one template is tempting because it looks consistent, but it forces a bank into fields like EBITDA that mean nothing for it."
+    },
+    {
+      "id": "d11-builder1",
+      "type": "builder",
+      "concept": "Block metrics a sector lacks",
+      "kind": "choice",
+      "prompt": "Your system fills a standard template for a bank and reports 'EBITDA margin: 62%'. What went wrong, and which check would catch it?",
+      "options": [
+        "A non-bank template was used; block metrics not defined for the sector",
+        "The bank's interest was misread; re-extract it and recompute the margin",
+        "No margin can be that high; flag any margin above 50% for review",
+        "Banks define EBITDA their own way; ask the model for this bank's"
+      ],
+      "answer": 0,
+      "explain": "For a bank, interest paid is the main cost of doing business, so an EBITDA that adds it back means nothing; tagging the sector and blocking undefined metrics stops it being computed. A 50% threshold is tempting, but it would flag healthy software firms and still pass a meaningless bank 'EBITDA' of 30%."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a new colleague why Brew Lane's profit would swing more than its sales.",
+    "modelAnswer": "More than half of Brew Lane's costs don't move with sales. Rent, salaries and depreciation stay roughly the same whether a café sells a hundred cups or a hundred and ten. So once the ingredients are paid for, most of each extra sale drops to profit. If sales rose 10% and only cost of goods sold rose with them, EBIT would go from 15 crore to 21, up 40%. That's operating leverage, and it cuts both ways: a bad year hits profit much harder than sales."
+  }
+}

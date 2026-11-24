@@ -1,0 +1,149 @@
+{
+  "day": 25,
+  "phase": 5,
+  "title": "The use-case map",
+  "pages": {
+    "why": "A London private equity firm asks your team where AI could help. In one meeting its staff list eleven tasks, from drafting investment memos to checking every number in board decks. You can build one or two of them well, not eleven, and a poor first choice can cost months and the client's trust.",
+    "idea": "A **use case** is one task, for one group of users, with a clear input and output: 'pull 20 figures from each portfolio company's monthly report into the monitoring sheet', not 'AI for portfolio monitoring'. It sits inside a **workflow**, the chain of steps from trigger to finished output, including who checks it.\n\nMost finance use cases come from a short catalogue, with document extraction running under nearly all of them:\n\n- Hedge and long-only funds: research drafting, comps and screening, model building and audit.\n- Private equity: data room Q&A, portfolio monitoring.\n- Credit funds: covenant tracking.\n- Family offices and wealth managers: consolidated reporting.\n- Fund operations and corporate finance teams: reconciliation, investor report drafts, deck and number checking.\n\nScore each candidate on three things:\n\n- Value: hours × frequency × seniority. A partner's hour is worth more than an analyst's.\n- Feasibility: can you reach the data, and can the output be checked?\n- Risk: what does a wrong answer cost, and would anyone notice?\n\nA **checkable output** can be verified quickly against a source or a rule, such as a figure that ties to its page and to a total. A view on whether to invest cannot be checked that way.\n\nSo start where output is checkable. Begin with **human in the loop**, where a person reviews each output before it is used. As accuracy is proven, move towards **straight-through processing**: items that pass every check need no human touch, and only exceptions reach a person.",
+    "example": {
+      "text": "Suppose the private equity firm shortlists three tasks. Analysts pull figures from 25 portfolio companies' monthly reports. Senior staff write first drafts of investment committee memos. Analysts check the numbers in board decks. Weight an analyst hour as 1 and a senior hour as 2.\n\n{table}\n\nValue: reports take 2 hours × 25 a month = 50 hours. Memos take 6 hours × 4 = 24 hours, but at weight 2 that is 48. Decks come to 20. On value alone, reports and memos are almost level.\n\nFeasibility and risk split them. Each report figure can be checked against its page and its totals, and a wrong one is caught before a partner sees it. A memo's argument has no rule to check it against, and a wrong claim could sway an investment decision.\n\nStart with reports. Memos can wait until the firm trusts the system.",
+      "table": {
+        "caption": "Per month, illustrative; scores out of 5",
+        "columns": ["Reports", "Memos", "Decks"],
+        "rows": [
+          { "label": "Hours per item", "values": [2, 6, 1] },
+          { "label": "Items per month", "values": [25, 4, 20] },
+          { "label": "Hours per month", "values": [50, 24, 20], "rule": "subtotal" },
+          { "label": "Seniority weight", "values": [1, 2, 1] },
+          {
+            "label": "Weighted hours",
+            "values": [50, 48, 20],
+            "rule": "subtotal",
+            "highlight": true
+          },
+          { "label": "Feasibility score", "values": [5, 2, 4] },
+          { "label": "Risk score, 5 is highest", "values": [1, 5, 2] }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Use case",
+        "definition": "One task, for one group of users, with a defined input, output and owner, that a system does or helps with."
+      },
+      {
+        "term": "Workflow",
+        "aka": ["process"],
+        "definition": "The chain of steps people follow to finish a piece of work, from trigger to output, including who reviews it."
+      },
+      {
+        "term": "Human in the loop",
+        "aka": ["HITL"],
+        "definition": "A design in which a person reviews, corrects or approves each output before it is used."
+      },
+      {
+        "term": "Straight-through processing",
+        "aka": ["STP"],
+        "definition": "Processing with no manual step: items that pass every check flow through, and only exceptions go to a person."
+      },
+      {
+        "term": "Checkable output",
+        "definition": "Output a person or a rule can verify quickly against a source or another figure, such as a number that ties to its page and to a total."
+      }
+    ],
+    "builder": "Many finance AI projects stall because of the first use case they picked, not the model. The usual mistake is the impressive demo, such as research opinions or memo drafts, where a reviewer must reread everything. If checking an output takes as long as doing the task, nothing is saved.\n\nThe real saving is the time to do a task minus the time to review the output. Extraction might fall from 2 hours to 20 minutes of review. A memo draft might still need 5 hours of rewriting.\n\nMeasure this per item from day one, rather than asking users how they feel.\n\n**Check worth building:** log, for every item, whether it passed every automated check and how many minutes a reviewer spent on it. A rising straight-through rate and falling review minutes show the use case is paying off.",
+    "client": {
+      "say": "Before we talk about what AI can do, I'd like to see where your team's hours go, and which of that work we could check.",
+      "ask": "If I gave your team back ten hours a week, which task would you choose?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d25-concept1",
+      "type": "concept",
+      "concept": "Best first use case",
+      "kind": "choice",
+      "prompt": "A credit fund's team lists four tasks it would like help with. Which makes the best first use case?",
+      "options": [
+        "Drafting the fund's view on each sector, where partners spend the most hours",
+        "Pulling figures from borrowers' reports, which tie to totals and source pages",
+        "Predicting which borrowers will default next year, the biggest possible prize",
+        "Writing letters to prospective investors, the task the team dislikes most"
+      ],
+      "answer": 1,
+      "explain": "Extracted figures can be checked against their page and against totals, so errors are caught cheaply and the time saved is real. Sector views use the most senior hours, which is tempting, but no rule can check an opinion, so reviewers would reread everything."
+    },
+    {
+      "id": "d25-concept2",
+      "type": "concept",
+      "concept": "Straight-through with exceptions",
+      "kind": "choice",
+      "prompt": "A reconciliation tool handles 1,000 payments a month. The 940 that pass every check are booked without anyone touching them, and the other 60 go to an analyst. What is this design?",
+      "options": [
+        "Human in the loop for every payment, since an analyst is involved",
+        "Straight-through processing, with exceptions sent to a person",
+        "Full automation, since the tool decides which payments need help",
+        "Manual processing, with the tool used only to sort the payments"
+      ],
+      "answer": 1,
+      "explain": "Items that pass every check flow through untouched and only exceptions reach a person, which is straight-through processing. Human in the loop for every payment is tempting because an analyst is involved, but the analyst sees only 60 of the 1,000."
+    },
+    {
+      "id": "d25-calc1",
+      "type": "calc",
+      "concept": "Hours saved, net of review",
+      "kind": "number",
+      "prompt": "A wealth manager's team pulls holdings from 60 custodian statements a month, taking 40 minutes each by hand. With a new tool, a reviewer spends 10 minutes checking each one. How many hours a year does the team save?",
+      "answer": 360,
+      "tolerance": 0,
+      "unit": "hours",
+      "check": "60 * (40 - 10) * 12 / 60",
+      "explain": "Each statement saves 40 − 10 = 30 minutes, so 60 × 30 = 1,800 minutes or 30 hours a month, which is 360 hours a year. 480 hours is the common slip: it counts all 40 minutes as saved and forgets the reviewer's 10."
+    },
+    {
+      "id": "d25-calc2",
+      "type": "calc",
+      "concept": "Net saving after running costs",
+      "kind": "choice",
+      "prompt": "Your firm's analysts spend 50 hours a month checking numbers in client decks. A tool cuts that to 10 hours of review. Analyst time costs ₹1,000 an hour, and the tool costs ₹15,000 a month to run. What is the net saving a year?",
+      "options": ["₹3.0 lakh", "₹4.2 lakh", "₹4.8 lakh", "₹6.0 lakh"],
+      "answer": 0,
+      "check": "((50 - 10) * 1000 - 15000) * 12 / 100000",
+      "explain": "The tool saves 40 hours × ₹1,000 = ₹40,000 a month, and after ₹15,000 of running cost that leaves ₹25,000 a month, or ₹3.0 lakh a year. ₹4.8 lakh is the tempting answer, but it forgets that the tool costs money to run."
+    },
+    {
+      "id": "d25-client1",
+      "type": "client",
+      "concept": "Find where the hours go",
+      "kind": "choice",
+      "prompt": "A hedge fund's head of research says, 'We want AI to write our research notes.' Which reply is best?",
+      "options": [
+        "Our system can write complete notes in your house style within minutes.",
+        "We'd fine-tune a large language model on your notes, with retrieval.",
+        "Which part takes longest: gathering numbers, building tables or writing?",
+        "We'd advise against it, because AI should not write investment research."
+      ],
+      "answer": 2,
+      "explain": "A note mixes checkable work, such as gathering numbers and building tables, with judgement, and knowing where the hours go shows which part to automate first. Promising complete notes is tempting, but it commits you to the least checkable part before you know where the time goes."
+    },
+    {
+      "id": "d25-builder1",
+      "type": "builder",
+      "concept": "Gate straight-through with rules",
+      "kind": "choice",
+      "prompt": "A reconciliation tool sends straight through any match the model rates above 90% confidence. At month-end, 14 auto-approved matches turn out to pair payments with invoices for different amounts. Which check would have caught them?",
+      "options": [
+        "Raise the confidence threshold from 90% to 99% before approving",
+        "Ask the model to explain its reasoning for each match it approves",
+        "Have a reviewer check a random 5% of approved matches each week",
+        "Approve only if amounts and dates tie exactly; review the rest"
+      ],
+      "answer": 3,
+      "explain": "A match is checkable, because amounts and dates either tie or they do not, so a rule should gate straight-through processing and send every difference to a person. A higher threshold is tempting, but confidence is the model's opinion of itself, and a confident wrong match would still pass."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, tell a fund's chief operating officer how you would pick the first AI use case for their team.",
+    "modelAnswer": "I'd start by listing where your team's hours go, then score each task on three things. Value: hours, times how often, times how senior the person is. Feasibility: can we reach the data, and can we check the output against a source? Risk: what does a wrong answer cost, and would anyone notice? I'd begin where output is checkable, like pulling figures from portfolio reports, because every number can be traced and tied out. Opinion work can wait until you trust the system."
+  }
+}

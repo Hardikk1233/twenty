@@ -1,0 +1,152 @@
+{
+  "day": 12,
+  "phase": 3,
+  "title": "Time value of money",
+  "pages": {
+    "why": "A family office is offered two deals for the same ₹10 crore: one pays back ₹13 crore after two years, the other ₹14 crore after four. The bigger number is not necessarily the better deal, because money that arrives later is worth less today. Every valuation method in this phase starts from that idea.",
+    "idea": "₹100 today is worth more than ₹100 in two years, because today's money can be invested and earn a return in the meantime. That is the **time value of money**. Risk adds to it: a promise to pay later might not be kept.\n\n**Compounding** is how money grows. At 10% a year, ₹100 becomes ₹110 after one year and ₹121 after two. In the second year you also earn interest on the first year's ₹10 of interest.\n\nDiscounting runs the same arithmetic backwards. At 10%, ₹121 due in two years is worth ₹100 today: its **present value** (PV). You divide by 1.1 once for each year of waiting.\n\nThe rate you use is the **discount rate**: the return you require for waiting and for the risk, usually what you could earn elsewhere on something equally risky. A higher rate means a lower present value.\n\nTwo tools turn this into decisions:\n\n- **Net present value** (NPV): the present value of the cash a deal brings in, minus what it costs today. Above zero, the deal beats your required return.\n- **Internal rate of return** (IRR): the discount rate at which NPV is exactly zero, the deal's own yearly return.\n\nInvestors state their required return as a hurdle. 'We underwrite to 18%' means a deal must show at least an 18% IRR in the model before the team approves it. Funds usually quote IRR, but NPV is the safer guide when deals differ in size: a high IRR on a small deal can add less value than a lower IRR on a large one.",
+    "example": {
+      "text": "Suppose Brew Lane is weighing a two-year contract to run the cafés at a business park. Assume it costs ₹10 crore today for kitchens and fit-out, brings in cash of ₹6 crore after one year and ₹7.2 crore after two, and that Brew Lane requires 10% a year. These are assumptions, not reported figures.\n\n{table}\n\nUndiscounted, the contract returns ₹13.2 crore for ₹10 crore. At 10%, Year 1's cash is worth 6 ÷ 1.1 = 5.45 today and Year 2's is worth 7.2 ÷ 1.21 = 5.95. NPV = 5.45 + 5.95 − 10 = ₹1.4 crore. Positive, so the contract beats Brew Lane's 10% requirement.\n\nNow try 20%: 6 ÷ 1.2 = 5 and 7.2 ÷ 1.44 = 5. Together they are worth exactly the ₹10 crore paid, so NPV is zero and the IRR is 20%.",
+      "table": {
+        "caption": "₹ crore, assumed contract; PV is present value",
+        "columns": ["Cash", "PV at 10%", "PV at 20%"],
+        "rows": [
+          { "label": "Year 0 (today)", "values": [-10, -10, -10] },
+          { "label": "Year 1", "values": [6, 5.45, 5] },
+          { "label": "Year 2", "values": [7.2, 5.95, 5] },
+          { "label": "Total", "values": [3.2, 1.4, 0], "rule": "total", "highlight": true }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Time value of money",
+        "aka": ["TVM"],
+        "definition": "Money today is worth more than the same amount later, because it can earn a return meanwhile and a later payment carries risk."
+      },
+      {
+        "term": "Compounding",
+        "aka": ["compound interest"],
+        "definition": "Earning returns on past returns as well as on the original sum, so money grows faster each year.",
+        "formula": "Future value = amount today × (1 + rate)^years"
+      },
+      {
+        "term": "Present value",
+        "aka": ["PV", "discounted value"],
+        "definition": "What a future amount is worth today, found by discounting it at the required return.",
+        "formula": "Future amount ÷ (1 + rate)^years"
+      },
+      {
+        "term": "Discount rate",
+        "aka": ["required return"],
+        "definition": "The yearly return you require for waiting and for the risk, used to turn future cash into present value."
+      },
+      {
+        "term": "Net present value",
+        "aka": ["NPV"],
+        "definition": "The present value of a deal's future cash minus its cost today. Above zero, the deal beats the discount rate.",
+        "formula": "Present value of future cash − cost today"
+      },
+      {
+        "term": "Internal rate of return",
+        "aka": ["IRR"],
+        "definition": "The discount rate at which NPV is exactly zero: the deal's own yearly return, compared with the hurdle.",
+        "formula": "The rate that makes NPV = 0"
+      }
+    ],
+    "builder": "NPV and IRR are arithmetic. A language model asked for one will write a plausible number that may be wrong, so compute them in code or with spreadsheet functions, and let the model only find and label the cash flows.\n\nIRR has no formula; software finds it by trial and error. Some patterns, such as cash out, then in, then out again, have two IRRs or none, and code must say so rather than pick one.\n\nDates matter too. Excel's NPV and IRR functions assume equal gaps between cash flows, but real deals have money going in on 17 March and coming back on 2 October. Use date-aware functions such as XNPV and XIRR.\n\n**Check worth building:** recompute every reported IRR from the dated cash flows, and confirm that NPV at that rate comes to zero.",
+    "client": {
+      "say": "Your hurdle sets the discount rate in every model we build for you, so I'd like to start from your number.",
+      "ask": "What return hurdle do you underwrite to?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d12-concept1",
+      "type": "concept",
+      "concept": "Higher rate, lower present value",
+      "kind": "choice",
+      "prompt": "A fund raises the discount rate it applies to a deal's future cash from 10% to 15%. What happens to the present value of that cash?",
+      "options": [
+        "It rises, because each rupee now compounds faster",
+        "It stays the same, because the cash flows themselves are unchanged",
+        "It falls, because each future rupee is now worth less today",
+        "It falls, but only for cash due after the first year"
+      ],
+      "answer": 2,
+      "explain": "Present value divides each future amount by (1 + rate) once per year of waiting, so a higher rate gives a smaller result, from the first year on. 'It rises' is the tempting slip: a higher rate grows money faster going forward, which is exactly why less is needed today."
+    },
+    {
+      "id": "d12-concept2",
+      "type": "concept",
+      "concept": "What a zero NPV means",
+      "kind": "choice",
+      "prompt": "A deal has an NPV of exactly zero at the fund's 12% discount rate. What does that mean?",
+      "options": [
+        "The deal earns exactly 12% a year, no more and no less",
+        "The deal makes no money: it only returns what was put in",
+        "The deal loses 12% of the money invested in it each year",
+        "The deal's IRR cannot be worked out from its cash flows"
+      ],
+      "answer": 0,
+      "explain": "NPV is zero when the cash, discounted at 12%, exactly repays the cost, so the deal earns precisely the 12% required and its IRR is 12%. 'Makes no money' is the tempting reading, but a zero-NPV deal still earns 12% a year; it just adds nothing beyond the hurdle."
+    },
+    {
+      "id": "d12-calc1",
+      "type": "calc",
+      "concept": "NPV of a two-year project",
+      "kind": "number",
+      "prompt": "Suppose Brew Lane could spend ₹10 crore today on new ovens that save ₹6.6 crore of costs in Year 1 and ₹6.05 crore in Year 2. At a 10% discount rate, what is the NPV?",
+      "answer": 1,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "6.6 / 1.1 + 6.05 / 1.1^2 - 10",
+      "explain": "6.6 ÷ 1.1 = 6 and 6.05 ÷ 1.21 = 5, so NPV = 6 + 5 − 10 = ₹1 crore. ₹2.65 crore is the common slip: it adds up the savings without discounting them."
+    },
+    {
+      "id": "d12-calc2",
+      "type": "calc",
+      "concept": "IRR from two cash flows",
+      "kind": "choice",
+      "prompt": "A fund pays ₹100 crore for a stake and sells it for ₹169 crore exactly two years later, with no cash in between. What is its IRR?",
+      "options": ["13%", "30%", "34.5%", "69%"],
+      "answer": 1,
+      "check": "((169 / 100)^(1 / 2) - 1) * 100",
+      "explain": "The IRR solves 100 × (1 + r) × (1 + r) = 169, and 1.3 × 1.3 = 1.69, so it is 30% a year. 34.5% is the tempting slip: it splits the 69% total gain evenly over two years and ignores compounding."
+    },
+    {
+      "id": "d12-client1",
+      "type": "client",
+      "concept": "Ask which hurdle applies",
+      "kind": "choice",
+      "prompt": "A family office's head of investments says, 'Tell me which of these five deals clear our hurdle.' Which reply is best?",
+      "options": [
+        "Sure. We'll rank them by total profit, largest first.",
+        "Hurdles are arbitrary; comparing NPVs would serve you better.",
+        "Sure. Our system can give you an IRR for any deal instantly.",
+        "Sure. What is the hurdle, and is it higher for riskier deals?"
+      ],
+      "answer": 3,
+      "explain": "The hurdle is the line every deal is tested against, and many investors set a higher one for riskier deals, so you need it before any model runs. Ranking by total profit sounds practical, but it ignores when the cash arrives, which is the whole point of a hurdle."
+    },
+    {
+      "id": "d12-builder1",
+      "type": "builder",
+      "concept": "Use the actual dates",
+      "kind": "choice",
+      "prompt": "A fund invested ₹100 crore on 1 April 2024 and received ₹121 crore on 30 September 2025, 18 months later. Your system reports an IRR of 21%, from a function that treats each cash flow as one year after the last. What should it do instead?",
+      "options": [
+        "Keep 21%, since IRR always treats cash flows as a year apart",
+        "Divide the 21% gain by 1.5 years and report 14% a year",
+        "Use a date-aware IRR on the actual dates, giving about 13.6%",
+        "Ask a language model to read the dates and estimate the IRR"
+      ],
+      "answer": 2,
+      "explain": "A date-aware function such as XIRR solves 1.21 = (1 + r)^1.5 for the real 18 months, giving about 13.6% a year. Dividing by 1.5 to get 14% is tempting, but it ignores compounding and overstates the yearly rate."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a new colleague what NPV and IRR tell an investor about a deal.",
+    "modelAnswer": "Money today is worth more than money later, because it can earn a return meanwhile. So we discount future cash at the return we require. NPV adds up a deal's discounted cash and takes off what we pay today: above zero means it beats our required return. IRR is the rate at which NPV is exactly zero, the deal's own yearly return. Take a contract that costs ₹10 crore and returns ₹6 crore, then ₹7.2 crore: at 10% its NPV is ₹1.4 crore, and its IRR is 20%."
+  }
+}

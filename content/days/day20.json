@@ -1,0 +1,147 @@
+{
+  "day": 20,
+  "phase": 4,
+  "title": "Public-markets investing and research",
+  "pages": {
+    "why": "At 4 p.m., a company held by a London hedge fund publishes its quarterly results, and an hour later management takes analysts' questions on a call. Before the market opens tomorrow, the portfolio manager must decide whether to buy more, hold or sell. The analyst has tonight to answer one question: does the reason the fund owns these shares still hold?",
+    "idea": "A long-only fund buys shares it expects to rise. A **long/short** fund, a type of hedge fund, also sells short: it borrows shares it expects to fall, sells them, and later buys them back to return to the lender, ideally at a lower price.\n\nEvery holding, or position, needs an **investment thesis**: a short, testable argument for why the price is wrong, and what would prove the argument wrong. The work runs in a loop: idea, research, model, position, monitor.\n\nMonitoring peaks in results season, the weeks after each quarter ends. A company publishes results, then holds an earnings call where analysts question management. Investors compare the numbers with consensus, listen for changes in **guidance**, management's own forecast, and revise their estimates.\n\nA research note has a familiar shape: the headline view and rating (buy, hold or sell), what changed, the thesis, estimates, valuation and a price target (where the analyst expects the share price in a year), bull, base and bear cases for good, expected and bad outcomes, and key risks.\n\nFunds are judged on risk as well as return. Beta (Day 13) measures how much an investment moves with the market. **Alpha** is the return left after allowing for that market exposure: the part skill can claim. Volatility measures how much returns swing, usually as their standard deviation. The **Sharpe ratio** divides return above the risk-free rate by volatility. A **drawdown** is a fall from a peak to a later low, as a percentage of the peak.",
+    "example": {
+      "text": "Suppose analysts expected Brew Lane's FY26 revenue to be ₹96 crore, EBITDA ₹21 crore and EPS ₹10. Results land at 4 p.m., and a results-day tool should produce this table within minutes.\n\n{table}\n\nRevenue beat by 4.2%: (100 − 96) ÷ 96. EBITDA missed by 4.8%, (20 − 21) ÷ 21, and EPS by 10%. Sales were stronger than expected, but costs grew faster: the EBITDA margin was 20% against 21.9% expected, 21 ÷ 96.\n\nNext, the analyst asks: did guidance change, and what did management say about costs on the call? Each quote is recorded with its speaker and timestamp. Then the model and estimates are updated, and a short note goes out: headline view first, then results against estimates, what changed, new estimates and price target, and whether the thesis still holds.",
+      "table": {
+        "caption": "₹ crore unless stated, year ended 31 March 2026",
+        "columns": ["FY26 reported", "Consensus, assumed", "Difference %"],
+        "rows": [
+          { "label": "Revenue", "values": [100, 96, 4.2] },
+          { "label": "EBITDA", "values": [20, 21, -4.8] },
+          { "label": "EPS ₹", "values": [9, 10, -10], "highlight": true }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Long/short",
+        "aka": ["long/short equity", "long-short"],
+        "definition": "A strategy that buys shares expected to rise and short-sells shares expected to fall: borrowing them, selling now and buying back later."
+      },
+      {
+        "term": "Investment thesis",
+        "aka": ["thesis", "investment case"],
+        "definition": "A short, testable argument for why a price is wrong, what will correct it, and what evidence would prove the argument wrong."
+      },
+      {
+        "term": "Guidance",
+        "aka": ["outlook", "management guidance"],
+        "definition": "Management's own forecast for coming periods, such as revenue growth or margins. Many companies give none, or give it only in words."
+      },
+      {
+        "term": "Alpha",
+        "definition": "Return beyond what a portfolio's market exposure, its beta, would have earned. Often used loosely to mean beating the benchmark."
+      },
+      {
+        "term": "Sharpe ratio",
+        "definition": "Return above the risk-free rate for each unit of volatility. Higher means more reward for the risk taken.",
+        "formula": "(Return − risk-free rate) ÷ volatility"
+      },
+      {
+        "term": "Drawdown",
+        "aka": ["peak-to-trough fall"],
+        "definition": "A fall from a portfolio's peak value to a later low, as a percentage of the peak. In private funds, the word can also mean a capital call.",
+        "formula": "(Peak − low) ÷ peak"
+      }
+    ],
+    "builder": "Results day rewards speed. Within minutes, a fund wants reported figures against consensus, this quarter's guidance beside last quarter's, and the key management quotes from the call. Each is a useful tool, and each has a trap.\n\nSpeed tempts a system to paraphrase, but a misquote is worse than no quote: someone may trade on it. Every quote must be word for word, with the speaker, the document and the page or timestamp. Guidance hides in words too: 'about 20%' last quarter and 'high teens' this quarter is a cut, though no new number appears.\n\n**Check worth building:** before a quote ships, match it word for word against the source transcript, and block it if the match fails.",
+    "client": {
+      "say": "Tell me what your team needs first when a company reports, and we'll build around those first thirty minutes.",
+      "ask": "On results day, what do you need in the first thirty minutes?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d20-concept1",
+      "type": "concept",
+      "concept": "How a short sale profits",
+      "kind": "choice",
+      "prompt": "A long/short fund expects a retailer's shares, now ₹500, to fall to ₹400. How does it profit if it is right?",
+      "options": [
+        "It buys shares now at ₹500 and sells them once they reach ₹400",
+        "It waits for the price to reach ₹400, then buys the shares cheaply",
+        "It borrows shares, sells them at ₹500, then buys them back at ₹400",
+        "It lends its own shares to other funds and keeps the fee they pay"
+      ],
+      "answer": 2,
+      "explain": "Short selling sells borrowed shares first and buys them back later, so a fall from ₹500 to ₹400 earns ₹100 a share before costs. Waiting to buy at ₹400 is tempting, but that only pays if the price later rises again."
+    },
+    {
+      "id": "d20-concept2",
+      "type": "concept",
+      "concept": "Alpha is skill, not market",
+      "kind": "choice",
+      "prompt": "A fund with a beta of 1.0 returned 12% in a year when its benchmark index also returned 12%. Its manager calls it a year of strong alpha. What is the fairest reply?",
+      "options": [
+        "Agreed: 12% in a single year shows real stock-picking skill",
+        "Its alpha is 12%, since alpha is simply the fund's total return",
+        "Alpha cannot be measured for a fund holding only listed shares",
+        "Its alpha is about zero: market exposure explains the return"
+      ],
+      "answer": 3,
+      "explain": "With a beta of 1.0, the fund was expected to match the market, and it did, so no return is left over for skill. Agreeing is tempting because 12% is a good year, but a fund that simply tracked the index would have earned the same."
+    },
+    {
+      "id": "d20-calc1",
+      "type": "calc",
+      "concept": "Sharpe ratio",
+      "kind": "choice",
+      "prompt": "Fund A returned 14% a year with 18% volatility. Fund B returned 10% with 8% volatility. The risk-free rate is 6%. Which fund has the higher Sharpe ratio, and what is it?",
+      "options": ["Fund A, 0.44", "Fund B, 0.50", "Fund A, 0.78", "Fund B, 1.25"],
+      "answer": 1,
+      "check": "(10 - 6) / 8",
+      "explain": "Sharpe divides return above the risk-free rate by volatility: Fund B scores (10 − 6) ÷ 8 = 0.50 and Fund A (14 − 6) ÷ 18 = 0.44. Fund A is tempting for its higher return, but it took more than twice the volatility, and 0.78 or 1.25 come from forgetting to subtract the risk-free rate."
+    },
+    {
+      "id": "d20-calc2",
+      "type": "calc",
+      "concept": "Drawdown from the peak",
+      "kind": "number",
+      "prompt": "A fund's value rises from ₹100 crore to a peak of ₹125 crore, falls to ₹100 crore, then recovers to ₹130 crore. What was its maximum drawdown?",
+      "answer": 20,
+      "tolerance": 0.1,
+      "unit": "%",
+      "check": "(125 - 100) / 125 * 100",
+      "explain": "Drawdown is measured from the peak: (125 − 100) ÷ 125 = 20%. 25% is the common slip: it divides the ₹25 crore fall by the ₹100 crore low instead of the ₹125 crore peak."
+    },
+    {
+      "id": "d20-client1",
+      "type": "client",
+      "concept": "Start from the first thirty minutes",
+      "kind": "choice",
+      "prompt": "A portfolio manager at a long/short fund says, 'Thirty of our companies report in the same week, and we're drowning.' Which reply is best?",
+      "options": [
+        "On results day, what do you need in the first thirty minutes?",
+        "Our system can write a full research note on each one in seconds.",
+        "Results day moves too fast to trust any AI system with the work.",
+        "We'd run agentic retrieval over transcripts with semantic chunking."
+      ],
+      "answer": 0,
+      "explain": "Asking what is needed first ties the tool to the decisions made in those minutes, such as whether to trade. A full note in seconds is tempting because it sounds impressive, but nobody asked for it, and one misquote in it would do more harm than no note."
+    },
+    {
+      "id": "d20-builder1",
+      "type": "builder",
+      "concept": "Verify quotes word for word",
+      "kind": "choice",
+      "prompt": "Your results-day tool shows: 'CEO: we expect margins to recover to 22% next year.' The transcript says: 'We hope margins can move back towards 22% over time.' Which check should have stopped this?",
+      "options": [
+        "A limit of 30 words on every quote the tool shows",
+        "An exact match against the transcript before it ships",
+        "A rule that every quote must contain at least one number",
+        "A second model asked to rate the quote's overall tone"
+      ],
+      "answer": 1,
+      "explain": "An exact match against the transcript would have failed and blocked the quote, which turned a hope into a forecast. A second model is tempting, but it can blur the meaning just as the first did, while a word-for-word match cannot be talked round."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, walk a new colleague through an analyst's results day.",
+    "modelAnswer": "The company reports, and the clock starts. First, compare the numbers with consensus: did revenue, margins and earnings beat or miss, and by how much? Second, check guidance: did management raise, hold or cut its forecast? Third, pull the key quotes from the call, word for word, with the speaker and time. Then update the model and estimates, and ask the real question: does the investment thesis still hold? Finally, a short note goes out, with the view first."
+  }
+}

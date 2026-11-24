@@ -1,0 +1,151 @@
+{
+  "day": 23,
+  "phase": 4,
+  "title": "Family offices and wealth managers",
+  "pages": {
+    "why": "A family office in Mumbai looks after one family's ₹4,000 crore, held at banks in India, Singapore and London and spread across twenty fund managers. Every quarter the statements arrive as PDFs, no two alike, and a team spends three weeks turning them into one report: what the family owns, how it did, and whether there is cash for next year's needs.",
+    "idea": "A **family office** is a private firm that runs one wealthy family's money: investments, tax, property and more. A multi-family office serves several families, sharing the cost. Wealth managers and private banks offer similar services to many wealthy clients at once.\n\nThe biggest decision is **asset allocation**: how to split money across asset classes, the broad types of investment, such as cash, bonds, listed shares, private equity and property. This split, more than any single investment, sets how much a portfolio can gain or lose.\n\nThe family writes its rules in an **investment policy statement** (IPS): goals, a return target, risk limits, a target and allowed range for each asset class, cash needs, and who decides what.\n\nThe investments sit with **custodians**: banks that hold assets in safekeeping, settle trades (complete the swap of securities for cash), collect income and report holdings. Funds the family invests in send their own statements. The office combines them into one consolidated report: what the family owns and how it did.\n\nTwo returns answer different questions:\n\n- **Time-weighted return** links the returns of each period, so money added or withdrawn has no effect. It judges a manager, who does not choose when money comes in. Most fund managers report it.\n- **Money-weighted return** is the internal rate of return (Day 12) on the family's own flows in and out, so timing counts. It shows what the family's money earned. Private equity funds report it, as an IRR.\n\nLiquidity planning ties it together: making sure cash is ready for spending, tax and capital calls from private funds (Day 19), even when markets are down.",
+    "example": {
+      "text": "A hypothetical family gives a manager ₹100 crore. The portfolio gains 20% in Q1. Pleased, the family adds another ₹100 crore at the start of Q2, just before the portfolio falls 10%.\n\n{table}\n\nTime-weighted: link the quarterly returns and ignore the money added. A 20% gain then a 10% fall gives 1.20 × 0.90 − 1 = 8%. That is the manager's result for the half-year.\n\nMoney-weighted: the family put in ₹200 crore and has ₹198 crore, a loss of ₹2 crore. The internal rate of return on its flows is −1.3% for the half-year. A close shortcut is gain ÷ average money invested: ₹100 crore was in for both quarters and ₹100 crore for one, an average of ₹150 crore, and −2 ÷ 150 = −1.3%.\n\nBoth numbers are right. The manager earned 8%, but the family lost money, because most of it arrived just before the fall.",
+      "table": {
+        "caption": "₹ crore unless marked %, Q1 and Q2, hypothetical portfolio",
+        "columns": ["Q1", "Q2"],
+        "rows": [
+          { "label": "Value at start", "values": [0, 120] },
+          { "label": "Money added by the family", "values": [100, 100] },
+          { "label": "Value after money added", "values": [100, 220], "rule": "subtotal" },
+          { "label": "Gain or loss", "values": [20, -22] },
+          { "label": "Value at end", "values": [120, 198], "rule": "total" },
+          { "label": "Return in the quarter, %", "values": [20, -10], "highlight": true }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Family office",
+        "aka": ["single-family office"],
+        "definition": "A private firm that manages one wealthy family's investments and affairs. A multi-family office serves several families."
+      },
+      {
+        "term": "Asset allocation",
+        "aka": ["allocation"],
+        "definition": "How a portfolio is split across asset classes such as cash, bonds, listed shares, private equity and property."
+      },
+      {
+        "term": "Investment policy statement",
+        "aka": ["IPS"],
+        "definition": "Written rules for a portfolio: goals, return target, risk limits, a target and range for each asset class, cash needs and who decides."
+      },
+      {
+        "term": "Custodian",
+        "aka": ["custodian bank", "custody bank"],
+        "definition": "A bank that holds investments in safekeeping for their owner, settles trades, collects income and reports holdings."
+      },
+      {
+        "term": "Time-weighted return",
+        "aka": ["TWR"],
+        "definition": "A return that links each period's return, so money added or withdrawn has no effect. Used to judge a manager.",
+        "formula": "(1 + Q1 return) × (1 + Q2 return) − 1"
+      },
+      {
+        "term": "Money-weighted return",
+        "aka": ["MWR", "dollar-weighted return"],
+        "definition": "The internal rate of return on an investor's own flows in and out, so their size and timing count. Shows what the money earned."
+      }
+    ],
+    "builder": "The classic family office pain is consolidation: statements from many custodians and managers, each in its own PDF layout, must become one view. Three steps, each checkable:\n\n- Extract each holding with its identifier, quantity, price, value, currency and date.\n- Classify it into the family's own asset classes, which rarely match a bank's labels.\n- Reconcile: holdings must add up to each statement's total, and opening value plus flows plus gains must equal closing value.\n\nA common trap is double counting: a private fund can appear on a custodian's statement and in the manager's own report. And this is some of the most private data there is, so keep each family's data isolated and log every access.\n\n**Check worth building:** match holdings across all sources by identifier, and flag any that appear twice before the total is reported.",
+    "client": {
+      "say": "I'd like to start with one quarter's statements, to see every layout you receive and time each step.",
+      "ask": "How many custodians and managers send you statements, and how long does the quarterly consolidated report take?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d23-concept1",
+      "type": "concept",
+      "concept": "What a custodian does",
+      "kind": "choice",
+      "prompt": "A family's listed shares and bonds are held at a custodian. What is the custodian's job?",
+      "options": [
+        "Choosing which shares and bonds the family should buy and sell next",
+        "Holding the assets safely, settling trades and reporting holdings",
+        "Writing and updating the family's investment policy statement",
+        "Auditing the family office's accounts at the end of each year"
+      ],
+      "answer": 1,
+      "explain": "A custodian keeps assets in safekeeping, settles trades, collects income and reports what is held. Choosing investments is the tempting answer, but that is the manager's job, and keeping the two apart means whoever picks investments does not also hold them."
+    },
+    {
+      "id": "d23-concept2",
+      "type": "concept",
+      "concept": "Which return judges a manager",
+      "kind": "choice",
+      "prompt": "A family added a large sum to a manager's portfolio just before markets fell. Which return should the family use to judge the manager's skill?",
+      "options": [
+        "Money-weighted return, because it reflects the family's real money",
+        "The rupee gain or loss, because that is what the family can spend",
+        "The average of both returns, to balance the two points of view",
+        "Time-weighted return, since the manager did not pick the timing"
+      ],
+      "answer": 3,
+      "explain": "Time-weighted return removes the effect of when money came in, which the manager does not control. Money-weighted return is tempting because it shows the family's real result, but it would blame the manager for the family's own timing."
+    },
+    {
+      "id": "d23-calc1",
+      "type": "calc",
+      "concept": "Linking quarterly returns",
+      "kind": "number",
+      "prompt": "A manager returns 10% in Q1 and −5% in Q2. The family added ₹50 crore at the start of Q2. What is the time-weighted return for the half-year?",
+      "answer": 4.5,
+      "tolerance": 0.1,
+      "unit": "%",
+      "check": "((1 + 0.1) * (1 - 0.05) - 1) * 100",
+      "explain": "Link the quarters: 1.10 × 0.95 − 1 = 4.5%, and the ₹50 crore makes no difference, because time-weighted return ignores flows. Adding the returns to get 5% is the common slip: Q2's loss applies to a portfolio already 10% bigger."
+    },
+    {
+      "id": "d23-calc2",
+      "type": "calc",
+      "concept": "Rebalancing to the IPS target",
+      "kind": "choice",
+      "prompt": "A family's IPS sets listed shares at 60% of the portfolio, within a range of 55% to 65%, and says to rebalance to 60% if shares leave the range. A year ago shares were ₹120 crore of ₹200 crore. After a rally they are ₹160 crore of ₹240 crore. How much of the shares should be sold, with the money moved into bonds?",
+      "options": ["₹4 crore", "₹16 crore", "₹24 crore", "₹40 crore"],
+      "answer": 1,
+      "check": "160 - 0.6 * 240",
+      "explain": "Shares are 160 ÷ 240 = 66.7%, outside the range, and the target is 60% × 240 = ₹144 crore, so sell 160 − 144 = ₹16 crore. ₹40 crore is tempting, but it takes shares back to last year's ₹120 crore, while ₹4 crore only reaches the 65% edge of the range."
+    },
+    {
+      "id": "d23-client1",
+      "type": "client",
+      "concept": "Manager return versus family return",
+      "kind": "choice",
+      "prompt": "The head of a family office says, 'All our managers report good returns, yet the family's wealth barely grew.' Which reply is best?",
+      "options": [
+        "Could we compare their time-weighted returns with the family's money-weighted one?",
+        "That suggests the managers overstate their returns, so we could audit their reports.",
+        "We can build a dashboard that shows each manager's latest return in real time.",
+        "Returns depend on markets, so there is not much that anyone can explain about this."
+      ],
+      "answer": 0,
+      "explain": "Managers report time-weighted returns, which ignore when the family added or took out money, while the family's wealth also reflects that timing and its spending. Suspecting the managers is tempting, but both figures can be right at once, as the example's 8% and −1.3% show."
+    },
+    {
+      "id": "d23-builder1",
+      "type": "builder",
+      "concept": "Double counting across sources",
+      "kind": "choice",
+      "prompt": "Your consolidated report puts a family's wealth at ₹1,150 crore. The true figure is ₹1,000 crore: a ₹150 crore private equity fund appears on both a custodian's statement and the fund manager's report. Which check would have caught this?",
+      "options": [
+        "Confirm that every holding is mapped to one of the family's asset classes",
+        "Ask a language model to read the report before it goes to the family",
+        "Match holdings across all sources by identifier and flag any duplicates",
+        "Round the consolidated total to the nearest ₹10 crore to absorb noise"
+      ],
+      "answer": 2,
+      "explain": "Matching by identifier across sources finds the fund listed twice before the total is summed. Checking the asset class mapping is tempting, but a duplicated holding is classified perfectly well, twice."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a family office client why their managers' returns and the family's own return can differ.",
+    "modelAnswer": "Your managers report a time-weighted return. It links each period's return and ignores when you added or took out money, because they don't control that. Your own result is money-weighted: it counts how much money was invested, and when. Add a lot just before a fall and a manager can show plus 8% while the family is down. Both numbers are right. One judges the manager; the other shows what your money actually earned."
+  }
+}

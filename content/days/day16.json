@@ -1,0 +1,156 @@
+{
+  "day": 16,
+  "phase": 3,
+  "title": "Discounted cash flow",
+  "pages": {
+    "why": "An investment committee is weighing a large stake in a growing café chain. Comps show what similar companies trade at; the committee also wants a value built from the business's own cash, with every assumption in plain view. That is the job of a discounted cash flow model.",
+    "idea": "A **discounted cash flow** (DCF) values a business as the present value of all the cash it will generate. It has four steps:\n\n- Forecast **unlevered free cash flow**: cash from the operations after tax and investment, before anything is paid to lenders. It belongs to lenders and shareholders together. The **forecast period** is usually five to ten years.\n- Add a **terminal value** for every year after that. Either assume cash grows at a steady rate forever, or apply an **exit multiple**: final-year EBITDA × the EV/EBITDA a buyer might pay then.\n- Discount everything at the WACC and add it up. That is enterprise value.\n- Take off net debt to reach equity value, and divide by diluted shares for value per share.\n\nGrowth must stay below the WACC, or the growth formula breaks, and below the economy's long-run growth, because no company can outgrow the economy forever.\n\nThe terminal value is usually most of the answer, because a healthy business lasts far beyond the forecast. That makes a DCF very sensitive to two inputs, the WACC and long-run growth. So analysts add a **sensitivity table**: value per share across a grid of WACCs and growth rates.",
+    "example": {
+      "text": "Start from Brew Lane's FY26 free cash flow of ₹3 crore. That is after ₹3 crore of interest, so add the interest back, less the 25% tax it saved: 3 + 3 × 0.75 = ₹5.25 crore of unlevered free cash flow.\n\nNow the assumptions, none of them reported: unlevered free cash flow rises by ₹2 crore a year, from ₹6 crore in FY27 to ₹14 crore in FY31; growth is 5% a year after that; and the WACC is Day 13's 13.5%.\n\n{table}\n\nEach year's cash is divided by 1.135 once per year of waiting: FY27's 6 ÷ 1.135 = 5.29, while FY31's 14 is divided five times, to 7.43. Terminal value = 14 × 1.05 ÷ (0.135 − 0.05) = ₹172.94 crore at the end of FY31; divided by 1.135 five times, it is worth 91.82 today, 74% of enterprise value.\n\nEnterprise value is ₹124.82 crore. Take off net debt of 22, and ₹102.82 crore of equity over 1 crore shares is about ₹103 a share, against a market price of ₹180. The price implies faster growth for longer, or a lower discount rate. Yet a sensitivity table running the WACC from 12.5% to 14.5% and growth from 4% to 6% spans only ₹81 to ₹139.",
+      "table": {
+        "caption": "₹ crore, FY27 to FY31 forecast; assumed WACC 13.5%, growth 5%",
+        "columns": ["Cash flow", "Present value"],
+        "rows": [
+          { "label": "FY27", "values": [6, 5.29] },
+          { "label": "FY28", "values": [8, 6.21] },
+          { "label": "FY29", "values": [10, 6.84] },
+          { "label": "FY30", "values": [12, 7.23] },
+          { "label": "FY31", "values": [14, 7.43] },
+          { "label": "Terminal value", "values": [172.94, 91.82], "highlight": true },
+          { "label": "Enterprise value, DCF", "values": [null, 124.82], "rule": "subtotal" },
+          { "label": "Less net debt", "values": [null, -22] },
+          { "label": "Equity value, DCF", "values": [null, 102.82], "rule": "total" }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Discounted cash flow",
+        "aka": ["DCF"],
+        "definition": "Valuing a business as the present value of the cash it will generate, discounted at a rate that reflects its risk."
+      },
+      {
+        "term": "Unlevered free cash flow",
+        "aka": ["free cash flow to the firm", "FCFF"],
+        "definition": "Cash from operations after tax and investment, before any payment to lenders, so it belongs to all funders.",
+        "formula": "EBIT × (1 − tax rate) + depreciation − capex − increase in working capital"
+      },
+      {
+        "term": "Forecast period",
+        "aka": ["explicit forecast period", "projection period"],
+        "definition": "The years forecast one by one, usually five to ten, before the terminal value takes over."
+      },
+      {
+        "term": "Terminal value",
+        "aka": ["continuing value"],
+        "definition": "The value, at the end of the forecast period, of all the cash flows after it. Usually most of a DCF's answer.",
+        "formula": "Final-year cash × (1 + growth) ÷ (WACC − growth)"
+      },
+      {
+        "term": "Exit multiple",
+        "aka": ["terminal multiple"],
+        "definition": "A multiple, usually EV/EBITDA, applied to final-year figures to set the terminal value, as if the business were sold then.",
+        "formula": "Final-year EBITDA × assumed EV/EBITDA"
+      },
+      {
+        "term": "Sensitivity table",
+        "aka": ["sensitivity analysis", "data table"],
+        "definition": "A grid showing how the answer changes as two inputs move, such as the WACC and long-run growth."
+      }
+    ],
+    "builder": "A DCF is a deterministic calculation over a handful of assumptions, and that split tells you what to automate. A language model can propose and document the assumptions, such as growth from management's own targets, each with a source. It should not do the arithmetic.\n\nThe arithmetic belongs in live spreadsheet formulas, where a client can click any cell, see how it was built and change an input. Pasted values look the same but cannot be audited or flexed, so many clients rebuild such a model before trusting it.\n\n**Check worth building:** block any terminal growth rate at or above the WACC, and print the terminal value's share of enterprise value beside every DCF result.",
+    "client": {
+      "say": "I'd like to send the model in a form your team can audit, so you can see and change every assumption.",
+      "ask": "When you receive a model, do you need live formulas, or are pasted values enough?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d16-concept1",
+      "type": "concept",
+      "concept": "Why terminal value dominates",
+      "kind": "choice",
+      "prompt": "In Brew Lane's DCF, the terminal value is 74% of enterprise value. Why is that normal?",
+      "options": [
+        "It covers every year after the forecast: most of the business's life",
+        "Terminal value is never discounted, so it is always the biggest number",
+        "It includes the company's cash and debt as well as its operations",
+        "The forecast was too short; ten years would bring it close to zero"
+      ],
+      "answer": 0,
+      "explain": "The forecast covers five years, but the business should go on long after, and all of those later years sit in the terminal value. 'Never discounted' is the tempting reason, but it is wrong: Brew Lane's terminal value of ₹172.94 crore is divided by 1.135 five times, down to ₹91.82 crore."
+    },
+    {
+      "id": "d16-concept2",
+      "type": "concept",
+      "concept": "A gap means different assumptions",
+      "kind": "choice",
+      "prompt": "Your DCF values Brew Lane at about ₹103 a share, but its shares trade at ₹180. What is the most useful conclusion?",
+      "options": [
+        "The DCF must contain an error, since a correct model matches the market",
+        "The shares are overpriced, so investors holding them should sell",
+        "DCFs only work for private companies, so ignore the market price",
+        "The price implies more growth or less risk; test if that is credible"
+      ],
+      "answer": 3,
+      "explain": "A DCF is only as good as its assumptions, so a gap with the market shows that investors are assuming something different, such as faster growth for longer. Calling the shares overpriced is tempting, but it treats your own assumptions as fact."
+    },
+    {
+      "id": "d16-calc1",
+      "type": "calc",
+      "concept": "Terminal value by growth",
+      "kind": "number",
+      "prompt": "A company's unlevered free cash flow in the final forecast year is ₹10 crore. Assume it grows 5% a year forever after that, and the WACC is 12%. What is the terminal value at the end of the forecast?",
+      "answer": 150,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "10 * (1 + 0.05) / (0.12 - 0.05)",
+      "explain": "Next year's cash is 10 × 1.05 = 10.5, and 10.5 ÷ (0.12 − 0.05) = ₹150 crore. ₹142.9 crore is the common slip: it divides this year's 10 instead of next year's 10.5."
+    },
+    {
+      "id": "d16-calc2",
+      "type": "calc",
+      "concept": "From EV to value per share",
+      "kind": "choice",
+      "prompt": "Suppose different assumptions give Brew Lane a DCF enterprise value of ₹160 crore. Its net debt is ₹22 crore and it has 1 crore shares. What value per share does that imply?",
+      "options": ["₹130", "₹138", "₹160", "₹182"],
+      "answer": 1,
+      "check": "(160 - netDebt26) / shares",
+      "explain": "Equity value is EV minus net debt, 160 − 22 = ₹138 crore, or ₹138 a share across 1 crore shares. ₹130 is the tempting slip: it takes off debt of 30 but forgets the ₹8 crore of cash that comes with the business."
+    },
+    {
+      "id": "d16-client1",
+      "type": "client",
+      "concept": "Ask about live formulas first",
+      "kind": "choice",
+      "prompt": "A private equity associate says, 'Send us your DCF on Brew Lane by Thursday.' Which reply is best?",
+      "options": [
+        "Will do. We'll send a PDF of the output, as it's easier to read.",
+        "Sure. Our AI will work out the value directly, so no spreadsheet.",
+        "Will do. Do you need live formulas, and should we use your WACC?",
+        "DCFs rest on assumptions, so the value would not mean much."
+      ],
+      "answer": 2,
+      "explain": "Whether they need live formulas decides how you build and deliver the model, and their house WACC keeps it consistent with their other work. The PDF sounds client-friendly, but nobody on a deal team can audit or change a number in it."
+    },
+    {
+      "id": "d16-builder1",
+      "type": "builder",
+      "concept": "Growth must stay below WACC",
+      "kind": "choice",
+      "prompt": "An analyst enters terminal growth of 15% into your system's DCF, where the WACC is 13.5%. The output shows a terminal value of −₹1,073 crore. Which check would have caught this?",
+      "options": [
+        "Block terminal growth at or above the WACC, and ask for a source",
+        "Replace any negative terminal value with zero, and keep running",
+        "Ask a language model whether the terminal value looks reasonable",
+        "Round every growth rate to the nearest whole per cent before use"
+      ],
+      "answer": 0,
+      "explain": "The formula divides by WACC minus growth, which turns negative when growth is higher, so the input must be blocked before the arithmetic runs. Replacing the result with zero is tempting because it hides the error, but the fault is the input, and growth of 15% a year forever is not credible anyway."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, walk a client through how a DCF turns cash flow forecasts into a value per share.",
+    "modelAnswer": "We forecast the cash the business will generate for all its funders, five years ahead. Then we add a terminal value for every year after that, assuming steady growth. We discount it all at the WACC to get enterprise value, take off net debt, and divide by the shares. For Brew Lane, on our assumptions, that's about ₹103 a share, with three quarters of it coming from the terminal value. So we show a sensitivity table, because small changes in growth or WACC move the answer a lot."
+  }
+}

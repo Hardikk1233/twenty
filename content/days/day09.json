@@ -1,0 +1,149 @@
+{
+  "day": 9,
+  "phase": 2,
+  "title": "Growth and comparability",
+  "pages": {
+    "why": "A New York fund is comparing Brew Lane, whose year ends in March, with a US café chain whose year ends in December. Brew Lane's revenue grew 25% and the US chain's 40%, but the US figure includes a chain it bought and covers a different twelve months. Before anyone calls the US chain the faster grower, the analyst has to put both on the same footing.",
+    "idea": "Growth is the change in a figure over time, and the comparison you choose changes the answer.\n\n- **Year on year** (YoY) compares a period with the same period a year earlier: FY26 with FY25, or this April to June quarter with last year's.\n- **Quarter on quarter** (QoQ) compares a quarter with the one just before it.\n\nQoQ is distorted by **seasonality**: swings that repeat every year, such as festive-season shopping, summer heat or monsoon rain. If a café chain's October to December quarter is always its busiest, a fall in January to March says little on its own. YoY compares like with like, so analysts lead with it.\n\nOver several years, use **CAGR**, the compound annual growth rate: the steady yearly rate that turns the first value into the last. It smooths bumpy years but hides the path.\n\n**Last twelve months** (LTM) adds up the most recent twelve months, whatever the fiscal year, so you can compare companies partway through a year.\n\n**Organic growth** comes from the existing business, leaving out acquisitions (businesses bought), disposals (businesses sold) and often currency moves. Bought growth costs capital and says little about whether customers want more.\n\nYear ends differ: most Indian companies end theirs in March, many US and UK companies in December. Before comparing, put both on the same twelve months: calendarise, rebuilding each company's figures for January to December, or use LTM to a common date.",
+    "example": {
+      "text": "Brew Lane's revenue over three years.\n\n{table}\n\nYear on year, FY26 grew 100 ÷ 80 − 1 = 25%, and FY25 grew 80 ÷ 64 − 1 = 25%.\n\nCAGR from FY24 to FY26 spans two years of growth, not three: count the gaps between columns. CAGR = (100 ÷ 64)^(1 ÷ 2) − 1. The square root of 1.5625 is 1.25, so CAGR is 25%. It matches each year here only because growth was steady.\n\nA shortcut that fails: total growth is 56.25%, and halving it gives 28.1% a year. That overstates, because growth compounds.\n\nTo compare Brew Lane with a December year-end peer, calendarise. January to December 2025 takes the last three months of FY25 and the first nine of FY26. Assuming sales are spread evenly through each year, that is a quarter of FY25 plus three quarters of FY26: 20 + 75 = ₹95 crore. Seasonality breaks that assumption, so use quarterly figures where they exist.",
+      "table": {
+        "caption": "₹ crore and %, years ended 31 March 2024 to 2026",
+        "columns": ["FY24", "FY25", "FY26"],
+        "rows": [
+          { "label": "Revenue", "values": [64, 80, 100] },
+          { "label": "Revenue growth (%)", "values": [null, 25, 25] }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Year on year",
+        "aka": ["YoY"],
+        "definition": "Growth against the same period a year earlier, such as this quarter against the same quarter last year.",
+        "formula": "(This period ÷ same period a year earlier − 1) × 100"
+      },
+      {
+        "term": "Quarter on quarter",
+        "aka": ["QoQ", "sequential growth"],
+        "definition": "Growth against the quarter just before. Easily distorted by seasonality.",
+        "formula": "(This quarter ÷ previous quarter − 1) × 100"
+      },
+      {
+        "term": "CAGR",
+        "aka": ["compound annual growth rate"],
+        "definition": "The steady yearly growth rate that turns a starting value into an ending value over several years.",
+        "formula": "(Last value ÷ first value)^(1 ÷ years) − 1"
+      },
+      {
+        "term": "Last twelve months",
+        "aka": ["LTM", "TTM", "trailing twelve months"],
+        "definition": "The most recent twelve months of results, whatever the fiscal year, built from annual and year-to-date figures.",
+        "formula": "Latest full year + current year to date − prior year to date"
+      },
+      {
+        "term": "Seasonality",
+        "definition": "Swings in sales or profit that repeat at the same time each year, such as festive-season shopping."
+      },
+      {
+        "term": "Organic growth",
+        "aka": ["underlying growth"],
+        "definition": "Growth from the existing business, leaving out acquisitions, disposals and often currency moves."
+      }
+    ],
+    "builder": "Analysts build LTM by hand every results season, which makes it a good calculation to automate. Year to date means the months of the current fiscal year so far.\n\nLTM = latest full year + current year to date − same months of the prior year.\n\nTake a hypothetical café chain with a March year end. FY26 revenue is ₹200 crore. April to September 2026 brings ₹120 crore, against ₹90 crore a year earlier. LTM to September 2026 = 200 + 120 − 90 = ₹230 crore.\n\nWhat breaks: a year-to-date figure later restated, a standalone quarter (the parent company alone) mixed with a consolidated year, or a half year simply doubled to ₹240 crore, which ignores seasonality.\n\n**Check worth building:** confirm all three inputs share entity, currency and definition, and that the two year-to-date periods cover the same months, one year apart.",
+    "client": {
+      "say": "Before we compare growth, I'd like to agree which twelve months each company is measured over.",
+      "ask": "When you compare companies with different year ends, do you align them to a calendar year?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d09-concept1",
+      "type": "concept",
+      "concept": "Seasonality: compare like with like",
+      "kind": "choice",
+      "prompt": "A café chain's revenue fell 15% quarter on quarter in January to March, straight after its festive October to December quarter. Against January to March last year, it rose 20%. What is the best reading?",
+      "options": [
+        "The chain is shrinking, and the 15% fall is the early warning sign",
+        "One figure must be wrong, since sales cannot rise and fall at once",
+        "The fall is likely seasonal; the 20% rise on last year is cleaner",
+        "The 20% rise must come from cafés the chain bought this quarter"
+      ],
+      "answer": 2,
+      "explain": "Year on year compares the same season a year apart, so seasonal swings cancel out, while quarter on quarter compares a quiet quarter with a busy one. Reading the 15% fall as shrinkage is tempting, but if the festive quarter is always the strongest, a fall after it is normal."
+    },
+    {
+      "id": "d09-concept2",
+      "type": "concept",
+      "concept": "Organic versus bought growth",
+      "kind": "choice",
+      "prompt": "Chain A's revenue grew 30%, all from cafés it bought during the year. Chain B's grew 15%, all from cafés it already had. A client asks whose business is growing faster. What is the best answer?",
+      "options": [
+        "A's, because its revenue grew twice as fast as B's did",
+        "Neither, since growth rates cannot be compared across firms",
+        "A's, because buying cafés signals confidence in demand",
+        "B's: A's organic growth is zero, and it paid for its growth"
+      ],
+      "answer": 3,
+      "explain": "Organic growth shows whether the existing business is winning customers: B's is 15% and A's is zero, its 30% bought with capital. Picking A on the headline figure is tempting, but that treats a purchase as if customers were buying more."
+    },
+    {
+      "id": "d09-calc1",
+      "type": "calc",
+      "concept": "CAGR counts years of growth",
+      "kind": "choice",
+      "prompt": "A hypothetical company's revenue grows from ₹100 crore in Year 1 to ₹172.8 crore in Year 4. What is its compound annual growth rate?",
+      "options": ["14.7%", "20%", "24.3%", "72.8%"],
+      "answer": 1,
+      "check": "((172.8 / 100) ^ (1 / 3) - 1) * 100",
+      "explain": "Year 1 to Year 4 is three years of growth, and 100 × 1.2 × 1.2 × 1.2 = 172.8, so CAGR is 20%. 24.3% is the tempting slip: it divides total growth of 72.8% by three, which ignores compounding."
+    },
+    {
+      "id": "d09-calc2",
+      "type": "calc",
+      "concept": "Last twelve months",
+      "kind": "number",
+      "prompt": "A hypothetical retailer with a March year end reports FY26 revenue of ₹500 crore. Revenue for April to June 2026 is ₹150 crore, against ₹120 crore for April to June 2025. What is its LTM revenue to 30 June 2026?",
+      "answer": 530,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "500 + 150 - 120",
+      "explain": "LTM = latest full year + current year to date − prior year to date = 500 + 150 − 120 = ₹530 crore. ₹650 crore is the common slip: adding the new quarter without taking off last year's counts fifteen months, not twelve."
+    },
+    {
+      "id": "d09-client1",
+      "type": "client",
+      "concept": "Align year ends first",
+      "kind": "choice",
+      "prompt": "A London fund manager says, 'Rank these Indian and US café chains by revenue growth.' Which reply is best?",
+      "options": [
+        "Sure, we'll rank them on each company's latest reported growth.",
+        "Year ends differ. Shall we align them to calendar years or LTM?",
+        "Indian and US accounts differ too much to compare, unfortunately.",
+        "We'll convert every figure into dollars first, so they line up."
+      ],
+      "answer": 1,
+      "explain": "Indian chains mostly end their year in March and US ones often in December, so aligning the twelve months first is what makes the ranking fair. Ranking on each company's latest reported growth is tempting because it is quick, but it compares growth over different periods."
+    },
+    {
+      "id": "d09-builder1",
+      "type": "builder",
+      "concept": "Match the year-to-date periods",
+      "kind": "choice",
+      "prompt": "For a company with a March year end, your system computes LTM revenue to September 2026 as FY26 revenue of ₹200 crore, plus April to September 2026 of ₹120 crore, minus April to June 2025 of ₹45 crore: ₹275 crore. Which check would have caught the error?",
+      "options": [
+        "Check that both year-to-date periods cover the same months",
+        "Check that LTM revenue is above the latest full year's revenue",
+        "Ask a language model whether ₹275 crore looks reasonable",
+        "Round each input to the nearest ₹10 crore before adding"
+      ],
+      "answer": 0,
+      "explain": "It added six months of this year but took off only three months of last year, so it counted fifteen months; matching the two periods catches that at once. Checking that LTM beats the full year is tempting, but ₹275 crore passes that test and is still wrong."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a client how you would compare growth at Brew Lane, whose year ends in March, with a US peer whose year ends in December.",
+    "modelAnswer": "First I'd put both on the same twelve months. I can calendarise Brew Lane: three months of FY25 plus nine of FY26 gives about ₹95 crore for calendar 2025, if sales are spread evenly. Or I can use last twelve months to a common date: the latest full year, plus this year to date, minus the same months last year. Then I'd compare year on year, so seasons cancel out, and strip out acquisitions to see organic growth."
+  }
+}

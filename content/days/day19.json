@@ -1,0 +1,151 @@
+{
+  "day": 19,
+  "phase": 4,
+  "title": "How investment funds work",
+  "pages": {
+    "why": "A family office has money in six private equity funds, and each sends a quarterly statement with its own layout and ratios. Its investment head wants one page that answers two questions: are these funds making money, and how much are the managers paid for it? That starts with knowing how a fund works.",
+    "idea": "A fund pools investors' money under one manager. In a private fund, open only to large investors, the investors are **limited partners** (LPs), such as pension funds, insurers and family offices. The manager is the **general partner** (GP), which picks the investments.\n\nA manager's assets under management (AUM) is the money it runs. A fund's **net asset value** (NAV) is what its holdings are worth, minus what it owes.\n\n- Open-ended funds, such as mutual funds and most hedge funds, let investors join and leave at NAV on set dates. Long-only funds just buy; hedge funds can also bet on prices falling.\n- Closed-ended funds lock money up for years, often about ten. Private equity buys companies, venture capital backs start-ups, and private credit lends to companies.\n- A fund of funds invests in other funds.\n\nIn a closed-ended fund, each LP commits a sum up front. The GP collects it in stages through a **capital call** when it needs cash, and returns money as distributions when it sells.\n\nMany managers charge '2 and 20'. The management fee, often 2% a year, is charged on money committed or managed, whatever the results. The performance fee, often 20% of profit, is called **carried interest** in private funds. It is usually paid only after LPs get their money back plus a minimum return, the hurdle rate or preferred return, often 8% a year. Terms vary, and live in each fund's legal agreement.\n\nFunds are judged on IRR (Day 12) and on multiples such as **TVPI**: cash returned plus NAV, divided by money paid in.",
+    "example": {
+      "text": "A fictional private equity fund has ₹100 crore of LP commitments. Five years in, it has called ₹80 crore: ₹70 crore for companies and ₹10 crore for the management fee, 2% of ₹100 crore a year for five years.\n\n{table}\n\nBoth multiples divide by money paid in, not committed:\n\n- DPI (distributions to paid-in) = 60 ÷ 80 = 0.75x: cash actually returned.\n- TVPI = (60 + 80) ÷ 80 = 1.75x: cash plus NAV, which is still the GP's estimate.\n\nMOIC (multiple on invested capital) measures the deals, before fees: 140 ÷ 70 = 2.0x. The gap to 1.75x is what the fees cost.\n\nMultiples ignore time. With all money in on day one and out at the end, 1.75x over four years is an IRR of about 15%; over eight, about 7%.\n\nNo carry is paid yet: LPs first get back their ₹80 crore plus the hurdle.",
+      "table": {
+        "caption": "₹ crore, a fictional private equity fund, end of Year 5",
+        "columns": ["Fund"],
+        "rows": [
+          { "label": "Committed by LPs", "values": [100] },
+          { "label": "Called so far, or paid in", "values": [80], "highlight": true },
+          { "label": "Distributed to LPs", "values": [60] },
+          { "label": "NAV of unsold holdings", "values": [80] },
+          { "label": "Distributed plus NAV", "values": [140], "rule": "total" }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Limited partner",
+        "aka": ["LP"],
+        "definition": "An investor in a private fund. It commits money but does not run the fund, and can lose no more than it puts in."
+      },
+      {
+        "term": "General partner",
+        "aka": ["GP", "sponsor"],
+        "definition": "The firm that runs a private fund: it raises money, manages the investments, and earns the fees and carried interest."
+      },
+      {
+        "term": "Carried interest",
+        "aka": ["carry", "promote"],
+        "definition": "The GP's share of a fund's profit, often 20%, usually paid only after LPs get back their capital plus the hurdle. Hedge funds charge a similar performance fee."
+      },
+      {
+        "term": "Net asset value",
+        "aka": ["NAV"],
+        "definition": "A fund's holdings at current value, minus what it owes. In private funds, it is largely the GP's estimate.",
+        "formula": "Assets − liabilities"
+      },
+      {
+        "term": "Capital call",
+        "aka": ["drawdown notice", "call notice"],
+        "definition": "A GP's request that LPs pay in part of their commitment, for a deal or fees, often within ten business days."
+      },
+      {
+        "term": "TVPI",
+        "aka": ["total value to paid-in"],
+        "definition": "Cash distributed plus NAV, divided by capital paid in. It counts unsold holdings at the GP's valuation; DPI counts cash returned only.",
+        "formula": "(Distributions + NAV) ÷ paid-in capital"
+      }
+    ],
+    "builder": "Fee and carry rules are legal prose in each fund's limited partnership agreement, and side letters, private deals with single LPs, can change them. Is the fee charged on commitments or on invested capital? Does the hurdle compound? Is carry paid deal by deal, or only after the whole fund has returned its capital? Each answer moves money between LPs and the GP.\n\nTurning these clauses into tested code is a real use case, but an error pays the wrong party, so a person signs off each rule against its clause.\n\n**Check worth building:** recompute each period's fees and carry from the encoded rules, and flag any difference from the administrator's figures, citing the clause.",
+    "client": {
+      "say": "Before we automate anything, I'd like to see how your team calculates fees and carry today, so we can test against it.",
+      "ask": "How are fees and carry calculated today: a spreadsheet, a system, or the administrator?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d19-concept1",
+      "type": "concept",
+      "concept": "Committed is not called",
+      "kind": "choice",
+      "prompt": "An LP commits ₹50 crore to a private equity fund. A year later, it has paid in only ₹15 crore. What explains the gap?",
+      "options": [
+        "The GP calls capital in stages, as it needs cash for deals and fees",
+        "The GP has already lost ₹35 crore of the LP's money in its first year",
+        "The LP is in breach, since commitments must be paid in on day one",
+        "The other ₹35 crore was paid back to the LP as distributions"
+      ],
+      "answer": 0,
+      "explain": "A commitment is a promise to pay when called, and the GP calls it in stages as it finds deals and pays fees. Reading the gap as a loss is tempting, but uncalled money has never left the LP's account."
+    },
+    {
+      "id": "d19-concept2",
+      "type": "concept",
+      "concept": "DPI is cash, TVPI includes NAV",
+      "kind": "choice",
+      "prompt": "Fund A reports a TVPI of 2.0x and a DPI of 0.2x. Fund B reports a TVPI of 1.6x and a DPI of 1.4x. What is the fairest reading?",
+      "options": [
+        "Fund A has already returned more cash to its LPs than Fund B",
+        "Fund B is worse on every measure, because its TVPI is the lower one",
+        "Most of Fund A's value is on paper; Fund B has returned real cash",
+        "They cannot be compared, because DPI and TVPI use different units"
+      ],
+      "answer": 2,
+      "explain": "Fund A's 2.0x is mostly NAV, the GP's estimate of unsold holdings, while Fund B has already returned 1.4x in cash. Calling Fund B worse because its TVPI is lower is tempting, but Fund A's paper gains may never turn into cash."
+    },
+    {
+      "id": "d19-calc1",
+      "type": "calc",
+      "concept": "TVPI uses paid-in capital",
+      "kind": "choice",
+      "prompt": "A fund has ₹100 crore of commitments. It has called ₹50 crore, distributed ₹20 crore, and its unsold holdings have a NAV of ₹70 crore. What is its TVPI?",
+      "options": ["0.4x", "0.9x", "1.4x", "1.8x"],
+      "answer": 3,
+      "check": "(20 + 70) / 50",
+      "explain": "TVPI adds cash distributed to NAV and divides by capital paid in: (20 + 70) ÷ 50 = 1.8x. 0.9x is the tempting slip: it divides by the ₹100 crore committed, but uncalled money has not been invested yet."
+    },
+    {
+      "id": "d19-calc2",
+      "type": "calc",
+      "concept": "Performance fee above a hurdle",
+      "kind": "number",
+      "prompt": "A hedge fund starts the year with ₹100 crore and gains ₹18 crore after its management fee. It charges a performance fee of 20% of any gain above an 8% hurdle. What is the performance fee?",
+      "answer": 2,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "0.2 * (18 - 0.08 * 100)",
+      "explain": "The hurdle is 8% of ₹100 crore, or ₹8 crore, so the fee applies only to the ₹10 crore above it: 20% × 10 = ₹2 crore. ₹3.6 crore is the common slip: it takes 20% of the whole ₹18 crore gain and ignores the hurdle."
+    },
+    {
+      "id": "d19-client1",
+      "type": "client",
+      "concept": "Learn today's method first",
+      "kind": "choice",
+      "prompt": "The finance head of a private equity firm says, 'Working out carry takes us a week every quarter. Could your AI do it?' Which reply is best?",
+      "options": [
+        "Yes. Our model can read your agreement and work out carry directly.",
+        "Possibly. How is it done today, and who checks it before it's paid?",
+        "We'd rather not: carry is too sensitive to let any software near it.",
+        "Yes, we'd fine-tune a model on waterfalls with catch-up and clawback."
+      ],
+      "answer": 1,
+      "explain": "Knowing today's method, whether a spreadsheet, a system or the administrator, and who signs off tells you what to match and where the checks go. Promising to work out carry directly is tempting, but an error pays the wrong party, so the rules must be encoded, tested and signed off first."
+    },
+    {
+      "id": "d19-builder1",
+      "type": "builder",
+      "concept": "Match fees to the administrator",
+      "kind": "choice",
+      "prompt": "Your system reads a fund's legal agreement and puts this year's management fee at ₹1.2 crore: 2% of the ₹60 crore called so far. The agreement charges 2% on ₹200 crore of commitments during the investment period, the years when the fund makes new deals. Which check would have caught the error?",
+      "options": [
+        "Confirm the fee is smaller than the fund's profit for the year",
+        "Ask the model to reread the agreement and confirm its own answer",
+        "Round every fee to the nearest ₹1 crore before it is reported",
+        "Match each fee to the administrator's figure, citing the clause"
+      ],
+      "answer": 3,
+      "explain": "The administrator's figure is ₹4 crore, 2% of ₹200 crore, so matching against it flags the ₹2.8 crore gap, and the cited clause shows which base is right. Checking the fee against profit sounds prudent, but management fees are owed whatever the profit, so ₹1.2 crore would pass."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a family office client the difference between a fund's DPI and its TVPI.",
+    "modelAnswer": "Both divide by the money you've actually paid in, not what you committed. DPI counts only the cash the fund has sent back to you. TVPI adds the value of the holdings it hasn't sold yet, and that value is the manager's own estimate. So a fund with a TVPI of 1.75x and a DPI of 0.75x has returned three-quarters of your money in cash, and the rest of its gain is still on paper. DPI is money in the bank; the rest of TVPI is an estimate."
+  }
+}

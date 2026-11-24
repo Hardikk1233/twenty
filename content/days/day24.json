@@ -1,0 +1,152 @@
+{
+  "day": 24,
+  "phase": 4,
+  "title": "Fund operations and the finance back office",
+  "pages": {
+    "why": "Before markets open in New York, a team in Mumbai checks a hedge fund's previous day: every trade, holding and cash balance in the fund's records must match the broker's and the bank's. Most lines match in seconds. The rest, called breaks, must be explained before the fund's net asset value can be signed off.",
+    "idea": "Investment firms split their work three ways. The front office decides and trades: portfolio managers, analysts, traders. The middle office watches risk, compliance and performance. The **back office** makes sure that what was decided actually happened and is recorded correctly.\n\nMost funds hire a **fund administrator**, an independent firm that keeps the fund's books, values its holdings and calculates its net asset value (NAV). It also processes subscriptions and redemptions, the money investors put in and take out, sends capital call and distribution notices, and prepares investor statements. A custodian (Day 23) holds the assets, and an auditor (Day 6) checks the accounts each year.\n\nThe engine of this work is **reconciliation**: comparing two records of the same thing and explaining every difference. Funds reconcile trades against brokers' confirmations (their record of each trade), holdings against the custodian, and cash against the bank. Each difference is a break: either timing, such as a payment still in transit, which clears on its own, or an error to fix.\n\nCompanies run the same discipline in the **month-end close**, the routine that finalises each month's books: record accruals (Day 5), reconcile bank and supplier balances, correct errors, then compare results with the budget.\n\nEach change to the books is a **journal entry**: a dated record of debits and credits that must be equal. A debit raises an asset or an expense and a credit lowers it; for liabilities, equity and revenue, it is the other way round.\n\nUnder **maker-checker**, one person prepares an entry or payment and a different person approves it, so nobody can change the books alone.",
+    "example": {
+      "text": "A hypothetical fund reconciles its October cash. Its ledger, the fund's own record, and its bank statement both start at ₹400 lakh.\n\n{table}\n\nThe opening balances agree, and three movements match on amount and date. Two are breaks, and together they explain the ₹28 lakh gap:\n\n- The bank took ₹2 lakh of charges the ledger never recorded. That is an error in the books, fixed with a journal entry: debit bank charges ₹2 lakh (an expense rises), credit cash ₹2 lakh (an asset falls).\n- The fund paid its auditor ₹30 lakh on 31 October, but the bank processed it on 2 November. That is timing: no entry, but track it until it clears.\n\nAdjusted, the ledger shows 460 − 2 = 458 and the bank 488 − 30 = 458, so the reconciliation is clear. Under maker-checker, a second person approves the entry before it is posted to the ledger.",
+      "table": {
+        "caption": "₹ lakh, 1 to 31 October, hypothetical fund",
+        "columns": ["Ledger", "Bank"],
+        "rows": [
+          { "label": "Cash at 1 October", "values": [400, 400] },
+          { "label": "Investor subscription", "values": [250, 250] },
+          { "label": "Shares bought", "values": [-180, -180] },
+          { "label": "Dividend received", "values": [20, 20] },
+          { "label": "Bank charges", "values": [null, -2], "highlight": true },
+          { "label": "Payment to auditor", "values": [-30, null], "highlight": true },
+          { "label": "Cash at 31 October", "values": [460, 488], "rule": "total" }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Back office",
+        "aka": ["operations", "ops"],
+        "definition": "The teams that settle trades, keep the books, reconcile records and report to investors, after the front office has decided and traded."
+      },
+      {
+        "term": "Fund administrator",
+        "aka": ["administrator", "fund admin"],
+        "definition": "An independent firm hired by a fund to keep its books, value its holdings, calculate its NAV and handle investor money and reporting."
+      },
+      {
+        "term": "Reconciliation",
+        "aka": ["rec", "recon"],
+        "definition": "Comparing two records of the same thing, such as ledger cash and the bank statement, and explaining every difference, called a break."
+      },
+      {
+        "term": "Month-end close",
+        "aka": ["close", "book close"],
+        "definition": "The routine that finalises a month's books: accruals, reconciliations, corrections and review, usually finished early in the next month."
+      },
+      {
+        "term": "Journal entry",
+        "aka": ["JE", "journal"],
+        "definition": "A dated record that changes the books, made of debits and credits that must be equal so the books stay balanced.",
+        "formula": "Total debits = total credits"
+      },
+      {
+        "term": "Maker-checker",
+        "aka": ["four-eyes check", "four-eyes principle"],
+        "definition": "A control in which one person prepares an entry or payment and a different person reviews and approves it."
+      }
+    ],
+    "builder": "Back-office work is high-volume, rule-based and checkable, so it gives the best return on automation. A fund can have thousands of trades, holdings and cash lines a day, and every record has a counterpart to test against.\n\nThe design: match automatically on clear rules (identifier, amount, date, and direction in or out), send each break to a person with both records side by side, and log every match, override and approval. Language models help at the edges, such as reading a broker's emailed confirmation or suggesting why a break arose. The matching itself is code.\n\nKeep maker-checker: your system can be the maker, never the checker of its own work.\n\n**Check worth building:** every journal entry the system proposes must balance, name the break it clears, and wait for a named person's approval before it posts.",
+    "client": {
+      "say": "Reconciliation is usually where automation pays first, so I'd like to see a month of your breaks and how each was cleared.",
+      "ask": "How many reconciliation breaks do you see each month, and how long does each take to clear?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d24-concept1",
+      "type": "concept",
+      "concept": "Front, middle and back office",
+      "kind": "choice",
+      "prompt": "Which of these tasks belongs to a fund's back office?",
+      "options": [
+        "Deciding which shares the fund should buy next week",
+        "Monitoring traders' positions against their risk limits",
+        "Presenting the fund's strategy to prospective investors",
+        "Reconciling the fund's cash against its bank statements"
+      ],
+      "answer": 3,
+      "explain": "Reconciling cash, checking that what happened matches the fund's records, is back-office work. Monitoring risk limits is the tempting answer because it sounds like operations, but that is the middle office's job: it oversees risk rather than processing trades."
+    },
+    {
+      "id": "d24-concept2",
+      "type": "concept",
+      "concept": "Timing break or error",
+      "kind": "choice",
+      "prompt": "A fund's ledger records a ₹45 lakh payment to an investor on 31 October, but the bank statement shows it on 1 November. How should the October cash reconciliation treat it?",
+      "options": [
+        "As an error: reverse the payment in the ledger so the two agree",
+        "As a timing difference: no entry, but track it until it clears",
+        "As a bank error: ask the bank to move the payment into October",
+        "As too small to matter: remove the line, since the money has gone"
+      ],
+      "answer": 1,
+      "explain": "The payment is real and correctly recorded; the bank simply processed it a day later, so the break clears on its own and needs tracking, not an entry. Reversing it in the ledger is tempting because the two would then agree, but it would make the books wrong just to make the numbers match."
+    },
+    {
+      "id": "d24-calc1",
+      "type": "calc",
+      "concept": "Finding the unexplained break",
+      "kind": "number",
+      "prompt": "At 30 November, a fund's ledger shows cash of ₹500 lakh and its bank statement ₹520 lakh. A ₹15 lakh dividend has reached the bank but is not yet in the ledger. How much of the difference is still unexplained?",
+      "answer": 5,
+      "tolerance": 0,
+      "unit": "₹ lakh",
+      "check": "520 - 500 - 15",
+      "explain": "The gap is 520 − 500 = ₹20 lakh, and the dividend explains 15 of it, leaving 20 − 15 = ₹5 lakh to investigate. Answering ₹20 lakh is the common slip: that is the whole gap, before taking off the part the dividend explains."
+    },
+    {
+      "id": "d24-calc2",
+      "type": "calc",
+      "concept": "Accruing a monthly fee",
+      "kind": "choice",
+      "prompt": "A fund charges a management fee of 2% a year on net assets of ₹600 crore. The fee is paid quarterly but accrued monthly. What fee should the October close accrue?",
+      "options": ["₹1 crore", "₹2 crore", "₹3 crore", "₹12 crore"],
+      "answer": 0,
+      "check": "600 * 0.02 / 12",
+      "explain": "The yearly fee is 600 × 2% = ₹12 crore, so one month's share is 12 ÷ 12 = ₹1 crore, whenever the cash is paid. ₹3 crore is the tempting slip: that is the quarterly payment, but an accrual records only the cost of the month being closed."
+    },
+    {
+      "id": "d24-client1",
+      "type": "client",
+      "concept": "Size the breaks first",
+      "kind": "choice",
+      "prompt": "The operations head at a hedge fund says, 'My team spends half of every day on reconciliations. Can AI take that over?' Which reply is best?",
+      "options": [
+        "Yes. AI can run the whole process, so your team can move on to other work now.",
+        "It is simple matching, so a spreadsheet macro would do; you don't need AI at all.",
+        "Much of it. How many breaks do you see a month, and how long does each take?",
+        "We'd send every line to a language model and let it decide what matches."
+      ],
+      "answer": 2,
+      "explain": "Break volume and time to clear show where the hours go and what automation could save, which shapes the build. Taking over the whole process is the tempting reply, but breaks need human judgement, and promising to remove the team's work overstates what any system should do."
+    },
+    {
+      "id": "d24-builder1",
+      "type": "builder",
+      "concept": "Match on more than amount",
+      "kind": "choice",
+      "prompt": "Your matching engine marks October's cash as fully reconciled. In fact, it had paired a ₹40 lakh dividend at the bank with a ₹40 lakh subscription in the ledger, dated three weeks earlier, whose money never arrived. Which rule would have prevented this?",
+      "options": [
+        "Widen the tolerance on amounts so that more lines match automatically",
+        "Require amount, date range and reference to agree before lines match",
+        "Ask a language model to confirm every match before the month closes",
+        "Run the reconciliation once a month instead of once every day"
+      ],
+      "answer": 1,
+      "explain": "Matching on amount alone let two unrelated ₹40 lakh items pair up; requiring dates and references to agree too would have left both as breaks for a person to clear. A language model is the tempting fix, but a field rule catches this every time, at almost no cost, while a model's judgement can vary."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, tell a fund's operations head how you would automate their cash reconciliation, and what stays with their team.",
+    "modelAnswer": "We'd match your ledger to the bank automatically, using clear rules: amount, date and reference must all agree. Anything left over is a break, shown to your team with both records side by side, and they decide whether it's timing or an error. If an entry is needed, our system can prepare it, but someone on your team approves it before it posts, so maker-checker stays intact. And every match, override and approval is logged for your auditor."
+  }
+}

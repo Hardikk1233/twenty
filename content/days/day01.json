@@ -1,0 +1,147 @@
+{
+  "day": 1,
+  "phase": 1,
+  "title": "How a business makes money, and who finance serves",
+  "pages": {
+    "why": "A London fund that lends to mid-sized companies is asked to finance a fast-growing café chain in India. Before anyone talks about the brand or the coffee, an analyst answers three questions: how did the business do, what does it own and owe, and where did its cash go? Almost every task you will automate for finance clients feeds a decision like this one, with real money behind it.",
+    "idea": "A business sells something and earns **revenue**. Along the way it pays for ingredients, rent, wages, interest on its loans and tax. These are its **expenses**. What is left is **profit**.\n\nFinance asks three questions about any business, and each has its own report:\n\n- How did it do over the year? The income statement (Day 2).\n- What does it own and owe on a given date? The balance sheet (Day 3).\n- Where did its cash come from and go? The cash flow statement (Day 4).\n\nTogether these are the **financial statements**. Profit and cash are not the same thing. A café that caters an office party on credit records the sale now and collects the money next month. You will meet this gap all month.\n\nMoney moves between three groups. Companies need money to grow. Investors supply it: lenders want it back with interest, and shareholders buy part of the business and share in its profits. In between sit advisers and service firms: banks, brokers, auditors who check the accounts, fund administrators who keep funds' books, and outsourced research and finance teams like yours.\n\nInvestors such as funds, family offices (the investment teams of wealthy families) and wealth managers are the **buy side**. Banks and brokers that sell them research, trading and deal services are the sell side. Most of your firm's clients are on the buy side, along with companies that need finance work done.",
+    "example": {
+      "text": "Meet **Brew Lane Cafés Ltd**, a fictional café chain you will follow for all 30 days. Its financial year runs from April to March, so FY26 means April 2025 to March 2026. Figures are in ₹ crore: 1 crore is 10 million, 100 crore is 1 billion, and 1 lakh is 100 thousand.\n\n{table}\n\nOf every ₹100 Brew Lane took in, ₹9 was left as profit.\n\nOn 31 March 2026 its assets, from cafés and ovens to cash, totalled ₹70 crore, and it owed ₹35 crore to lenders and suppliers. Over the year its cash rose from ₹6 crore to ₹8 crore. Profit was ₹9 crore, yet cash rose by only ₹2 crore. Day 4 explains the gap.",
+      "table": {
+        "caption": "₹ crore, year ended 31 March 2026",
+        "columns": ["FY26"],
+        "rows": [
+          { "label": "Revenue", "values": [100] },
+          { "label": "Expenses, including interest and tax", "values": [-91] },
+          { "label": "Profit after tax", "values": [9], "rule": "total" }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Revenue",
+        "aka": ["sales", "turnover", "top line", "revenue from operations"],
+        "definition": "Money earned from selling goods or services in a period, before any expenses are taken off."
+      },
+      {
+        "term": "Expenses",
+        "aka": ["costs"],
+        "definition": "Costs a business records in a period, from ingredients and wages to interest and tax."
+      },
+      {
+        "term": "Profit",
+        "aka": ["earnings"],
+        "definition": "Revenue minus expenses. There are several profit lines, so always ask which one is meant.",
+        "formula": "Revenue − expenses"
+      },
+      {
+        "term": "Financial statements",
+        "aka": ["accounts", "financials"],
+        "definition": "The income statement, balance sheet and cash flow statement, plus the notes that explain them."
+      },
+      {
+        "term": "Crore",
+        "aka": ["Cr"],
+        "definition": "Indian unit equal to 10 million, or 100 lakh; 100 crore is 1 billion, and 1 lakh is 100,000."
+      },
+      {
+        "term": "Buy side",
+        "definition": "Investors who put money to work, such as funds, family offices and wealth managers. The banks and brokers that serve them are the sell side."
+      }
+    ],
+    "builder": "Almost every finance task has the same shape: messy documents go in, a number comes out, and someone bets money on that number. A fluent paragraph with one wrong figure is worse than no answer, because it looks finished and gets used.\n\nSo two properties matter more than fluency. Accuracy: the number is right. Traceability: anyone can go from the number to the exact page and line it came from, in one click.\n\n**Check worth building:** every figure your system outputs carries its source document, page and the text it was read from. A figure without a source does not ship.",
+    "client": {
+      "say": "Before we build anything, I'd like to understand the decision this work feeds, because that tells us how accurate it has to be.",
+      "ask": "Which decision does this work feed, and who signs off on it?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d01-concept1",
+      "type": "concept",
+      "concept": "Three statements, three questions",
+      "kind": "choice",
+      "prompt": "A fund manager asks, 'Where did the cash go last year?' Which statement answers that?",
+      "options": [
+        "The income statement",
+        "The balance sheet",
+        "The cash flow statement",
+        "The share price history"
+      ],
+      "answer": 2,
+      "explain": "The cash flow statement tracks cash coming in and going out over the year. The income statement is the tempting pick, but it reports profit, which counts sales the business has not yet been paid for."
+    },
+    {
+      "id": "d01-concept2",
+      "type": "concept",
+      "concept": "Profit is not cash",
+      "kind": "choice",
+      "prompt": "Brew Lane made ₹9 crore of profit in FY26, but its cash rose by only ₹2 crore. What does this tell you?",
+      "options": [
+        "There must be an accounting error, since profit and the rise in cash should match",
+        "Profit and cash differ: cash also moves when a business invests or repays debt",
+        "Brew Lane must have overstated its revenue to make its profit look higher",
+        "Brew Lane must have left some expenses out of its income statement"
+      ],
+      "answer": 1,
+      "explain": "Profit measures performance, while cash also moves for things profit ignores, such as building new cafés or repaying a loan. An accounting error is the tempting answer, but a gap between profit and cash is normal, not a sign of a mistake."
+    },
+    {
+      "id": "d01-calc1",
+      "type": "calc",
+      "concept": "Adding up expenses",
+      "kind": "number",
+      "prompt": "Brew Lane's FY26 revenue was ₹100 crore. Its expenses were ₹40 crore for coffee, food and cups, ₹40 crore for rent, staff and other running costs, and ₹11 crore for equipment wear and tear, interest and tax. What was its profit?",
+      "answer": 9,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "revenue - (cogs + opex + (depreciation + interest + tax))",
+      "explain": "Expenses total 40 + 40 + 11 = ₹91 crore, so profit is 100 − 91 = ₹9 crore. Stopping at ₹20 crore, after the first two lines, is the common slip: wear and tear, interest and tax are expenses too."
+    },
+    {
+      "id": "d01-calc2",
+      "type": "calc",
+      "concept": "Crore to million",
+      "kind": "choice",
+      "prompt": "A US client wants Brew Lane's FY26 revenue of ₹100 crore in millions. What do you write?",
+      "options": ["₹10 million", "₹100 million", "₹1,000 million", "₹10,000 million"],
+      "answer": 2,
+      "check": "revenue * 10",
+      "explain": "One crore is 10 million, so ₹100 crore is ₹1,000 million, which is ₹1 billion. ₹100 million is the tempting slip: it treats a crore as a million and understates revenue tenfold."
+    },
+    {
+      "id": "d01-client1",
+      "type": "client",
+      "concept": "Ask what decision the work feeds",
+      "kind": "choice",
+      "prompt": "A family office manager asks, 'Can your AI summarise this company's annual report for me?' Which reply is best?",
+      "options": [
+        "Happy to. Which decision will the summary feed, and who acts on it?",
+        "Yes, our system can summarise any annual report in a few seconds.",
+        "Yes, although you would need to check every number it gives you.",
+        "We would rather not, because summaries of financial reports are risky."
+      ],
+      "answer": 0,
+      "explain": "Knowing the decision tells you what the summary must cover and how accurate it has to be. The quick yes is tempting because it sounds helpful, but it commits you before you know what a good summary means to this client."
+    },
+    {
+      "id": "d01-builder1",
+      "type": "builder",
+      "concept": "Traceability",
+      "kind": "choice",
+      "prompt": "Your system reports Brew Lane's FY26 revenue as ₹100 crore in a well-written summary. A reviewer asks which page the figure came from, and the system cannot say. What is the main problem?",
+      "options": [
+        "The summary is too long for a busy reviewer to read",
+        "The figure cannot be traced, so nobody can verify it",
+        "The figure is wrong; FY26 revenue was ₹80 crore",
+        "Revenue should have been reported in US dollars"
+      ],
+      "answer": 1,
+      "explain": "Finance users check a number against its source before relying on it, so every figure needs its document and page. The figure is actually right, which is the trap: a correct number that nobody can verify still cannot be used."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, tell a new colleague the three questions finance asks about any business, and which statement answers each.",
+    "modelAnswer": "Finance asks three questions. How did the business do over a period? The income statement answers that, from revenue down to profit. What does it own and owe on a given date? That's the balance sheet. Where did the cash come from and go? That's the cash flow statement. You need all three, because a business can report a profit and still run short of cash."
+  }
+}

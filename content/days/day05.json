@@ -1,0 +1,154 @@
+{
+  "day": 5,
+  "phase": 1,
+  "title": "How the three statements connect",
+  "pages": {
+    "why": "At midnight, an associate at a private equity firm, which invests in private companies, finds that the balance sheet in a deal model, a spreadsheet of forecast statements, is out by ₹3 crore. The partners vote on the deal at 9 a.m., and the error could be in any of 2,000 cells. Knowing how the three statements link turns a night of searching into a ten-minute fix.",
+    "idea": "Income statements and balance sheets use **accrual accounting**: revenue is recorded when it is earned and costs when they are incurred, not when cash changes hands. The cash flow statement records only cash. Three ideas connect them:\n\n- **Depreciation** spreads an asset's cost over the years it is used. **Amortisation** does the same for intangible assets, ones you cannot touch, such as software. Both cut profit with no cash leaving, so cash from operations adds them back. Balance sheets show assets after taking off all depreciation so far.\n- **Working capital** is current assets minus current liabilities. When receivables or inventory grow, cash is tied up; when payables grow, cash is freed.\n- **Reserves**, part of equity, grow by each year's profit and shrink by dividends. This is how profit reaches the balance sheet.\n\nTrace three events through all three statements. Amounts are hypothetical; costs and tax are left out.\n\n- A ₹2 crore sale on credit. Income statement: revenue and profit up 2. Balance sheet: receivables up 2, reserves up 2. Cash flow: no cash yet, as the rise in receivables cancels the profit.\n- ₹5 crore of ovens, paid in cash, used for five years, then scrapped. Income statement: nothing today, then depreciation of 1 a year. Balance sheet: property and equipment up 5, cash down 5. Cash flow: 5 out under investing, as capital expenditure.\n- A ₹1 crore loan repayment. Income statement: nothing, since only interest is a cost. Balance sheet: debt and cash both down 1. Cash flow: 1 out under financing.\n\nAfter each event, the balance sheet still balances.",
+    "example": {
+      "text": "Brew Lane's reported FY26 links: each balance at 31 March 2026 is the year-earlier balance plus movements from the other statements.\n\n{table}\n\n- Reserves: 16 + profit 9 − dividends 0 = 25, with profit from the income statement.\n- Property and equipment: 47 + capital expenditure 10 − depreciation 5 = 52. Capex comes from the cash flow statement, depreciation from the income statement.\n- Debt: 31 − 1 repaid = 30. The repayment is a line in cash from financing.\n- Cash: 6 + 2 = 8, where 2 is the cash flow statement's net change, 13 − 10 − 1.\n\nWorking capital links too: receivables, inventory and payables each rose by 1 on the balance sheet, and those changes sit inside cash from operations.",
+      "table": {
+        "caption": "₹ crore, year ended 31 March 2026",
+        "columns": ["FY26"],
+        "rows": [
+          { "label": "Opening reserves", "values": [16] },
+          { "label": "Profit after tax", "values": [9] },
+          { "label": "Dividends", "values": [0] },
+          { "label": "Closing reserves", "values": [25], "rule": "total" },
+          { "label": "Opening property and equipment", "values": [47] },
+          { "label": "Capital expenditure", "values": [10] },
+          { "label": "Depreciation", "values": [-5] },
+          { "label": "Closing property and equipment", "values": [52], "rule": "total" },
+          { "label": "Opening debt", "values": [31] },
+          { "label": "Debt repaid", "values": [-1] },
+          { "label": "Closing debt", "values": [30], "rule": "total" },
+          { "label": "Opening cash", "values": [6] },
+          { "label": "Net change in cash", "values": [2] },
+          { "label": "Closing cash", "values": [8], "rule": "total" }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Accrual accounting",
+        "aka": ["accrual basis"],
+        "definition": "Recording revenue when earned and costs when incurred, not when cash changes hands. Income statements and balance sheets use it; cash flow statements do not."
+      },
+      {
+        "term": "Depreciation",
+        "definition": "Spreading the cost of a physical asset, such as an oven, over the years it is used. It lowers profit, but no cash leaves at that point.",
+        "formula": "Straight-line: (cost − value left at the end) ÷ years of use"
+      },
+      {
+        "term": "Amortisation",
+        "definition": "Depreciation for intangible assets, ones you cannot touch, such as software and licences. Often reported together with depreciation as D&A."
+      },
+      {
+        "term": "Working capital",
+        "aka": ["net working capital", "net current assets"],
+        "definition": "The money tied up in running the business day to day. Many analysts leave out cash and debt, using receivables + inventory − payables.",
+        "formula": "Current assets − current liabilities"
+      },
+      {
+        "term": "Reserves",
+        "aka": ["other equity", "reserves and surplus", "retained earnings"],
+        "definition": "The part of equity built up inside the business, mainly profits kept rather than paid out as dividends.",
+        "formula": "Closing reserves = opening reserves + profit after tax − dividends"
+      }
+    ],
+    "builder": "These links form a constraint system. Most figures sit in two or more equations: profit drives reserves and cash from operations, and capex drives property and equipment and cash. Each statement can look fine on its own while the set is wrong.\n\nThat is the basis of automated checking of financial models. One wrong number makes something else stop tying: read capex as 11 instead of 10, and both property and equipment and cash fail to roll forward. The failing checks share one input, which points straight at the error, much as failing tests point to a bug.\n\n**Check worth building:** roll every balance forward, opening plus flows from the other statements equals closing, for reserves, property and equipment, debt and cash. Report each break with the lines involved.",
+    "client": {
+      "say": "The links between statements narrow a balance error to a few lines, and that search is easy to automate.",
+      "ask": "When a model does not balance, how long does it take your team to find the error?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d05-concept1",
+      "type": "concept",
+      "concept": "Revenue when earned, not paid",
+      "kind": "choice",
+      "prompt": "A café chain caters a corporate event in March 2026 and bills ₹2 crore, which the client pays in May 2026. The chain's year ends on 31 March. How does the event show up in its FY26 accounts?",
+      "options": [
+        "Revenue of ₹2 crore, and receivables of ₹2 crore at 31 March",
+        "Nothing yet: it is recorded in FY27, when the cash arrives",
+        "Revenue of ₹2 crore, and cash of ₹2 crore at 31 March",
+        "Receivables of ₹2 crore, but no revenue until the cash arrives"
+      ],
+      "answer": 0,
+      "explain": "Under accrual accounting, revenue is recorded when it is earned, in March, and the unpaid ₹2 crore sits in receivables until May. Waiting for the cash is the tempting answer, but that is cash accounting, which company income statements do not use."
+    },
+    {
+      "id": "d05-concept2",
+      "type": "concept",
+      "concept": "Loan repayment is not a cost",
+      "kind": "choice",
+      "prompt": "Brew Lane repaid ₹1 crore of its bank loan in FY26. How did the repayment itself affect its FY26 income statement?",
+      "options": [
+        "Expenses rose by ₹1 crore, so profit fell by ₹1 crore",
+        "It did not appear there: only the interest is a cost",
+        "Profit fell by ₹0.75 crore, after tax at 25%",
+        "It was spread as a cost over the loan's remaining years"
+      ],
+      "answer": 1,
+      "explain": "Repaying the loan lowers cash and debt by ₹1 crore each and appears in cash from financing, but it is not a cost. Treating it as an expense is the tempting mistake: of the loan's costs, only the ₹3 crore of interest reached Brew Lane's income statement."
+    },
+    {
+      "id": "d05-calc1",
+      "type": "calc",
+      "concept": "Rolling an asset forward",
+      "kind": "number",
+      "prompt": "At 31 March 2025, Brew Lane's property and equipment was ₹47 crore. In FY26 it spent ₹10 crore of capital expenditure, charged ₹5 crore of depreciation and sold nothing. What was its property and equipment at 31 March 2026?",
+      "answer": 52,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "ppe25 + capex - depreciation",
+      "explain": "47 + 10 − 5 = ₹52 crore: capital expenditure adds to the asset and depreciation wears it down. 57 is the common slip: it forgets that depreciation reduces the asset each year."
+    },
+    {
+      "id": "d05-calc2",
+      "type": "calc",
+      "concept": "Working capital",
+      "kind": "choice",
+      "prompt": "At 31 March 2026, Brew Lane has cash of ₹8 crore, receivables of ₹4 crore, inventory of ₹6 crore, payables of ₹5 crore and a long-term bank loan of ₹30 crore. Using current assets minus current liabilities, what is its working capital?",
+      "options": ["−₹17 crore", "₹5 crore", "₹13 crore", "₹18 crore"],
+      "answer": 2,
+      "check": "cash26 + receivables26 + inventory26 - payables26",
+      "explain": "Current assets are 8 + 4 + 6 = 18 and the only current liability is payables of 5, so working capital is ₹13 crore. Taking off the loan too gives −₹17 crore, the tempting slip, but a loan not due within 12 months is not a current liability."
+    },
+    {
+      "id": "d05-client1",
+      "type": "client",
+      "concept": "Size the search first",
+      "kind": "choice",
+      "prompt": "A private equity client says, 'Our analysts lose whole evenings when a model will not balance.' Which reply is best?",
+      "options": [
+        "We could add a line that forces the balance sheet to balance.",
+        "Our AI builds models that always balance, so that problem goes away.",
+        "Models that do not balance usually mean the analysts need training.",
+        "How long does a typical search take, and how often does it happen?"
+      ],
+      "answer": 3,
+      "explain": "Asking how long the search takes and how often it happens sizes the problem, which tells you whether an automated check is worth building. Forcing the balance sheet to balance is the tempting fix, but it hides the error instead of finding it."
+    },
+    {
+      "id": "d05-builder1",
+      "type": "builder",
+      "concept": "One input breaks two links",
+      "kind": "choice",
+      "prompt": "Your tool checks Brew Lane's FY26 statements as read from a PDF. Two roll-forwards fail. Property and equipment: 47 + 11 − 5 = 53, against 52 on the balance sheet. Cash: 6 + 13 − 11 − 1 = 7, against 8. Reserves and debt tie. What is the most likely error?",
+      "options": [
+        "Balance sheet cash should be 7, not 8",
+        "Capital expenditure should be 10, not 11",
+        "The debt repaid should be 0, not 1",
+        "Property and equipment should be 53, not 52"
+      ],
+      "answer": 1,
+      "explain": "Capital expenditure is the one input in both failing checks, and 10 makes both tie: 47 + 10 − 5 = 52 and 6 + 13 − 10 − 1 = 8. Changing balance sheet cash to 7 is tempting because that check failed, but it leaves property and equipment broken."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a new colleague how Brew Lane's three statements link together.",
+    "modelAnswer": "The income statement's profit flows into reserves on the balance sheet: Brew Lane's reserves went from 16 to 25 crore because it kept all ₹9 crore of profit. The cash flow statement starts from that same profit and adjusts it to cash. Capital expenditure adds to property and equipment and depreciation takes it down: 47 plus 10 minus 5 is 52. And the year's change in cash lands on the balance sheet: 6 plus 2 is 8. If any link doesn't tie, a number somewhere is wrong."
+  }
+}

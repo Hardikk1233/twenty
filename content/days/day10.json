@@ -1,0 +1,147 @@
+{
+  "day": 10,
+  "phase": 2,
+  "title": "Quality of earnings and red flags",
+  "pages": {
+    "why": "A private credit fund is weeks away from lending to a fast-growing restaurant group whose profit has doubled in two years. Its analyst notices that cash from operations fell over the same period, and that a note deep in the annual report describes large purchases from a firm owned by the founder's brother. Neither fact is in the results headline, and both change the decision.",
+    "idea": "Reported profit follows accounting rules, but the rules leave room for judgement. Quality of earnings asks how much of a profit is real, repeatable and backed by cash. Five patterns deserve a look.\n\n- Adjustments. Companies publish **adjusted earnings**: profit with items they call unusual taken out. Some are genuine **exceptional items**, such as a fire or a gain on selling land. But a 'one-off' cost that appears every year is a running cost, and a company that strips out one-off costs while keeping one-off gains is flattering itself.\n- Aggressive revenue recognition: booking sales before they are earned, for example by shipping extra stock to distributors just before the year end. The sign is receivables growing faster than sales.\n- **Capitalisation** of running costs. Recording an expense as an asset, to be spread over years, lifts profit now. It also flatters cash from operations, because the spending moves to cash from investing.\n- Profit rising while cash from operations falls. Profit can be shaped; cash is harder to fake.\n- Warnings in the text. An auditor's qualified opinion means the auditor disagrees with part of the accounts or could not check it. **Related-party transactions** are deals with owners, managers, their families or their firms. **Contingent liabilities** are possible obligations, such as a pending lawsuit, kept in the notes rather than on the balance sheet. In India, a **promoter pledge** means the founding shareholders, called promoters, have borrowed against their shares; if the price falls, lenders can sell, and the price falls further.",
+    "example": {
+      "text": "Brew Lane's accounts are simple, so start with a hypothetical café chain.\n\n{table}\n\nRevenue rose 20% and profit after tax 50%, yet cash from operations fell by more than half. Receivables doubled: receivable days went from 10 ÷ 100 × 365 = 36.5 to 20 ÷ 120 × 365 = 60.8. Customers are taking far longer to pay, or some sales were booked early. Either way, profit is not turning into cash.\n\nNow run the same tests on Brew Lane's FY26. Cash from operations of ₹13 crore exceeds profit after tax of ₹9 crore: a pass. Receivables grew 33%, from ₹3 crore to ₹4 crore, while revenue grew 25%. The rule fires, but receivables rose by only ₹1 crore, and receivable days moved from 13.7 to 14.6. That is a flag to note, not a verdict.",
+      "table": {
+        "caption": "₹ crore, hypothetical café chain, Year 1 and Year 2",
+        "columns": ["Year 1", "Year 2"],
+        "rows": [
+          { "label": "Revenue", "values": [100, 120] },
+          { "label": "Profit after tax", "values": [10, 15] },
+          { "label": "Cash from operations", "values": [12, 5], "highlight": true },
+          { "label": "Receivables at year end", "values": [10, 20], "highlight": true }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Adjusted earnings",
+        "aka": ["underlying profit", "normalised earnings", "non-GAAP earnings"],
+        "definition": "Profit with items management calls unusual taken out. Useful, but the company chooses what to remove."
+      },
+      {
+        "term": "Exceptional item",
+        "aka": ["one-off item", "non-recurring item"],
+        "definition": "A large, unusual gain or loss shown separately, such as a fire, a legal settlement or the sale of a property."
+      },
+      {
+        "term": "Capitalisation",
+        "aka": ["capitalising a cost"],
+        "definition": "Recording a cost as an asset and spreading it over future years, instead of expensing it now. Not to be confused with market capitalisation."
+      },
+      {
+        "term": "Related-party transaction",
+        "aka": ["RPT"],
+        "definition": "A deal between a company and its owners, managers, their relatives or firms they control. Legal, but the price may not be fair."
+      },
+      {
+        "term": "Contingent liability",
+        "definition": "A possible obligation that depends on a future event, such as losing a lawsuit. Disclosed in the notes, not on the balance sheet."
+      },
+      {
+        "term": "Promoter pledge",
+        "aka": ["pledged shares", "share pledge"],
+        "definition": "In India, promoters, the founders or controlling shareholders, using their shares as security for a loan. A falling price can force a sale."
+      }
+    ],
+    "builder": "Red flags are a strong use case because the evidence sits in text: the auditor's report, notes on related parties and contingent liabilities, exchange filings on pledged shares. A system can read every page an analyst has no time for.\n\nBut it must output a flag, never a verdict. Brew Lane's receivables rule fires on a ₹1 crore rise; a system that writes 'aggressive revenue recognition' has turned a data point into an accusation. A good flag names the rule that fired, the figures, and a quoted sentence with its document and page. The analyst decides what it means.\n\n**Check worth building:** confirm that every quoted sentence appears word for word on the cited page, and drop any flag whose quote cannot be found.",
+    "client": {
+      "say": "We'd show every flag with the exact sentence and page behind it, so your analysts judge the evidence, not our summary.",
+      "ask": "Which red flags do you check on every company, and is that checklist written down?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d10-concept1",
+      "type": "concept",
+      "concept": "Profit rising, cash falling",
+      "kind": "choice",
+      "prompt": "Over three years, a retailer's profit rises every year while its cash from operations falls every year. What is the most likely concern?",
+      "options": [
+        "It is spending heavily to build new stores, which drains operating cash",
+        "It proves the accounts are false, so the profit can be ignored",
+        "Nothing: profit and operating cash always drift apart as firms grow",
+        "Profit may be sitting in unpaid invoices or unsold stock, not cash"
+      ],
+      "answer": 3,
+      "explain": "Profit that does not turn into cash often sits in rising receivables or inventory, which is why this gap is a classic warning. Building new stores is the tempting answer, but that spending sits in cash from investing, so it cannot explain a fall in operating cash."
+    },
+    {
+      "id": "d10-concept2",
+      "type": "concept",
+      "concept": "Recurring one-offs are costs",
+      "kind": "choice",
+      "prompt": "A company has left 'one-off' restructuring costs out of its adjusted profit in each of the last four years. How should you treat those costs?",
+      "options": [
+        "As exceptional, because the company has labelled them that way",
+        "As a normal cost of running the business, since they recur",
+        "As an accounting error that the auditor should have corrected",
+        "As a tax saving, since restructuring costs lower the tax bill"
+      ],
+      "answer": 1,
+      "explain": "A cost that comes back every year is part of running the business, whatever its label, so leaving it out flatters adjusted profit. Accepting the company's label is tempting, but management chooses the adjustments, and four years in a row is not a one-off."
+    },
+    {
+      "id": "d10-calc1",
+      "type": "calc",
+      "concept": "Capitalised costs lift profit",
+      "kind": "number",
+      "prompt": "A café chain records ₹5 crore of routine repairs as equipment, depreciated evenly over five years starting this year, instead of expensing them. How much higher is this year's profit before tax?",
+      "answer": 4,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "5 - 5 / 5",
+      "explain": "Expensing would cost ₹5 crore this year; capitalising costs only one year's depreciation, 5 ÷ 5 = ₹1 crore, so profit before tax is 5 − 1 = ₹4 crore higher. ₹5 crore is the common slip: the new asset still has to be depreciated, starting this year."
+    },
+    {
+      "id": "d10-calc2",
+      "type": "calc",
+      "concept": "Treat one-offs consistently",
+      "kind": "choice",
+      "prompt": "A company reports profit after tax of ₹40 crore. Its adjusted profit adds back ₹10 crore of 'one-off' restructuring costs but keeps a ₹6 crore one-off gain from selling land. Both figures are after tax. Treating both items as one-offs, what is adjusted profit?",
+      "options": ["₹34 crore", "₹40 crore", "₹44 crore", "₹50 crore"],
+      "answer": 2,
+      "check": "40 + 10 - 6",
+      "explain": "Removing both one-offs gives 40 + 10 − 6 = ₹44 crore. ₹50 crore, the company's own figure, is the tempting pick, but it adds back the one-off cost while keeping the one-off gain, which flatters profit."
+    },
+    {
+      "id": "d10-client1",
+      "type": "client",
+      "concept": "Flags with sources, not verdicts",
+      "kind": "choice",
+      "prompt": "A portfolio manager says, 'Have your AI tell me which of these 50 companies are cooking the books.' Which reply is best?",
+      "options": [
+        "We'd flag warning signs with sources. Which checks does your team use?",
+        "We can rank all 50 by fraud risk and have the list to you by Friday.",
+        "We can't accuse companies of fraud, so we'd rather not take this on.",
+        "Our model scores each company on 25 forensic ratios, so it won't miss fraud."
+      ],
+      "answer": 0,
+      "explain": "Flags with quoted sources let the client's analysts judge, and asking for their checks ties the work to their process. Ranking all 50 by fraud risk is tempting because it is what they asked for, but it turns weak signals into accusations nobody can verify."
+    },
+    {
+      "id": "d10-builder1",
+      "type": "builder",
+      "concept": "Verify every quote",
+      "kind": "choice",
+      "prompt": "Your system flags: 'Note 34, page 142: the company guarantees a ₹50 crore loan taken by a firm the promoter owns.' A reviewer opens page 142 and finds no such sentence. Which check would have caught this before it reached the reviewer?",
+      "options": [
+        "Ask the model to rate its confidence in each flag before output",
+        "Report only the ten most serious flags for each company",
+        "Confirm the quote appears word for word on the cited page",
+        "Check that page 142 exists in the annual report before output"
+      ],
+      "answer": 2,
+      "explain": "Matching the quote against the text of the cited page catches invented or misplaced quotes automatically. A confidence score is tempting, but models can be confidently wrong, and a score cannot prove the sentence exists."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, tell a fund manager how you would check whether a company's profits are real.",
+    "modelAnswer": "I'd start with cash. If profit keeps rising while cash from operations falls, I want to know where the profit is sitting, often in receivables growing faster than sales. Then I'd compare reported with adjusted profit and ask whether the one-offs recur. I'd look for running costs moved onto the balance sheet. And I'd read the notes: the auditor's report, related-party deals, contingent liabilities and, in India, pledged promoter shares. Each one is a flag to investigate, not a verdict."
+  }
+}

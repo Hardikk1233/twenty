@@ -1,0 +1,148 @@
+{
+  "day": 28,
+  "phase": 5,
+  "title": "Regulation, confidentiality and risk",
+  "pages": {
+    "why": "A credit fund wants your team to run AI over borrower files, including unannounced results from a company with listed bonds. Before a single file moves, its compliance team asks where the data will be stored, who can see it, and whether the AI provider keeps it or learns from it. Your answers, not your demo, decide whether you get the work.",
+    "idea": "Finance runs on information that must not leak.\n\n**Material non-public information** (MNPI) is information not yet public that would likely move a share or bond price significantly if it were, such as unannounced results or a planned takeover. Trading on it, or passing it to someone who trades, is **insider trading**, which is illegal in India, the US, the UK and most other markets.\n\nFirms contain MNPI with **information barriers**: rules and systems that stop it crossing between teams, such as a deal team and a trading desk. Clients also require a **non-disclosure agreement** (NDA) before sharing a data room or portfolio files.\n\nPersonal data needs the same care. **Know your customer** (KYC) checks collect identity documents, addresses and tax numbers, and privacy laws limit how such data is used and moved. **Data residency** is where data is stored and processed; some laws and contracts require it to stay in one country or region.\n\nSEBI regulates India's securities markets; RBI, the central bank, regulates banks and other lenders. The SEC regulates US securities markets; the FCA regulates financial firms and markets in the UK.\n\nSummarising filings for a fund is information; telling a person what to buy can be investment advice, which usually needs registration. And for each AI provider, know where client data goes: how long it is kept, whether it trains models, and how each client's data is kept apart.\n\nThis is a map of concepts, not legal advice. Rules differ by country and change, so confirm the specifics with your compliance or legal team.",
+    "example": {
+      "text": "Before designing anything, sort a client's data by how sensitive it is. Suppose a credit fund sends your team these files in a typical month.\n\n{table}\n\nOnly 300 of 480 files, 62.5%, are public. The other 180 each need a control:\n\n- Borrower reports are confidential under the NDA, and may be MNPI where a borrower has listed shares or bonds. Only named people see them, and every view is logged.\n- Loan agreements stay inside this client's workspace, never in a shared search index.\n- KYC files hold passports and tax numbers. Mask them, or keep them out of the AI tool altogether.\n\nAn unsorted folder forces the strictest rules onto every file.",
+      "table": {
+        "caption": "Files received over 30 days, one credit fund client, illustrative",
+        "columns": ["Files"],
+        "rows": [
+          { "label": "Public filings and news", "values": [300] },
+          { "label": "Borrower reports, confidential", "values": [120], "highlight": true },
+          { "label": "Loan agreements under NDA", "values": [40] },
+          { "label": "Investor KYC files", "values": [20] },
+          { "label": "Total", "values": [480], "rule": "total" }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Material non-public information",
+        "aka": ["MNPI", "inside information", "unpublished price sensitive information", "UPSI"],
+        "definition": "Information not yet public that would likely move a share or bond price significantly if it were, such as unannounced results or a planned takeover."
+      },
+      {
+        "term": "Insider trading",
+        "aka": ["insider dealing"],
+        "definition": "Trading on material non-public information, or passing it to someone who trades. It is illegal in India, the US, the UK and most other markets."
+      },
+      {
+        "term": "Information barrier",
+        "aka": ["ethical wall", "Chinese wall"],
+        "definition": "Rules and systems that stop confidential information passing between teams, such as a deal team and a trading desk."
+      },
+      {
+        "term": "Non-disclosure agreement",
+        "aka": ["NDA", "confidentiality agreement"],
+        "definition": "A contract that limits who may see shared information and what it may be used for."
+      },
+      {
+        "term": "Know your customer",
+        "aka": ["KYC"],
+        "definition": "Checks a financial firm runs to confirm who a client is and where their money comes from, using identity documents, addresses and tax numbers."
+      },
+      {
+        "term": "Data residency",
+        "definition": "Where data is stored and processed. Some laws and client contracts require certain data to stay in one country or region."
+      }
+    ],
+    "builder": "The security review decides more deals than the demo. Expect a questionnaire before any client data reaches your tool: where data is stored and processed, whether the AI provider keeps or trains on it, who can see it, how it is deleted, and how one client's data is kept from another's.\n\nDesign the answers in from the start: a separate workspace and search index per client, provider settings that limit retention and exclude training, an agreed processing region, encryption and access logs. The classic failure is a shared index, where one client's question retrieves another's documents.\n\n**Check worth building:** an automated isolation test for every client workspace. Query it with phrases unique to other clients' documents, confirm nothing comes back, and check that every retrieved passage carries the requester's client ID. Confirm each client's requirements with compliance or legal.",
+    "client": {
+      "say": "I'd like to bring your compliance and security teams in early, because their questions will shape the design more than any demo.",
+      "ask": "Who has to approve a new tool that touches client data, and what do they ask for?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d28-concept1",
+      "type": "concept",
+      "concept": "Spotting MNPI",
+      "kind": "choice",
+      "prompt": "Which of these is most likely to be material non-public information?",
+      "options": [
+        "A listed company's annual report, posted on the exchange website last week",
+        "Your analyst's own model of a listed company, built from its published filings",
+        "A listed borrower's quarterly results, shared with its lenders before release",
+        "A newspaper interview in which a listed company's chief executive discusses demand"
+      ],
+      "answer": 2,
+      "explain": "Results shared with lenders before release are not yet public and could move the price, which makes them MNPI. Your analyst's model is tempting because it is not public, but analysis built entirely from public information is not inside information."
+    },
+    {
+      "id": "d28-concept2",
+      "type": "concept",
+      "concept": "Information versus advice",
+      "kind": "choice",
+      "prompt": "Your firm builds a tool for a wealth manager. Which feature is most likely to count as investment advice and need a compliance review first?",
+      "options": [
+        "Putting every fund's past returns into one table for the adviser",
+        "Summarising each fund manager's quarterly letter for the adviser",
+        "Flagging client statements whose holdings do not add up to the total",
+        "Messaging each end client a suggested fund to switch money into"
+      ],
+      "answer": 3,
+      "explain": "A personalised suggestion to an individual about what to buy or sell is what regulators generally treat as advice, which usually needs registration. The returns table is tempting because it compares funds, but it informs the adviser's decision rather than making one for the client."
+    },
+    {
+      "id": "d28-calc1",
+      "type": "calc",
+      "concept": "Counting personal data",
+      "kind": "number",
+      "prompt": "A wealth manager sends your team 250 files a month: 175 public fund factsheets, 50 client statements showing names and account numbers, and 25 KYC files. What percentage of the files contain personal data?",
+      "answer": 30,
+      "tolerance": 0.1,
+      "unit": "%",
+      "check": "(50 + 25) / 250 * 100",
+      "explain": "Client statements name a person and an account, so they hold personal data just as KYC files do: (50 + 25) ÷ 250 = 30%. Counting only the KYC files gives 25 ÷ 250 = 10%, which leaves the statements unprotected."
+    },
+    {
+      "id": "d28-calc2",
+      "type": "calc",
+      "concept": "Sizing a security questionnaire",
+      "kind": "choice",
+      "prompt": "A client's security questionnaire has 180 questions. Your firm's standard answer pack covers 75% of them. Each remaining question takes 30 minutes to answer and check. How many hours of work are left?",
+      "options": ["13.5 hours", "22.5 hours", "45 hours", "90 hours"],
+      "answer": 1,
+      "check": "180 * (1 - 0.75) * 30 / 60",
+      "explain": "The pack leaves 25% of 180 = 45 questions, and 45 × 30 minutes = 1,350 minutes, or 22.5 hours. 90 hours is the tempting slip: it prices all 180 questions, including those the pack already answers."
+    },
+    {
+      "id": "d28-client1",
+      "type": "client",
+      "concept": "Find who approves",
+      "kind": "choice",
+      "prompt": "A hedge fund's head of research loves your demo and says, 'Let's start on Monday with our live research files.' Which reply is best?",
+      "options": [
+        "Great. We'll load your live research files on Monday and get going.",
+        "Great. Who approves tools that touch your data, and what will they need?",
+        "Our tool is certified secure, so your firm won't need to review it at all.",
+        "We can't begin until you sign a three-year contract with us for the tool."
+      ],
+      "answer": 1,
+      "explain": "Live client files cannot move until the people who approve new tools have signed off, so finding them now saves weeks later. Agreeing to load files on Monday is tempting, but it skips the security review that decides whether the work happens at all."
+    },
+    {
+      "id": "d28-builder1",
+      "type": "builder",
+      "concept": "Isolate clients at retrieval",
+      "kind": "choice",
+      "prompt": "In testing, an analyst working for Client A asks your tool about a borrower, and the answer quotes a loan agreement that belongs to Client B. Which fix and check address the cause?",
+      "options": [
+        "Filter every search by client ID, and test isolation on each release",
+        "Tell the model in its prompt never to mention other clients' documents",
+        "Encrypt every stored document so it cannot be read by an outsider",
+        "Shorten how long the provider keeps prompts from 30 days to 7 days"
+      ],
+      "answer": 0,
+      "explain": "The search returned another client's document, so the fix is a hard filter on client ID at retrieval, proved by an automated test with other clients' phrases. A prompt instruction is tempting, but it asks the model to hide a leak that has already happened, and a prompt is not an access control."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, tell a new colleague why they must never paste a client's data room file into a public AI chatbot.",
+    "modelAnswer": "A data room file is shared under an NDA, and if the company is listed, it may be material non-public information. A public chatbot sends that file to a provider we have no contract with, which may keep it, train on it or store it in another country. That can breach the NDA, our information barriers and our data residency promises, and it puts the client's trust at risk. Use only approved tools, and if you're unsure, ask compliance before you paste anything."
+  }
+}

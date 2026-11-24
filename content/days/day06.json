@@ -1,0 +1,145 @@
+{
+  "day": 6,
+  "phase": 1,
+  "title": "Filings, periods and units",
+  "pages": {
+    "why": "A New York fund asks for an Indian company's quarterly revenue and receives a figure ten times too high. Nothing was misread: the table was in ₹ million, and the system assumed ₹ crore. Before you trust a number, you need its document, period, unit and company.",
+    "idea": "Companies publish numbers in several documents, which deserve different levels of trust. The key test is the **audit**: an independent accountant's check that the statements are fairly presented.\n\n- The **annual report** holds the year's audited financial statements, the **notes to accounts** that explain each line, management's commentary and the auditor's report.\n- Quarterly results are shorter, and usually only reviewed by the auditor, a lighter check.\n- Investor presentations and earnings call transcripts, the record of management's call with analysts, give useful context but are unaudited and selective.\n\nUS companies file annual reports with the SEC, the US markets regulator, as 10-Ks and quarterly reports as 10-Qs. Indian listed companies file theirs with the stock exchanges, NSE and BSE. The accounting rules are Ind AS for most Indian listed companies, IFRS across much of the world and US GAAP in the US.\n\nA **fiscal year** is a company's reporting year. Almost all Indian companies use April to March, so FY26 ends on 31 March 2026 and Q1 FY26 is April to June 2025. Many US companies use the calendar year and others pick their own year end, so 'Q1' alone is ambiguous.\n\nIndian listed companies with subsidiaries, companies they control, publish two sets of statements: standalone, for the listed parent company alone, and **consolidated statements**, which add in the subsidiaries. Analysts usually use consolidated; US filings usually show only consolidated.\n\nPast figures can change, too. A **restatement** revises numbers already published, to fix an error or apply a new rule. Always record whether a figure is as first reported or as restated.",
+    "example": {
+      "text": "Brew Lane reports in ₹ crore. Some Indian reports use ₹ lakh, and a US investor thinks in millions and billions, so the same FY26 figures can appear three ways.\n\n{table}\n\nThe conversions: 1 lakh = 100,000. 1 crore = 100 lakh = 10 million. 100 crore = 1 billion. So ₹100 crore of revenue is ₹10,000 lakh, ₹1,000 million or ₹1 billion.\n\nIndian reports also group digits differently: one crore is written 1,00,00,000, which a US report writes as 10,000,000.\n\nPeriods: FY26 runs from 1 April 2025 to 31 March 2026. Its Q4 is January to March 2026, which a calendar-year US company calls Q1 2026.",
+      "table": {
+        "caption": "Same ₹ figures in three units, year ended 31 March 2026",
+        "columns": ["₹ crore", "₹ lakh", "₹ million"],
+        "rows": [
+          { "label": "Revenue", "values": [100, 10000, 1000] },
+          { "label": "EBITDA", "values": [20, 2000, 200] },
+          { "label": "Profit after tax", "values": [9, 900, 90] }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Annual report",
+        "definition": "A company's yearly publication: audited financial statements and notes, the auditor's report and management's commentary. The US annual filing with the SEC is the 10-K."
+      },
+      {
+        "term": "Notes to accounts",
+        "aka": ["notes to the financial statements", "footnotes"],
+        "definition": "The pages after the statements that explain them: accounting policies, breakdowns of totals, loan terms, commitments and risks."
+      },
+      {
+        "term": "Audit",
+        "aka": ["external audit", "statutory audit"],
+        "definition": "An independent accountant's check that financial statements are fairly presented, ending in a signed opinion. Quarterly figures usually get only a lighter review."
+      },
+      {
+        "term": "Consolidated statements",
+        "aka": ["consolidated financial statements", "group accounts"],
+        "definition": "Statements that combine a parent company and the subsidiaries it controls as one business, removing dealings between them. Standalone statements cover the parent alone."
+      },
+      {
+        "term": "Fiscal year",
+        "aka": ["financial year", "FY"],
+        "definition": "The 12 months a company reports on. Almost all Indian companies use April to March, so FY26 ends in March 2026; elsewhere year ends and naming vary."
+      },
+      {
+        "term": "Restatement",
+        "definition": "A change to figures already published for a past period. Strictly it means correcting an error; analysts also use it for changes from new rules."
+      }
+    ],
+    "builder": "Most wrong numbers from AI systems in finance are not misread digits. They are mismatches: ₹ million taken for crore, a quarter taken for a year, standalone taken for consolidated, or an old figure that has since been restated. Each looks plausible on its own.\n\nSo never store a bare number. Store each figure with its value, scale, currency, period, period type (a quarter, a year or a balance at a date), entity scope (consolidated or standalone), source document and page. Two figures can be compared or combined only when these fields agree, or after an explicit conversion.\n\n**Check worth building:** before any calculation, compare the scale, currency, period and scope of its inputs, and refuse to compute when they differ.",
+    "client": {
+      "say": "Before we automate anything, I'd like to see where your analysts' hours actually go, so we fix the slowest step first.",
+      "ask": "Where do your analysts lose the most time: finding the document, pulling the numbers, or checking them?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d06-concept1",
+      "type": "concept",
+      "concept": "Consolidated versus standalone",
+      "kind": "choice",
+      "prompt": "An Indian listed company reports FY26 revenue of ₹300 crore in its standalone statements and ₹450 crore in its consolidated statements. What explains the gap?",
+      "options": [
+        "Consolidated counts sales between group companies twice",
+        "Standalone is unaudited, so it leaves out some of the year's sales",
+        "Consolidated has been restated, while standalone is as first reported",
+        "Consolidated adds in the business of the subsidiaries it controls"
+      ],
+      "answer": 3,
+      "explain": "Consolidated statements combine the parent with the subsidiaries it controls, so the gap comes from adding the subsidiaries' business. Double counting is the tempting idea, but consolidation removes sales between group companies precisely so that nothing is counted twice."
+    },
+    {
+      "id": "d06-concept2",
+      "type": "concept",
+      "concept": "Naming fiscal quarters",
+      "kind": "choice",
+      "prompt": "Brew Lane's fiscal year runs from April to March. Which months make up its Q1 FY26?",
+      "options": [
+        "January to March 2025",
+        "April to June 2025",
+        "January to March 2026",
+        "April to June 2026"
+      ],
+      "answer": 1,
+      "explain": "FY26 runs from April 2025 to March 2026, so its first quarter is April to June 2025. January to March 2026 is tempting because a calendar-year US company calls it Q1 2026, but for Brew Lane those months are Q4 FY26."
+    },
+    {
+      "id": "d06-calc1",
+      "type": "calc",
+      "concept": "Million to crore",
+      "kind": "number",
+      "prompt": "An Indian company's annual report shows revenue of ₹2,500 million. Your client's template is in ₹ crore. What do you enter?",
+      "answer": 250,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "2500 / 10",
+      "explain": "One crore is 10 million, so ₹2,500 million ÷ 10 = ₹250 crore. 25 is the common slip: dividing by 100 treats a crore as 100 million."
+    },
+    {
+      "id": "d06-calc2",
+      "type": "calc",
+      "concept": "Deriving the fourth quarter",
+      "kind": "choice",
+      "prompt": "A US company's last 10-Q shows revenue of $150 million for the nine months to 30 September 2025, and its 10-K shows $210 million for calendar 2025. There is no 10-Q for the fourth quarter. What was its revenue for October to December 2025?",
+      "options": ["$50 million", "$52.5 million", "$60 million", "$360 million"],
+      "answer": 2,
+      "check": "210 - 150",
+      "explain": "Q4 is the full year minus the first nine months: 210 − 150 = $60 million. $52.5 million is tempting, but it is an average quarter, and real quarters are rarely equal."
+    },
+    {
+      "id": "d06-client1",
+      "type": "client",
+      "concept": "Find where the time goes",
+      "kind": "choice",
+      "prompt": "A head of research at a fund says, 'Our analysts spend too long on quarterly results. Can your AI speed that up?' Which reply is best?",
+      "options": [
+        "Which takes longest: finding results, pulling numbers or checking them?",
+        "Yes: our system reads any results PDF and extracts every figure in it.",
+        "Results are unaudited, so we would rather start with your annual reports.",
+        "We could fine-tune a large language model on your team's past research."
+      ],
+      "answer": 0,
+      "explain": "Finding documents, pulling numbers and checking them call for different systems, so knowing which step eats the time tells you what to build. The confident yes is tempting, but it promises extraction before you know whether extraction is the slow step."
+    },
+    {
+      "id": "d06-builder1",
+      "type": "builder",
+      "concept": "Store scale with every figure",
+      "kind": "choice",
+      "prompt": "Your pipeline reports Brew Lane's FY26 revenue growth as 1,150%. It read revenue of 80 from the FY25 annual report and 1,000 from an FY26 investor presentation, and both readings are correct. Which check would have caught the problem?",
+      "options": [
+        "Extract both figures again with a second model and compare them",
+        "Check that FY26 revenue is higher than FY25 revenue before dividing",
+        "Store each figure's scale, and refuse to divide when scales differ",
+        "Round every growth rate to the nearest whole percent before output"
+      ],
+      "answer": 2,
+      "explain": "The presentation was in ₹ million, so 1,000 is ₹100 crore and growth was really 25%; checking each figure's stored scale would have blocked the division. Re-extracting with a second model is the trap: both readings were correct, so the models agree and the error survives."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a fund manager why a number read correctly from a filing can still be wrong.",
+    "modelAnswer": "A number means little without its context. Brew Lane's revenue is ₹100 crore, or ₹1,000 million: the same figure. Put the million figure beside last year's ₹80 crore without converting, and growth looks like 1,150% instead of 25%. A quarter isn't a year, standalone figures leave out subsidiaries, and past figures can be restated. So we store every number with its scale, currency, period, entity scope and source page, and check those match before calculating anything."
+  }
+}

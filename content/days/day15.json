@@ -1,0 +1,155 @@
+{
+  "day": 15,
+  "phase": 3,
+  "title": "Multiples and comparable companies",
+  "pages": {
+    "why": "A fund analyst covering Indian consumer stocks is asked whether a listed café chain, priced at 20 times its yearly profit, is cheap or expensive. Nobody can answer that in isolation, so the analyst lines it up against similar listed companies. Choosing those companies is where most of the judgement goes.",
+    "idea": "A **valuation multiple** divides a value by something the business earns or owns, so companies of different sizes can be compared. Four are common, each following Day 14's pairing rule:\n\n- **Price to earnings** (P/E): share price ÷ earnings per share.\n- **EV/EBITDA**: enterprise value ÷ EBITDA. It is largely unaffected by how much debt a company carries, so it compares businesses financed differently.\n- EV/Sales: enterprise value ÷ revenue, for companies with little or no profit yet.\n- **Price to book** (P/B): share price ÷ book value per share. It suits banks and insurers, whose assets are mostly financial.\n\nA multiple is trailing when it uses the last reported year or the last twelve months, and forward when it uses analysts' forecast for next year. Growing companies look cheaper on forward multiples, so always say which one you mean.\n\nOn its own, 20x means little. **Comparable companies**, or comps, put it in context: listed businesses similar in what they sell, size, growth, margins and region. Choosing them is the judgement call. Summarise the peers with the median, the middle value, rather than the mean, the simple average, because one odd peer can drag the mean a long way.\n\nTakeovers are different. A buyer of a whole company usually pays a **control premium** over the share price, the extra it pays to run the business its own way. So multiples from past deals, called precedent transactions, tend to run higher than the multiples at which shares trade.",
+    "example": {
+      "text": "Brew Lane against five fictional listed café and bakery chains, on trailing multiples. The peers' figures are made up for teaching.\n\n{table}\n\nPeer E is the outlier: its profit collapsed after a failed expansion, so its price is divided by a tiny number. It drags the mean EV/EBITDA up to 14x, while the median stays at 11x.\n\nApply the median to Brew Lane's FY26 EBITDA: 11 × 20 = ₹220 crore of EV. Take off net debt of 22 to get ₹198 crore of equity, or ₹198 a share. The mean would give 14 × 20 − 22 = ₹258 a share, 30% more, because of one peer.\n\nNeither number says what Brew Lane is worth. They show how the market prices similar businesses, which is one input among several.",
+      "table": {
+        "caption": "Times (x), trailing multiples at the FY26 results; peers are fictional",
+        "columns": ["EV/EBITDA", "P/E"],
+        "rows": [
+          { "label": "Peer A", "values": [8, 16] },
+          { "label": "Peer B", "values": [9, 18] },
+          { "label": "Peer C", "values": [11, 24] },
+          { "label": "Peer D", "values": [12, 26] },
+          { "label": "Peer E", "values": [30, 66], "highlight": true },
+          { "label": "Median", "values": [11, 24], "rule": "subtotal" },
+          { "label": "Mean", "values": [14, 30] },
+          { "label": "Brew Lane", "values": [10.1, 20], "highlight": true }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Valuation multiple",
+        "aka": ["multiple", "trading multiple"],
+        "definition": "A value divided by a measure of what the business earns or owns, so companies of different sizes can be compared."
+      },
+      {
+        "term": "Price to earnings",
+        "aka": ["P/E", "PE ratio", "earnings multiple"],
+        "definition": "What investors pay for each rupee of a year's profit.",
+        "formula": "Share price ÷ earnings per share"
+      },
+      {
+        "term": "EV/EBITDA",
+        "aka": ["EV to EBITDA", "enterprise multiple"],
+        "definition": "What the whole business costs per rupee of EBITDA. Largely unaffected by debt, so it compares companies financed differently.",
+        "formula": "Enterprise value ÷ EBITDA"
+      },
+      {
+        "term": "Price to book",
+        "aka": ["P/B", "price to book value"],
+        "definition": "What investors pay per rupee of equity on the balance sheet. Most used for banks and insurers.",
+        "formula": "Share price ÷ book value per share"
+      },
+      {
+        "term": "Comparable companies",
+        "aka": ["comps", "peer group", "trading comparables"],
+        "definition": "Listed companies similar in business, size, growth and region, whose multiples are used to value another company."
+      },
+      {
+        "term": "Control premium",
+        "aka": ["takeover premium", "acquisition premium"],
+        "definition": "The amount above the market share price that a buyer pays to take control of a company. It varies widely from deal to deal."
+      }
+    ],
+    "builder": "Comps are among the most automatable jobs in finance: pull prices, share counts and financials, then apply standard formulas. The maths is the easy part. What goes wrong sits upstream:\n\n- peers chosen by industry code alone, so a coffee-bean exporter sits next to a café chain;\n- a loss-making peer's negative P/E averaged in as if it meant something;\n- trailing and forward multiples, or different year ends, mixed in one column.\n\nPeer choice is judgement, so keep it with people. Let an analyst approve the peer set, store who approved it and why, then refresh the numbers automatically.\n\n**Check worth building:** report negative or extreme multiples as 'not meaningful', list which peers were left out and why, and show the median beside the mean.",
+    "client": {
+      "say": "Peer choice drives the answer more than the maths does, so I'd like your team to approve the peer list.",
+      "ask": "How long does it take to refresh a comp set today, and how often do you do it?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d15-concept1",
+      "type": "concept",
+      "concept": "The median resists outliers",
+      "kind": "choice",
+      "prompt": "Why do analysts usually summarise a peer group with the median multiple rather than the mean?",
+      "options": [
+        "The median is always lower, which makes a valuation more cautious",
+        "The mean cannot be used when peers report in different currencies",
+        "One extreme peer can drag the mean far but barely move the median",
+        "Stock exchanges require research reports to quote the median"
+      ],
+      "answer": 2,
+      "explain": "The median is the middle value, so a single outlier, such as a peer whose profit collapsed, hardly shifts it. 'Always lower' is tempting because outliers often push the mean up, but a very low outlier pulls the mean below the median."
+    },
+    {
+      "id": "d15-concept2",
+      "type": "concept",
+      "concept": "Why takeover multiples run higher",
+      "kind": "choice",
+      "prompt": "Multiples paid in past takeovers of café chains are higher than the multiples at which similar café shares trade today. What is the main reason?",
+      "options": [
+        "Buyers of a whole company pay a premium to run it their own way",
+        "Listed shares stay mispriced until a buyer finally notices them",
+        "Takeover multiples are always calculated on forecast profits",
+        "Companies that are taken over carry no debt, which lifts their EV"
+      ],
+      "answer": 0,
+      "explain": "Control lets a buyer change strategy, cut costs or combine operations, so it pays more than the price of a small stake. 'Mispriced shares' is tempting, but the premium appears even when the market price is fair, because control itself has value."
+    },
+    {
+      "id": "d15-calc1",
+      "type": "calc",
+      "concept": "Equity multiples skip net debt",
+      "kind": "choice",
+      "prompt": "Five peers trade at a median P/E of 24x and a mean of 30x, pulled up by one outlier. Brew Lane's FY26 EPS is ₹9 and its net debt is ₹22 crore. What share price does the median P/E imply?",
+      "options": ["₹194", "₹216", "₹238", "₹270"],
+      "answer": 1,
+      "check": "24 * eps",
+      "explain": "P/E is an equity multiple, so the median gives the share price directly: 24 × ₹9 = ₹216. ₹194 is the tempting slip: it takes off net debt, which you only do when you start from an EV multiple."
+    },
+    {
+      "id": "d15-calc2",
+      "type": "calc",
+      "concept": "Forward P/E",
+      "kind": "number",
+      "prompt": "Suppose analysts forecast Brew Lane's FY27 EPS at ₹12. At a share price of ₹180, what is its forward P/E?",
+      "answer": 15,
+      "tolerance": 0,
+      "unit": "x",
+      "check": "price / 12",
+      "explain": "Forward P/E divides the price by next year's forecast EPS: 180 ÷ 12 = 15x. 20x is the slip: that is the trailing P/E, which uses FY26 EPS of ₹9, and rising profit makes the forward multiple lower."
+    },
+    {
+      "id": "d15-client1",
+      "type": "client",
+      "concept": "Let the client approve peers",
+      "kind": "choice",
+      "prompt": "A portfolio manager says, 'Send me comps for Brew Lane by tomorrow.' Which reply is best?",
+      "options": [
+        "Sure. We'll include every listed restaurant company, to be thorough.",
+        "Sure. Our system picks the right peers itself, so no input needed.",
+        "Comps are unreliable, so a DCF would serve you better here.",
+        "Will do. Is there an approved peer list, or shall we propose one?"
+      ],
+      "answer": 3,
+      "explain": "Peer choice drives the result, so using the client's approved list, or getting them to sign off yours, avoids a dispute about the answer later. Including every restaurant company sounds thorough, but a fine-dining group or a pizza delivery chain may be priced very differently from a café chain."
+    },
+    {
+      "id": "d15-builder1",
+      "type": "builder",
+      "concept": "Exclude meaningless multiples",
+      "kind": "choice",
+      "prompt": "Your comps tool reports a peer mean P/E of 12x. One of the five peers made a loss last year, and its P/E of −24x went into the mean. Which check would have caught this?",
+      "options": [
+        "Recompute the mean in a second tool to confirm the arithmetic",
+        "Ask a language model whether 12x looks right for café chains",
+        "Mark negative multiples 'not meaningful' and leave them out",
+        "Replace the loss-making peer's P/E with zero and recompute"
+      ],
+      "answer": 2,
+      "explain": "A P/E on a loss has no meaning, so it should be marked 'not meaningful' and excluded; the other four peers average 21x. Recomputing the mean is tempting, but the arithmetic was right: the input should never have been in it."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a new colleague how comparable companies help value Brew Lane, and one trap to avoid.",
+    "modelAnswer": "We find listed companies like Brew Lane, café and bakery chains of similar size and growth, and see what multiples the market gives them, such as EV to EBITDA. Brew Lane trades at 10.1 times. Our peer median is 11 times, which would imply about ₹198 a share. The trap is outliers: one peer whose profit collapsed trades at 30 times and drags the mean up to 14. So we quote the median, and we ask the client to approve the peer list."
+  }
+}

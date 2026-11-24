@@ -1,0 +1,149 @@
+{
+  "day": 27,
+  "phase": 5,
+  "title": "Building for trust",
+  "pages": {
+    "why": "A credit fund's analyst finds one wrong figure in a covenant report your system produced: net debt taken from the wrong quarter. It was off by only 4%, but the fund now rechecks every figure by hand, and the time saving is gone. In finance, trust is lost on the first wrong number and rebuilt slowly.",
+    "idea": "Finance tolerates almost no numeric error. A number feeds a decision with money behind it, and one wrong figure makes a reviewer distrust all the others. If they recheck everything, the system has saved nothing.\n\nEight principles keep trust:\n\n- Every number carries a **source citation**: the document, page and text it came from.\n- Models read and reason; code calculates. Ratios, totals and changes run in code or live spreadsheet formulas.\n- Run a **tie-out** wherever figures should agree: the balance sheet balances, closing cash matches, parts add up to totals.\n- 'Not found' beats a guess. A blank costs minutes; a plausible wrong number can cost a decision.\n- Exceptions go to a **review queue**, a list of items a person must clear before release.\n- An **audit trail** records every input, output, check and human edit, with who and when.\n- Test on a **golden set**: past work the client has already checked. Score **field-level accuracy**, the share of individual figures that are right, not of whole documents.\n- Deliver in the client's format: Excel with live formulas, and their own Word and PowerPoint templates.\n\nNone of this is about the model. The system around the model is what earns trust.",
+    "example": {
+      "text": "A fund's research team gives you 50 past quarterly results its analysts have already checked: your golden set. The system extracts four fields from each, 200 in all, and you compare every field with the analysts' answer.\n\n{table}\n\nField-level accuracy is 189 ÷ 200 = 94.5%. The split matters more than the total:\n\n- The 7 'not found' fields went to the review queue and cost a few minutes each.\n- The 4 wrong fields are the danger, because they looked finished. That is a 2% wrong rate, which the client should see separately.\n- EBITDA is weakest at 44 ÷ 50 = 88%, a hint that companies label it differently or report an adjusted version.\n\nIf the 11 misses fell in different documents, only 39 of 50 documents, 78%, would be fully right. That score hides where to fix; field-level scores show it.",
+      "table": {
+        "caption": "Fields scored against a golden set of 50 quarterly results, illustrative",
+        "columns": ["Right", "Not found", "Wrong"],
+        "rows": [
+          { "label": "Revenue", "values": [50, 0, 0] },
+          { "label": "EBITDA", "values": [44, 4, 2], "highlight": true },
+          { "label": "Profit after tax", "values": [48, 1, 1] },
+          { "label": "Earnings per share", "values": [47, 2, 1] },
+          { "label": "Total", "values": [189, 7, 4], "rule": "total" }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Source citation",
+        "aka": ["citation", "provenance"],
+        "definition": "A link from an output figure to the document, page and exact text it came from, so anyone can check it in one step."
+      },
+      {
+        "term": "Tie-out",
+        "aka": ["tick and tie", "cross-check"],
+        "definition": "A check that figures agree with each other or with their source, such as parts adding up to a total."
+      },
+      {
+        "term": "Golden set",
+        "aka": ["ground truth set", "evaluation set"],
+        "definition": "Past work the client has already checked, kept fixed as a test set to score the system and catch regressions."
+      },
+      {
+        "term": "Field-level accuracy",
+        "definition": "The share of individual extracted fields that match the golden set, rather than the share of whole documents that are fully right.",
+        "formula": "Correct fields ÷ total fields × 100"
+      },
+      {
+        "term": "Audit trail",
+        "aka": ["audit log"],
+        "definition": "A permanent record of every input, output, check and human edit, showing who did what and when."
+      },
+      {
+        "term": "Review queue",
+        "aka": ["exception queue"],
+        "definition": "The list of items a person must check or complete before output is released, such as failed checks and fields not found."
+      }
+    ],
+    "builder": "Every reviewer already runs tests in their head: do the parts add up, is the sign right, is it the right quarter, does it match the page? Write those down and they become automated checks that run on every output.\n\nTwo traps recur. Accuracy measured on documents you chose, rather than the client's, overstates quality. And one blended accuracy number hides the wrong values that matter most, so report wrong and not found separately.\n\nModels also change. A new model, prompt or parser can fix one field and quietly break another.\n\n**Check worth building:** rerun the golden set on every change to models, prompts or code, and block the release if field-level accuracy falls or any field that was right turns wrong.",
+    "client": {
+      "say": "Your reviewers already know what goes wrong, so their checklist is the best test suite we could ask for.",
+      "ask": "What does your reviewer check before work goes out? Let's turn that checklist into automated tests."
+    }
+  },
+  "quiz": [
+    {
+      "id": "d27-concept1",
+      "type": "concept",
+      "concept": "'Not found' beats a guess",
+      "kind": "choice",
+      "prompt": "Your system cannot find a borrower's interest expense in this quarter's report. What should it output?",
+      "options": [
+        "Last quarter's interest expense, since the loan has not changed",
+        "Zero, so that the interest cover calculation can still run",
+        "'Not found', with the item sent to a person in the review queue",
+        "An estimate worked out from the loan's size and interest rate"
+      ],
+      "answer": 2,
+      "explain": "A blank that a person fills costs minutes, while a plausible guess looks finished and can reach a decision unnoticed. Last quarter's figure is tempting because it is often close, but it is not this quarter's number, and no reviewer would know it was copied."
+    },
+    {
+      "id": "d27-concept2",
+      "type": "concept",
+      "concept": "Models read, code calculates",
+      "kind": "choice",
+      "prompt": "Your system must report net debt to EBITDA for 40 companies. Which design is most trustworthy?",
+      "options": [
+        "The model reads the report and writes the ratio into its summary",
+        "The model reads both figures with sources, and code divides them",
+        "The model calculates the ratio twice and keeps it if the two agree",
+        "The model looks the ratio up on a data vendor's public website"
+      ],
+      "answer": 1,
+      "explain": "Reading is the model's job and arithmetic is code's, so each input has a source and the division is exact and repeatable. Having the model calculate twice is tempting, but two answers from the same model can agree and both be wrong."
+    },
+    {
+      "id": "d27-calc1",
+      "type": "calc",
+      "concept": "Field-level accuracy",
+      "kind": "number",
+      "prompt": "A golden set has 60 reports with 5 fields each. Your system gets 282 fields right, returns 'not found' for 12 and gets 6 wrong. What is its field-level accuracy?",
+      "answer": 94,
+      "tolerance": 0.1,
+      "unit": "%",
+      "check": "282 / (60 * 5) * 100",
+      "explain": "There are 60 × 5 = 300 fields, so accuracy is 282 ÷ 300 = 94%. Leaving out the 12 'not found' fields gives 282 ÷ 288 = 97.9%, which flatters the system by ignoring fields it failed to deliver."
+    },
+    {
+      "id": "d27-calc2",
+      "type": "calc",
+      "concept": "Sizing the review queue",
+      "kind": "choice",
+      "prompt": "Each month your system extracts 12,000 fields, and 3% of them fail a tie-out or come back 'not found'. Each of those takes a reviewer 4 minutes. How many reviewer hours a month does the review queue need?",
+      "options": ["24 hours", "240 hours", "360 hours", "1,440 hours"],
+      "answer": 0,
+      "check": "12000 * 0.03 * 4 / 60",
+      "explain": "3% of 12,000 is 360 items, and 360 × 4 = 1,440 minutes, or 24 hours. 1,440 hours is the tempting slip: the arithmetic is right, but the answer is still in minutes."
+    },
+    {
+      "id": "d27-client1",
+      "type": "client",
+      "concept": "Measure accuracy on their work",
+      "kind": "choice",
+      "prompt": "A fund's chief operating officer asks, 'How accurate is your system?' Which reply is best?",
+      "options": [
+        "Very accurate: modern models score above 95% on public benchmarks.",
+        "Accuracy in AI cannot really be measured, so we rely on reviewers.",
+        "Our F1 score on extraction benchmarks is 0.97, a very low error rate.",
+        "Let's measure it field by field on a golden set of your past work."
+      ],
+      "answer": 3,
+      "explain": "Accuracy depends on the documents and fields, so the only number worth quoting is one measured on the client's own checked work, field by field. Public benchmark scores are tempting because they sound precise, but they say little about this client's documents."
+    },
+    {
+      "id": "d27-builder1",
+      "type": "builder",
+      "concept": "Audit trail explains past outputs",
+      "kind": "choice",
+      "prompt": "A client asks why the net debt your system reported for a borrower in March differs from the figure it now gives for the same quarter. Nobody can explain the change. What was missing?",
+      "options": [
+        "A log of each run's inputs, model and prompt versions, and edits",
+        "A golden set, so the system's accuracy is measured before each release",
+        "A larger model with stronger reasoning, so the figure would not change",
+        "A rule to round net debt to the nearest crore, so small gaps disappear"
+      ],
+      "answer": 0,
+      "explain": "Only an audit trail of what each run read, which versions it used and who edited what can explain why one figure changed. A golden set is tempting, but it measures accuracy across many documents and cannot say why this particular number moved."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, tell a sceptical fund reviewer why they can trust your system's numbers.",
+    "modelAnswer": "Every number links to the page and line it came from, so you can check any figure in one click. The model only reads; ratios and totals are calculated in code, and tie-outs confirm that parts add up and the balance sheet balances. If the system can't find something, it says 'not found' and sends it to a person instead of guessing. And we've measured it field by field on fifty reports your team already checked, so you know where it's strong and where it isn't."
+  }
+}

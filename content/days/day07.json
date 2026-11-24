@@ -1,0 +1,160 @@
+{
+  "day": 7,
+  "phase": 2,
+  "title": "Profitability and returns",
+  "pages": {
+    "why": "A fund manager in Singapore can back only one of two café chains. One has twice the sales of the other, but the smaller one earns ₹25 a year on every ₹100 its owners have put in, against ₹10 at the larger one. The analyst has to show which is the better business, not just the bigger one.",
+    "idea": "A **margin** divides a profit line by revenue. It shows how much of each ₹100 of sales a business keeps, not how much money it needed to earn it. A chain with fat margins that must buy costly sites can be a worse business than a thin-margin chain that needs very little.\n\nReturns fix this by dividing profit by capital: the money that owners and lenders put in to earn it.\n\n- **Return on equity** (ROE): profit after tax ÷ equity. What the owners' money earned.\n- **Return on capital employed** (ROCE): EBIT ÷ capital employed, which is equity plus debt. What all the capital earned, before interest and tax, so the mix of debt and equity does not change it.\n- **Return on invested capital** (ROIC): EBIT after tax, called NOPAT (net operating profit after tax), ÷ invested capital, which is equity plus debt minus cash. What the capital tied up in the business earned, after tax.\n\nReturns matter more than size because capital has a cost: lenders want interest, owners expect a return (Day 13). Growth adds value only when new capital earns more than it costs. At a 12% cost, a chain earning 20% on each new café gets richer as it grows; one earning 8% gets poorer, however fast its sales rise.\n\n**DuPont analysis** splits ROE into three levers that multiply together:\n\n- net margin: profit for each ₹1 of sales;\n- **asset turnover**: sales for each ₹1 of assets;\n- leverage: assets for each ₹1 of equity, called the equity multiplier; debt funds the rest.\n\nTwo companies can reach the same ROE by different routes, and an ROE built on borrowing carries more risk.",
+    "example": {
+      "text": "Brew Lane's FY26 returns, using profit for the year and balances at 31 March 2026.\n\n{table}\n\nROE = profit after tax 9 ÷ equity 35 = 25.7%. DuPont reaches the same number: net margin 9% × asset turnover 1.43 (revenue 100 ÷ total assets 70) × equity multiplier 2.0 (assets 70 ÷ equity 35) = 25.7%.\n\nROCE = EBIT 15 ÷ capital employed 65 (equity 35 + debt 30) = 23.1%. So does total assets 70 − current liabilities 5.\n\nROIC = NOPAT 11.25 (EBIT 15 × 0.75, after 25% tax) ÷ invested capital 57 (35 + 30 − cash 8) = 19.7%.\n\nPractice varies: many analysts use the average of opening and closing balances. Average equity is (26 + 35) ÷ 2 = 30.5, so ROE is 9 ÷ 30.5 = 29.5%: same company, same year, a different number.",
+      "table": {
+        "caption": "% or times (x); FY26, on balances at 31 March 2026",
+        "columns": ["FY26"],
+        "rows": [
+          { "label": "Net margin (%)", "values": [9] },
+          { "label": "Asset turnover (x)", "values": [1.43] },
+          { "label": "Equity multiplier (x)", "values": [2] },
+          {
+            "label": "Return on equity (%)",
+            "values": [25.7],
+            "rule": "subtotal",
+            "highlight": true
+          },
+          { "label": "Return on capital employed (%)", "values": [23.1] },
+          { "label": "Return on invested capital (%)", "values": [19.7] }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Margin",
+        "aka": ["profit margin"],
+        "definition": "A profit line as a percentage of revenue. Always say which line: gross, EBITDA, EBIT or net.",
+        "formula": "Profit line ÷ revenue × 100"
+      },
+      {
+        "term": "Return on equity",
+        "aka": ["ROE"],
+        "definition": "Profit after tax as a percentage of equity: what the owners' money earned. Firms differ on using closing or average equity.",
+        "formula": "Profit after tax ÷ equity × 100"
+      },
+      {
+        "term": "Return on capital employed",
+        "aka": ["ROCE"],
+        "definition": "Operating profit as a percentage of the capital owners and lenders have put in. Financing choices do not change it.",
+        "formula": "EBIT ÷ (equity + debt) × 100"
+      },
+      {
+        "term": "Return on invested capital",
+        "aka": ["ROIC"],
+        "definition": "Operating profit after tax as a percentage of the capital tied up in the business. Compare it with the cost of capital.",
+        "formula": "EBIT × (1 − tax rate) ÷ (equity + debt − cash) × 100"
+      },
+      {
+        "term": "Asset turnover",
+        "definition": "Revenue divided by total assets: the sales each rupee of assets produces in a year.",
+        "formula": "Revenue ÷ total assets"
+      },
+      {
+        "term": "DuPont analysis",
+        "aka": ["DuPont identity"],
+        "definition": "Splitting return on equity into net margin, asset turnover and leverage, to see which one drives it.",
+        "formula": "ROE = net margin × asset turnover × (total assets ÷ equity)"
+      }
+    ],
+    "builder": "Ask three analysts for Brew Lane's ROE and you may get three answers: 25.7% on closing equity, 29.5% on average equity, 34.6% on opening equity. ROCE varies too: EBIT before or after tax, capital employed with or without cash. None of these is wrong. Mixing them is. Set one company's average-balance ROE beside another's closing-balance ROE, and a difference in arithmetic looks like a difference in performance.\n\nSo do not hard-code one formula. Keep a definitions registry for each client: the formula, which balances, the tax treatment and the lines included. Store the definition's ID with every ratio you compute.\n\n**Check worth building:** before two ratios appear side by side, confirm they carry the same definition ID, and flag any pair that does not.",
+    "client": {
+      "say": "Before we compute any returns, I'd like your ratio definitions, so our ROE matches the one your analysts quote.",
+      "ask": "Is there a house definition sheet for ratios, or does each analyst calculate their own way?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d07-concept1",
+      "type": "concept",
+      "concept": "Returns depend on capital needed",
+      "kind": "choice",
+      "prompt": "A hotel chain earns a 30% EBIT margin and a café chain 15%, yet the café chain has the higher ROCE. How can that be?",
+      "options": [
+        "The hotels need far more capital for each rupee of sales",
+        "The café chain pays less interest on its borrowings",
+        "The hotel chain's accounts must contain an error",
+        "The café chain has issued fewer shares than the hotels"
+      ],
+      "answer": 0,
+      "explain": "ROCE is EBIT margin times sales per rupee of capital, so a hotel chain with costly buildings can earn a fat margin and still a lower return. Lower interest is the tempting answer, but ROCE uses EBIT, which is before interest, so financing cannot explain the gap."
+    },
+    {
+      "id": "d07-concept2",
+      "type": "concept",
+      "concept": "Leverage inflates return on equity",
+      "kind": "choice",
+      "prompt": "Two café chains both report ROE of 20%. Chain A has no debt. Chain B has borrowed heavily, so its assets are four times its equity. What does DuPont analysis tell you?",
+      "options": [
+        "They are equally attractive, since owners earn 20% in both",
+        "A is the riskier one, as it relies only on owners' money",
+        "B's return leans on debt, so a fall in profit hurts its owners more",
+        "B must be the larger chain, as its assets are four times its equity"
+      ],
+      "answer": 2,
+      "explain": "With assets four times equity, B needs only a quarter of A's margin times turnover to reach 20%, and the same leverage magnifies any fall in profit. Calling them equally attractive is tempting, but the same ROE can carry very different risk."
+    },
+    {
+      "id": "d07-calc1",
+      "type": "calc",
+      "concept": "Return on capital employed",
+      "kind": "number",
+      "prompt": "Brew Lane's FY26 EBIT is ₹15 crore. At 31 March 2026, its equity is ₹35 crore and its debt ₹30 crore. Using closing balances, what is its ROCE?",
+      "answer": 23.1,
+      "tolerance": 0.1,
+      "unit": "%",
+      "check": "ebit / (equity26 + debt26) * 100",
+      "explain": "ROCE = EBIT ÷ (equity + debt) = 15 ÷ 65 = 23.1%. Dividing by equity alone gives 42.9%, the common slip: ROCE measures the return on lenders' capital as well as owners'."
+    },
+    {
+      "id": "d07-calc2",
+      "type": "calc",
+      "concept": "DuPont levers multiply",
+      "kind": "choice",
+      "prompt": "A grocery chain has a net margin of 2%, asset turnover of 3.0x and an equity multiplier of 2.5x. What is its return on equity?",
+      "options": ["5%", "6%", "7.5%", "15%"],
+      "answer": 3,
+      "check": "2 * 3 * 2.5",
+      "explain": "ROE = net margin × asset turnover × equity multiplier = 2% × 3.0 × 2.5 = 15%. 6% is the tempting slip: it stops before leverage, so it is the return on assets, not on equity."
+    },
+    {
+      "id": "d07-client1",
+      "type": "client",
+      "concept": "Ask for the house definition",
+      "kind": "choice",
+      "prompt": "A fund manager says, 'Send me ROE for the 25 companies in our portfolio by Friday.' Which reply is best?",
+      "options": [
+        "Sure, we'll use profit after tax over closing equity for all 25.",
+        "Will do. Closing or average equity, and reported or adjusted profit?",
+        "ROE can mislead because of debt, so we'd suggest ROIC instead.",
+        "We can, but every firm defines ROE differently, so it may not match."
+      ],
+      "answer": 1,
+      "explain": "Closing versus average equity alone moves Brew Lane's ROE from 25.7% to 29.5%, so asking for the house definition is what makes the numbers match. Choosing closing equity yourself sounds decisive, but it is a guess, and guesses are how mismatched ratios start."
+    },
+    {
+      "id": "d07-builder1",
+      "type": "builder",
+      "concept": "Per-client definitions registry",
+      "kind": "choice",
+      "prompt": "Using the textbook formula, your system reports Brew Lane's FY26 ROCE as 23.1%. The client's model says 17.3%. Both use EBIT of ₹15 crore and capital employed of ₹65 crore. What would have prevented the mismatch?",
+      "options": [
+        "Use each client's definitions from a registry, and record which was used",
+        "Keep the textbook formula, and ask the client to correct their model",
+        "Re-extract EBIT from the income statement, since it was probably misread",
+        "Round both figures to whole numbers before comparing them with each other"
+      ],
+      "answer": 0,
+      "explain": "17.3% is EBIT after 25% tax divided by 65, so the client's house definition is after tax; a registry applies the client's version and records it. Keeping the textbook formula is tempting because it is standard, but the client's definition is not an error, and their numbers are the ones they act on."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a fund manager what drives Brew Lane's 25.7% return on equity.",
+    "modelAnswer": "DuPont splits it into three levers. Brew Lane keeps ₹9 of profit from every ₹100 of sales, a 9% net margin. Each rupee of assets brings in ₹1.43 of sales a year. And each rupee of equity supports ₹2 of assets, because debt funds the rest. Multiply them and you get 25.7%. So part of that return comes from borrowing. That's why I'd also look at return on capital employed, 23.1%, which doesn't depend on how the business is financed."
+  }
+}

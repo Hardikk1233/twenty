@@ -1,0 +1,150 @@
+{
+  "day": 18,
+  "phase": 4,
+  "title": "Capital markets",
+  "pages": {
+    "why": "One morning the central bank raises interest rates, and a bond held by a London fund that lends to companies falls in price, though the company behind it has never missed a payment. An hour later, a café chain's shares fall 6% on results showing profit up 25%. Neither market is broken: prices move when expectations change.",
+    "idea": "Capital markets are where companies and governments raise money from investors. In the primary market, an issuer sells new securities, such as shares or bonds, and receives the cash. A company's first sale of shares to the public is its **initial public offering** (IPO), after which they trade on an exchange such as NSE or BSE. Later trading between investors is the secondary market: the company receives nothing.\n\nA share is part-ownership, with a claim on the profit left after everyone else is paid. A **bond** is a loan cut into tradable pieces. The issuer pays interest, the **coupon**, and repays the face value, the amount lent, on a set date, its maturity.\n\nA bond's **yield** is the yearly return from buying at today's price and holding to maturity. The payments are fixed, so price and yield move in opposite directions: pay less for the same payments and your return rises. A **credit rating**, usually from AAA down to D, grades how likely the issuer is to pay in full and on time. Lower ratings mean higher yields.\n\nAn index, such as the Nifty 50 or S&P 500, tracks a basket of shares; a fund's benchmark is the index it is judged against.\n\nPrices move on surprise. The **consensus estimate** is the average of analysts' forecasts for a figure such as EPS; a result above it is a beat, below it a miss. If consensus EPS is ₹8 and the company reports ₹10, it beat by 25%: (10 − 8) ÷ 8. Management's own forecast, called guidance, can move the price more than the result.",
+    "example": {
+      "text": "A company's bond has a ₹100 face value, an 8% coupon and one year left to run. Rates have since risen: a new bond from the same company must now pay a 10% coupon.\n\n{table}\n\nThe old bond still pays what it promised: ₹8 of coupon plus ₹100 back, ₹108 in a year. Nobody will pay ₹100 for ₹108 when ₹100 buys ₹110 from the new bond. So the old bond's price falls until it also yields 10%: 108 ÷ 1.10 = ₹98.2. Its payments did not change; only its price did.\n\nWith three years left, the same rise would cut the price to about ₹95: the low coupon is locked in for longer.",
+      "table": {
+        "caption": "₹ per bond, one year before maturity",
+        "columns": ["Old bond", "New bond"],
+        "rows": [
+          { "label": "Coupon, paid at year end", "values": [8, 10] },
+          { "label": "Face value, repaid at maturity", "values": [100, 100] },
+          { "label": "Received in one year", "values": [108, 110], "rule": "subtotal" },
+          { "label": "Price today", "values": [98.2, 100], "highlight": true },
+          { "label": "Yield, % a year", "values": [10, 10] }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Initial public offering",
+        "aka": ["IPO", "flotation"],
+        "definition": "A company's first sale of shares to the public, before they list on an exchange. New shares raise cash for it; existing shares sold pay their owners."
+      },
+      {
+        "term": "Bond",
+        "aka": ["debenture", "NCD", "note"],
+        "definition": "A tradable loan: the issuer pays a coupon and repays the face value at maturity. Indian company bonds are often non-convertible debentures (NCDs)."
+      },
+      {
+        "term": "Coupon",
+        "aka": ["coupon rate"],
+        "definition": "Yearly interest on a bond, as a percentage of face value: 8% on ₹100 pays ₹8. Most are fixed; some float with a benchmark rate.",
+        "formula": "Coupon rate × face value"
+      },
+      {
+        "term": "Yield",
+        "aka": ["yield to maturity", "YTM"],
+        "definition": "The yearly return from buying a bond at today's price and holding it to maturity. Current yield, coupon ÷ price, is a rougher measure."
+      },
+      {
+        "term": "Credit rating",
+        "aka": ["rating"],
+        "definition": "An agency's grade of a borrower's ability to pay in full and on time, from AAA (safest) down to D (in default). Agencies include CRISIL, ICRA, S&P, Moody's and Fitch."
+      },
+      {
+        "term": "Consensus estimate",
+        "aka": ["consensus", "street estimate"],
+        "definition": "The average or median of analysts' forecasts for a figure, such as EPS. Results above it beat; results below it miss."
+      }
+    ],
+    "builder": "Market data, from prices to estimates and ratings, mostly comes from data vendors such as Bloomberg, LSEG or FactSet, under licence. Licences can limit who sees the data, whether it is stored and which systems it flows into, so read them before feeding it to an AI model.\n\nPrice histories hide a second trap. Corporate actions, such as splits, bonus issues and dividends, change the share price without making holders richer or poorer. After a 1:1 bonus issue, a ₹180 share trades near ₹90, yet nobody has lost money. A naive chart shows a 50% crash.\n\n**Check worth building:** match every large one-day price move to a corporate actions feed, and adjust past prices before computing returns.",
+    "client": {
+      "say": "Before we connect any feeds, I'd like to check what your data licences allow, so the build never puts you in breach.",
+      "ask": "Which data vendors are you licensed for, and do the terms allow that data to go into an AI system?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d18-concept1",
+      "type": "concept",
+      "concept": "Price falls when yield rises",
+      "kind": "choice",
+      "prompt": "You own a bond with a fixed 7% coupon. Interest rates rise, and similar new bonds now yield 9%, though nothing about your issuer has changed. What happens to your bond's price?",
+      "options": [
+        "It rises, because higher rates make its fixed coupon more valuable",
+        "It stays at face value, because the issuer will still repay in full",
+        "It falls, until a buyer would also earn about 9% by holding it",
+        "It falls, because the issuer has become more likely to default"
+      ],
+      "answer": 2,
+      "explain": "Your coupon is fixed, so the only way your bond can offer the 9% buyers now demand is a lower price. Staying at face value is tempting because the issuer still repays it at maturity, but until then nobody pays full price for 7% when 9% is on offer."
+    },
+    {
+      "id": "d18-concept2",
+      "type": "concept",
+      "concept": "Prices move on surprise",
+      "kind": "choice",
+      "prompt": "A company reports profit up 25% on last year, exactly in line with the consensus estimate. Its share price barely moves. What is the best explanation?",
+      "options": [
+        "Investors expected it, so the good news was already in the price",
+        "A 25% rise in profit is too small to move a share price very much",
+        "Investors look only at revenue on results day, not at profit",
+        "The market has not read the results yet, so the rise comes later"
+      ],
+      "answer": 0,
+      "explain": "Prices already reflect what investors expect, so only the surprise against consensus moves them, and an in-line result has none. Thinking 25% is too small is tempting, but the same 25% would have lifted the price if consensus had expected 15%."
+    },
+    {
+      "id": "d18-calc1",
+      "type": "calc",
+      "concept": "Yield depends on price",
+      "kind": "choice",
+      "prompt": "A bond has a ₹100 face value, a 10% coupon and one year left, so it will pay ₹110. It trades at ₹105 today. What is its yield to maturity?",
+      "options": ["4.8%", "5.0%", "9.5%", "10.0%"],
+      "answer": 0,
+      "check": "(110 - 105) / 105 * 100",
+      "explain": "You pay ₹105 and receive ₹110, a gain of ₹5 on ₹105, which is 4.8%: below the coupon because you paid more than face value. 10.0% is the tempting pick, but that is the coupon rate, which equals the yield only when the price is ₹100."
+    },
+    {
+      "id": "d18-calc2",
+      "type": "calc",
+      "concept": "Beat or miss against consensus",
+      "kind": "number",
+      "prompt": "Suppose the consensus estimate for Brew Lane's FY26 EPS was ₹10. Brew Lane reported EPS of ₹9. By what percentage did it fall short of consensus? Enter the gap as a positive number.",
+      "answer": 10,
+      "tolerance": 0.1,
+      "unit": "%",
+      "check": "(10 - eps) / 10 * 100",
+      "explain": "A beat or miss is measured against the estimate: (10 − 9) ÷ 10 = 10% below consensus. 11.1% is the common slip: it divides the ₹1 gap by the reported ₹9 instead of the ₹10 consensus."
+    },
+    {
+      "id": "d18-client1",
+      "type": "client",
+      "concept": "Check data licences first",
+      "kind": "choice",
+      "prompt": "A hedge fund's head of data says, 'We already pay for a market data terminal, so your AI can pull prices straight from it.' Which reply is best?",
+      "options": [
+        "Great, we'll connect it this week and load the full price history.",
+        "Useful. Do your licence terms allow that data to feed an AI system?",
+        "We'd rather scrape free websites, so licences never become an issue.",
+        "Our retrieval layer embeds tick data at scale, so volume is no issue."
+      ],
+      "answer": 1,
+      "explain": "Vendor licences often limit storing data or passing it to other systems, so checking the terms first keeps the client out of breach. Connecting this week is tempting because it sounds keen, but if the licence forbids it, the build itself is the breach."
+    },
+    {
+      "id": "d18-builder1",
+      "type": "builder",
+      "concept": "Adjust for corporate actions",
+      "kind": "choice",
+      "prompt": "Suppose Brew Lane makes a 1:1 bonus issue, one free share for each share held, and its price moves from ₹180 to ₹90. Your dashboard then reports a 50% one-day loss for every fund that holds it. Which check would catch this?",
+      "options": [
+        "Ask a language model whether a 50% fall in one day looks plausible",
+        "Delete any one-day price move above 20% from the stored history",
+        "Recompute the loss using closing prices instead of opening prices",
+        "Match big moves to a corporate actions feed and adjust past prices"
+      ],
+      "answer": 3,
+      "explain": "A 1:1 bonus issue doubles the share count and halves the price, so holders lose nothing; matching the move to the corporate action and adjusting earlier prices removes the false loss. Deleting big moves is tempting, but it would also hide real crashes and still leave every earlier price unadjusted."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a client why the price of a bond they hold fell when interest rates rose.",
+    "modelAnswer": "Your bond's payments were fixed the day it was issued: say an 8% coupon on ₹100, with a year left. Rates have risen, and new bonds from the same issuer now pay 10%. Nobody will pay ₹100 for your 8% when ₹100 buys 10% elsewhere, so the price falls until a buyer earns 10% too, about ₹98. Nothing is wrong with the issuer, and if you hold to maturity you still get your ₹100 back. Price and yield simply move in opposite directions."
+  }
+}

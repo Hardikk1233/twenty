@@ -1,0 +1,184 @@
+{
+  "day": 30,
+  "phase": 5,
+  "title": "Capstone",
+  "pages": {
+    "why": "After a month of lessons, you will sit with a client who has a real problem and twenty minutes to explain it. What you leave behind is one page: what to build, why it pays, how it stays right, and how to prove it in six weeks. Writing that page well is what this course has prepared you for.",
+    "idea": "A **solution brief** turns a discovery conversation into a plan a client can approve, on one page. Yours has eight sections:\n\n- Workflow: the task, who does it, how often.\n- Pain in numbers: hours, turnaround and errors today.\n- Data sources: where the inputs live, and in what form.\n- Design: extract, calculate, check, review, output.\n- Three automated checks: rules a machine runs on every output.\n- Success metric: one number with a target.\n- Pilot plan: one workflow, one team, four to six weeks.\n- Two risks, each with how you would contain it.\n\nBehind it sits the **business case**: the value the work creates against the cost to build and run it, often shown as a payback period, the months until savings cover the cost. Keep it conservative. Count only hours the client agrees would be saved, net of review time, and include running costs.\n\nIf the pilot hits its metric, **rollout** extends the tool to more users, documents or teams in stages. Each stage keeps the checks, golden set and review queue that proved it, so accuracy is shown again before volume grows.\n\nIn the capstone, you pick one of three mock clients, a hedge fund, a multi-family office or a private credit fund, write your brief, then compare it with a model answer.",
+    "example": {
+      "text": "Suppose an Indian manufacturer's finance team matches 9,000 supplier invoices a month to orders and delivery receipts, at 6 minutes each: 900 hours. A tool would cut that to 2 minutes of review per invoice, saving 600 hours a month. At ₹500 an hour, that is ₹3 lakh a month. The tool costs ₹18 lakh to build and ₹1 lakh a month to run.\n\n{table}\n\nNet benefit is 3 − 1 = ₹2 lakh a month, so payback is 18 ÷ 2 = 9 months. Year one gains 24 − 18 = ₹6 lakh; from year two, with no build cost, the gain is ₹24 lakh a year.\n\nNotice what is left out: no value for fewer errors or a faster month-end close. If the case only works once those are added, it is not a strong case.",
+      "table": {
+        "caption": "₹ lakh, illustrative business case",
+        "columns": ["Monthly", "Year 1"],
+        "rows": [
+          { "label": "Analyst time saved", "values": [3, 36] },
+          { "label": "Running cost", "values": [-1, -12] },
+          { "label": "Net benefit", "values": [2, 24], "rule": "subtotal" },
+          { "label": "Build cost, one-off", "values": [null, -18] },
+          { "label": "Net gain", "values": [null, 6], "rule": "total" }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Solution brief",
+        "aka": ["one-pager"],
+        "definition": "A one-page proposal for one use case, covering workflow, pain, data, design, checks, success metric, pilot and risks."
+      },
+      {
+        "term": "Business case",
+        "aka": ["ROI case"],
+        "definition": "The argument that a project is worth doing: the value it creates against the cost to build and run it.",
+        "formula": "Payback in months = one-off cost ÷ net monthly benefit"
+      },
+      {
+        "term": "Rollout",
+        "aka": ["deployment"],
+        "definition": "Extending a tool from the pilot to more users, documents or teams in stages, keeping the checks that proved it."
+      }
+    ],
+    "builder": "Rollout is where systems decay quietly. A custodian changes its statement layout, a new client defines EBITDA its own way, the AI provider updates its model, or reviewers who have seen months of clean output start approving without reading.\n\nNone of this announces itself. Accuracy drifts down while every dashboard still shows green.\n\nSo keep the pilot's discipline after launch: version every model and prompt, keep the review queue for exceptions, and keep measuring.\n\n**Check worth building:** every month, rerun the golden set and have a reviewer check a random sample of outputs that went straight through. If field-level accuracy falls below the pilot's level, route everything back through review until it is fixed.",
+    "client": {
+      "say": "Here is one page: what we would build, what it saves, how we would know it works, and what could go wrong.",
+      "ask": "What would you need to see on one page to approve a pilot, and who else has to agree?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d30-concept1",
+      "type": "concept",
+      "concept": "A conservative business case",
+      "kind": "choice",
+      "prompt": "Which business case would most convince a client's finance director?",
+      "options": [
+        "Count every hour the task takes today as saved, since the tool does the work",
+        "Count hours saved net of review time, and include build and running costs",
+        "Count hours saved, plus the value of every error the tool might prevent",
+        "Compare the tool's monthly cost with the salary of one full-time analyst"
+      ],
+      "answer": 1,
+      "explain": "A finance director will test the numbers, so the case that survives counts only real savings after review time and sets them against every cost. Counting every hour as saved is tempting, but someone still reviews the output, and an inflated case falls apart at the first question."
+    },
+    {
+      "id": "d30-concept2",
+      "type": "concept",
+      "concept": "Roll out in stages",
+      "kind": "choice",
+      "prompt": "A pilot with one team hit its success metric. How should rollout proceed?",
+      "options": [
+        "Switch every team on at once and drop the review queue, as accuracy is proven",
+        "Pause for six months to see whether the pilot's results hold before adding more",
+        "Let each team configure the tool for itself, since their needs will differ",
+        "Add teams in stages, keeping the golden set, checks and review queue each time"
+      ],
+      "answer": 3,
+      "explain": "Each new team brings new documents and habits, so accuracy must be shown again as volume grows, using the checks that proved the pilot. Switching everyone on at once is tempting after a good pilot, but it removes the safety net just as the system meets work it has never seen."
+    },
+    {
+      "id": "d30-calc1",
+      "type": "calc",
+      "concept": "Payback period",
+      "kind": "choice",
+      "prompt": "A tool costs ₹12 lakh to build and ₹50,000 a month to run. It saves 300 hours a month of analyst time at ₹1,000 an hour. What is its payback period?",
+      "options": ["3.4 months", "4.0 months", "4.8 months", "24.0 months"],
+      "answer": 2,
+      "check": "12 / (300 * 1000 / 100000 - 0.5)",
+      "explain": "The saving is 300 × ₹1,000 = ₹3 lakh a month, less ₹0.5 lakh of running cost, so ₹2.5 lakh net and 12 ÷ 2.5 = 4.8 months. 4.0 months is the tempting slip: it ignores the running cost."
+    },
+    {
+      "id": "d30-calc2",
+      "type": "calc",
+      "concept": "Straight-through rate saves review",
+      "kind": "number",
+      "prompt": "At rollout, a tool handles 2,000 items a month. Its straight-through rate rises from 60% to 85%, and each item that still goes to review takes 6 minutes. How many reviewer hours a month does this save?",
+      "answer": 50,
+      "tolerance": 0,
+      "unit": "hours",
+      "check": "2000 * (0.85 - 0.6) * 6 / 60",
+      "explain": "Items needing review fall from 40% to 15% of 2,000, from 800 to 300, and 500 × 6 minutes = 3,000 minutes, or 50 hours. 30 hours is the tempting slip: it is the review time still needed for the 300 items, not the time saved."
+    },
+    {
+      "id": "d30-client1",
+      "type": "client",
+      "concept": "Hold the pilot to one team",
+      "kind": "choice",
+      "prompt": "A client reads your brief and asks, 'Can the pilot cover all three of our teams at once?' Which reply is best?",
+      "options": [
+        "Let's prove it with one team first. Which has the most volume?",
+        "Yes, the more teams we include, the faster we will all learn.",
+        "No, we never run a pilot with more than one team at any time.",
+        "We could parallelise across all teams with a multi-tenant design."
+      ],
+      "answer": 0,
+      "explain": "One team keeps the pilot measurable, and asking which has the most volume points it where a result will matter most. Saying yes is tempting, but three teams triple the documents and opinions, and blur the one number that decides rollout."
+    },
+    {
+      "id": "d30-builder1",
+      "type": "builder",
+      "concept": "Catch silent layout changes",
+      "kind": "choice",
+      "prompt": "Three months after rollout, a custodian changes its statement layout. The system keeps producing figures, reviewers approve them as usual, and a client spots a wrong total. Which check would have caught it first?",
+      "options": [
+        "Remind reviewers every month to read each output more carefully",
+        "Tie each statement's holdings to its printed total, on every file",
+        "Retrain the model every month on all the latest statements it read",
+        "Show a confidence score next to every figure the system extracts"
+      ],
+      "answer": 1,
+      "explain": "A tie-out runs on every file and fails the moment a misread layout breaks the sum, whatever the reviewers' habits. Reminding reviewers is tempting, but months of clean output make people skim, which is how the error got through."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, walk a client's chief operating officer through the one-page brief you would leave behind.",
+    "modelAnswer": "It's one page. First, the workflow and what it costs you today in hours, turnaround and errors. Then the design: we extract each figure with its source, calculate in code, run three automated checks, and send anything that fails to your reviewers, with output in your own templates. One success metric, agreed now. A six-week pilot with one team, a golden set from your past work and a written out-of-scope list. And the two biggest risks, with how we'd contain each."
+  },
+  "capstone": {
+    "clients": [
+      {
+        "id": "hedge-fund",
+        "name": "Quillfield Capital, a fictional long/short equity hedge fund in London",
+        "situation": "Quillfield runs a long/short equity fund, buying some shares and betting against others, with 12 analysts covering 120 listed companies in Europe and India. In each results season, analysts update their Excel models with reported figures, compare them with consensus estimates, and send portfolio managers a first take with key management quotes. Each company takes about 2.5 hours, so 300 analyst hours land in a four-week window, and first takes arrive 3 to 4 hours after results. Last season, two misquoted management comments reached portfolio managers. Estimates come from a licensed data vendor whose terms limit their use in AI tools.",
+        "model": {
+          "workflow": "Results-day update for each covered company: read the results release and call transcript, update the reported figures in the analyst's Excel model, compare them with consensus, and send portfolio managers a short first take. 120 companies, four seasons a year, done by 12 analysts.",
+          "pain": "About 2.5 hours per company, so 300 analyst hours per season, crammed into four weeks. First takes reach portfolio managers 3 to 4 hours after results, often after the share price has moved. Two misquoted management comments reached them last season.",
+          "data": "Results releases, filings and investor presentations from exchanges and company websites, in PDF and HTML; call transcripts; consensus estimates from the licensed data vendor, under its AI-use terms; and each analyst's Excel model, whose input rows differ by sector.",
+          "design": "Extract: reported line items with source page and line, and management quotes word for word with their place in the transcript. Calculate: in code, changes on last year and gaps to consensus. Check: run the three checks. Review: the analyst approves figures and quotes in a review queue. Output: values written into the analyst's own Excel input sheet, plus a one-page first take in the fund's template.",
+          "checks": "1. Every reported figure matches its source page, and parts add up to the reported totals. 2. Every quote matches the transcript word for word; no match, no quote. 3. Period, currency and scale match the model's column, and any figure that moves close to 10x, 100x or 1,000x from last quarter is flagged.",
+          "metric": "Median time from results release to an analyst-approved model update and first take: from about 3.5 hours today to under 1 hour, measured on every pilot company that reports during the pilot.",
+          "pilot": "Six weeks spanning one results season, with the 3 analysts who cover 30 European consumer companies. Golden set: last season's 30 approved model updates and first takes. In scope: reported figures, gaps to consensus and quotes. Out of scope: forecasts, valuation changes, trade ideas, other sectors and Indian companies.",
+          "risks": "1. A misquote reaches portfolio managers in a fast market: quotes are verbatim only, linked to the transcript, and none leaves the review queue unapproved. 2. Breaching the vendor's licence: confirm the AI-use terms with the vendor and compliance before the pilot, and keep consensus data in code, out of model prompts, if the terms require it."
+        }
+      },
+      {
+        "id": "family-office",
+        "name": "Lanternbay Family Office, a fictional multi-family office in Singapore",
+        "situation": "Lanternbay manages money for 18 families, many of Indian origin, with assets at 9 custodian banks and in 30 outside funds across Switzerland, Singapore, India and the US. After each quarter-end, 4 analysts pull holdings and transactions from about 400 PDF statements, sort each holding into an asset class, check the figures against statement totals and build one consolidated report per family. Each statement takes about 45 minutes, and reports go out 15 working days after quarter-end; families want them in 5. Last year, two reports double-counted a holding moved between custodians. Statements carry names, account numbers and tax IDs, and several families require their data to stay in Singapore.",
+        "model": {
+          "workflow": "Quarterly consolidated report for each of 18 families: pull holdings and transactions from custodian and fund statements, sort holdings into asset classes, check them against statement totals, and build one report per family. Done by 4 analysts after every quarter-end.",
+          "pain": "About 400 statements a quarter at roughly 45 minutes each: 300 analyst hours. Reports go out 15 working days after quarter-end, against the families' wish for 5. Two reports last year double-counted a holding moved between custodians.",
+          "data": "PDF statements from 9 custodians and 30 fund managers, each in its own layout and some scanned; data files from the few custodians that offer them; the office's asset-class mapping sheet; and last quarter's approved reports. Statements contain names, account numbers and tax IDs.",
+          "design": "Extract: holdings, values, currencies and transactions with source page, after masking personal identifiers. Calculate: in code, convert currencies at one agreed quarter-end rate and total by asset class. Check: run the three checks. Review: analysts clear failed checks and any security not seen before in a review queue. Output: the office's own Excel report template with live totals, and a source link behind every figure.",
+          "checks": "1. Each statement's extracted holdings add up to its printed total, in its own currency. 2. Holdings roll forward: last quarter's position plus this quarter's transactions equals this quarter's position, for each account. 3. No security, matched on its ISIN, the international code for a security, is counted twice in a family's report unless it truly sits in two accounts.",
+          "metric": "Working days from quarter-end to approved consolidated reports for the pilot families: from 15 today to 5 or fewer, measured on the pilot quarter.",
+          "pilot": "Five weeks on one quarter's statements for 3 families, run by 2 analysts. Golden set: those families' last two approved quarterly reports and the statements behind them. In scope: holdings, transactions and asset-class totals. Out of scope: performance returns, tax reporting, private fund capital accounts and the other 15 families.",
+          "risks": "1. Leaking personal data or breaching residency: mask identifiers before extraction, process and store everything in Singapore, and get the office's sign-off on the AI provider's retention and training terms. 2. A changed statement layout misread without warning: the total tie-out fails, and any layout not seen before goes to full review."
+        }
+      },
+      {
+        "id": "private-credit",
+        "name": "Ironmoor Credit Partners, a fictional private credit fund in London",
+        "situation": "Ironmoor lends directly to 45 mid-sized European companies. Each quarter, every borrower sends management accounts, its unaudited internal statements, and a compliance certificate, its own calculation of the covenant ratios. Two analysts re-key the figures into a covenant workbook and retest leverage (debt to EBITDA) and interest cover under each loan's own definitions. Each borrower takes about 4 hours, so 180 hours a quarter, and results reach portfolio managers 6 weeks after quarter-end. Last year a breach surfaced 5 weeks late: an add-back, a cost one loan let its borrower leave out of EBITDA, had been applied to another loan. Loan agreements run to about 150 pages each, and two borrowers have listed bonds.",
+        "model": {
+          "workflow": "Quarterly covenant monitoring for 45 borrowers: read each compliance certificate and set of management accounts, recompute leverage and interest cover under that loan's own definitions, and report headroom, the gap to each limit, and any breach to portfolio managers. Done by 2 analysts.",
+          "pain": "About 4 hours per borrower, so 180 analyst hours a quarter. Results reach portfolio managers about 6 weeks after quarter-end. Last year one breach surfaced 5 weeks late because an add-back allowed under one loan was applied to another.",
+          "data": "Compliance certificates and management accounts from borrowers, in PDF and Excel; loan agreements of about 150 pages each, with bespoke definitions of EBITDA, debt and add-backs; and the analysts' covenant workbook with the last four quarters of tested figures.",
+          "design": "Extract: once per loan, the covenant definitions, add-backs and limits, approved by an analyst; each quarter, the figures with their source pages. Calculate: ratios in code, using that loan's approved definitions. Check: run the three checks. Review: analysts clear exceptions and sign off any breach or headroom under 10%. Output: the fund's covenant workbook and a one-page portfolio summary.",
+          "checks": "1. Recomputed ratios match the borrower's own certificate; any gap goes to review with both workings side by side. 2. Each input figure ties to the management accounts, and parts add up to reported totals. 3. Every add-back used is on that loan's approved list and within its cap; anything else is flagged.",
+          "metric": "Analyst hours per borrower each quarter: from about 4 today to 1.5 or fewer, measured across the pilot borrowers, with every covenant test still signed off by an analyst.",
+          "pilot": "Six weeks on one quarter's packs for 12 borrowers, run by the 2 analysts. Golden set: the last four quarters of approved tests for those 12, including the breach caught late. In scope: leverage and interest cover. Out of scope: other covenants, loan amendments and the other 33 borrowers.",
+          "risks": "1. Applying the wrong definition to a loan: definitions are extracted once, approved by an analyst, versioned, and changed only with sign-off. 2. Packs from the two borrowers with listed bonds may be material non-public information: keep them in a restricted workspace, limit access to named people, and log every view."
+        }
+      }
+    ]
+  }
+}

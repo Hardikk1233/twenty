@@ -1,0 +1,61 @@
+/* Design tokens. One accent: input blue, used only for what the learner does, as in a
+   financial model where blue marks a typed input and black a calculated value.
+   Green and red appear only in quiz feedback. */
+
+:root {
+  --paper: #fbfbfa;
+  --ink: #14171a;
+  --muted: #6b7280;
+  --rule: #e3e5e8;
+  --input: #1d4ed8;
+  --on-input: #ffffff;
+  --right: #1e7b4a;
+  --wrong: #b3261e;
+  --tint: #f0f1f3; /* highlighted statement row */
+
+  --font: 'IBM Plex Sans', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  --text-body: 1.0625rem; /* 17px */
+  --text-lead: 1.25rem;
+  --text-prompt: 1.1875rem;
+  --text-h1: 1.75rem;
+  --text-table: 1rem;
+  --text-small: 0.9375rem;
+
+  --measure: 36rem; /* about 68 characters at 17px */
+  --gutter: 16px;
+  --tabbar-h: 3.5rem;
+  --actionbar-h: 4.5rem;
+  --radius: 10px;
+
+  color-scheme: light;
+}
+
+/* Dark theme: follows the phone unless the learner picked light. Green and red are lifted so
+   feedback text stays readable on the dark paper. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --paper: #101214;
+    --ink: #ecedee;
+    --muted: #9aa1aa;
+    --rule: #2a2e33;
+    --input: #7aa2ff;
+    --on-input: #101214;
+    --right: #5bb98a;
+    --wrong: #f28b82;
+    --tint: #1b1e22;
+    color-scheme: dark;
+  }
+}
+
+:root[data-theme='dark'] {
+  --paper: #101214;
+  --ink: #ecedee;
+  --muted: #9aa1aa;
+  --rule: #2a2e33;
+  --input: #7aa2ff;
+  --on-input: #101214;
+  --right: #5bb98a;
+  --wrong: #f28b82;
+  --tint: #1b1e22;
+  color-scheme: dark;
+}

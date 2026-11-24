@@ -1,0 +1,162 @@
+{
+  "day": 8,
+  "phase": 2,
+  "title": "Liquidity, leverage and efficiency",
+  "pages": {
+    "why": "A private credit fund, which lends directly to companies, is asked to lend to a café chain. Before reading anything else, its analyst asks three questions: can the chain pay this year's bills, how heavy is its debt against its earnings, and how long is its cash tied up in stock and unpaid invoices? A handful of ratios answers all three in minutes.",
+    "idea": "Day 7 asked how well a business earns. Today's ratios ask whether it can pay its bills, carry its debt and turn sales into cash.\n\nLiquidity: can it pay what falls due within a year? The **current ratio** is current assets ÷ current liabilities. Below 1 can spell trouble; far above 1 can mean idle cash or slow-moving stock.\n\nLeverage, meaning reliance on borrowed money:\n\n- **Net debt** is debt minus cash, since cash could repay part of the debt tomorrow.\n- **Debt to equity** compares what lenders have put in with what owners have.\n- **Net debt to EBITDA** shows roughly how many years of EBITDA would clear net debt. Lenders watch it closely, and loan agreements often set a maximum.\n- **Interest cover** is EBIT ÷ interest: how many times operating profit covers the interest bill.\n\nEfficiency, counted in days:\n\n- Receivable days: how long customers take to pay. Receivables ÷ revenue × 365.\n- Inventory days: how long stock sits before it is sold. Inventory ÷ cost of goods sold × 365.\n- Payable days: how long the business takes to pay suppliers. Payables ÷ cost of goods sold × 365.\n\nThe **cash conversion cycle** joins them: receivable days + inventory days − payable days. It is how long cash stays tied up between paying suppliers and collecting from customers. Shorter is better; below zero, suppliers are funding the business.\n\nPractice varies: some analysts use average balances or a 360-day year, so always state the method.",
+    "example": {
+      "text": "Brew Lane at 31 March 2026, with FY26 income statement figures. Its bank loan is non-current, so payables of ₹5 crore are its only current liability.\n\n{table}\n\n- Current ratio: current assets 18 (cash 8 + receivables 4 + inventory 6) ÷ payables 5 = 3.6x.\n- Net debt: debt 30 − cash 8 = ₹22 crore. Debt to equity: 30 ÷ 35 = 0.86x.\n- Net debt to EBITDA: 22 ÷ 20 = 1.1x. Interest cover: EBIT 15 ÷ interest 3 = 5.0x.\n- Receivable days: 4 ÷ 100 × 365 = 14.6. Inventory days: 6 ÷ 40 × 365 = 54.75. Payable days: 5 ÷ 40 × 365 = 45.625.\n- Cash conversion cycle: 14.6 + 54.75 − 45.625 = 23.7 days.\n\nThe table shows days to one decimal place. Add those rounded figures and you get 23.8, which is why systems should calculate from unrounded inputs.",
+      "table": {
+        "caption": "Times (x), ₹ crore or days; FY26, balances at 31 March 2026",
+        "columns": ["FY26"],
+        "rows": [
+          { "label": "Current ratio (x)", "values": [3.6] },
+          { "label": "Net debt", "values": [22] },
+          { "label": "Debt to equity (x)", "values": [0.86] },
+          { "label": "Net debt to EBITDA (x)", "values": [1.1] },
+          { "label": "Interest cover (x)", "values": [5] },
+          { "label": "Receivable days", "values": [14.6] },
+          { "label": "Inventory days", "values": [54.8] },
+          { "label": "Payable days", "values": [-45.6] },
+          {
+            "label": "Cash conversion cycle (days)",
+            "values": [23.7],
+            "rule": "total",
+            "highlight": true
+          }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Current ratio",
+        "definition": "Current assets divided by current liabilities: whether a business can cover what it owes within a year.",
+        "formula": "Current assets ÷ current liabilities"
+      },
+      {
+        "term": "Net debt",
+        "definition": "Debt minus cash. Firms differ on whether lease liabilities and other debt-like items go in.",
+        "formula": "Debt − cash"
+      },
+      {
+        "term": "Debt to equity",
+        "aka": ["D/E"],
+        "definition": "Debt divided by equity: how much lenders have put in for each rupee from owners.",
+        "formula": "Debt ÷ equity"
+      },
+      {
+        "term": "Net debt to EBITDA",
+        "aka": ["net leverage"],
+        "definition": "Net debt divided by a year's EBITDA: roughly how many years of operating earnings would clear the debt.",
+        "formula": "Net debt ÷ EBITDA"
+      },
+      {
+        "term": "Interest cover",
+        "aka": ["interest coverage", "times interest earned"],
+        "definition": "How many times operating profit covers the interest bill. Some lenders use EBITDA instead of EBIT.",
+        "formula": "EBIT ÷ interest"
+      },
+      {
+        "term": "Cash conversion cycle",
+        "aka": ["CCC", "cash cycle"],
+        "definition": "The days cash is tied up between paying suppliers and collecting from customers.",
+        "formula": "Receivable days + inventory days − payable days"
+      }
+    ],
+    "builder": "These ratios mix two kinds of number. Debt, cash and receivables are balances on a date; EBITDA, interest and revenue are totals for a period. Each ratio must pair a balance with the period that ends on that date. Halfway through a year, net debt at 30 September over six months of EBITDA roughly doubles the ratio; use last twelve months EBITDA instead (Day 9).\n\nDenominators can also be zero or negative. A company with no interest bill has no interest cover. One with negative EBITDA produces a negative net debt to EBITDA, which sorts as the safest company in any screen. Return 'not meaningful' (n.m.) in both cases, never a number.\n\n**Check worth building:** before computing any ratio, confirm the balance date matches the end of the income period, and return n.m. when the denominator is zero or negative.",
+    "client": {
+      "say": "If we know the ratios that make your team say no, we can screen out weak companies before anyone reads a page.",
+      "ask": "Which two or three ratios would make you reject a company immediately?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d08-concept1",
+      "type": "concept",
+      "concept": "What net debt to EBITDA means",
+      "kind": "choice",
+      "prompt": "Brew Lane's net debt to EBITDA is 1.1x. What does that tell a lender?",
+      "options": [
+        "Its debt is about 1.1 times the owners' equity",
+        "Its EBIT covers its interest bill about 1.1 times",
+        "Its current assets cover its bills 1.1 times over",
+        "Its net debt equals about 1.1 years of EBITDA"
+      ],
+      "answer": 3,
+      "explain": "Net debt of 22 ÷ EBITDA of 20 = 1.1, so net debt equals about 1.1 years of earnings before interest, tax, depreciation and amortisation. Reading it as debt to equity is tempting, but that ratio divides debt by equity, and Brew Lane's is 0.86x."
+    },
+    {
+      "id": "d08-concept2",
+      "type": "concept",
+      "concept": "Negative cash conversion cycle",
+      "kind": "choice",
+      "prompt": "A supermarket chain has a cash conversion cycle of −20 days. What does that mean?",
+      "options": [
+        "It loses money on each sale, so it burns cash as it grows",
+        "It collects cash from shoppers before it pays its suppliers",
+        "Its stock takes 20 days to sell, faster than most retailers",
+        "It has 20 days of cash left before it must borrow more"
+      ],
+      "answer": 1,
+      "explain": "The cycle is receivable days + inventory days − payable days, so it turns negative when suppliers are paid after shoppers have already paid. Reading it as a loss is tempting, but the cycle measures the timing of cash, not profit."
+    },
+    {
+      "id": "d08-calc1",
+      "type": "calc",
+      "concept": "Inventory days",
+      "kind": "number",
+      "prompt": "At 31 March 2026, Brew Lane held ₹6 crore of inventory. Its FY26 revenue was ₹100 crore and its cost of goods sold ₹40 crore. How many days of inventory did it hold?",
+      "answer": 54.8,
+      "tolerance": 0.1,
+      "unit": "days",
+      "check": "inventory26 / cogs * 365",
+      "explain": "Inventory days = inventory ÷ cost of goods sold × 365 = 6 ÷ 40 × 365 = 54.8 days. Dividing by revenue gives 21.9 days, the common slip: inventory is recorded at cost, so compare it with cost of goods sold, not with sales."
+    },
+    {
+      "id": "d08-calc2",
+      "type": "calc",
+      "concept": "Current ratio",
+      "kind": "choice",
+      "prompt": "At 31 March 2026, Brew Lane has cash of ₹8 crore, receivables of ₹4 crore, inventory of ₹6 crore, payables of ₹5 crore and a ₹30 crore long-term bank loan. What is its current ratio?",
+      "options": ["0.5x", "2.4x", "3.6x", "14.0x"],
+      "answer": 2,
+      "check": "(cash26 + receivables26 + inventory26) / payables26",
+      "explain": "Current assets of 8 + 4 + 6 = 18, divided by current liabilities of 5, give 3.6x; the loan is not due within a year, so it stays out. 0.5x is the tempting slip: it treats the ₹30 crore loan as a current liability."
+    },
+    {
+      "id": "d08-client1",
+      "type": "client",
+      "concept": "Ask for reject rules",
+      "kind": "choice",
+      "prompt": "A credit fund's portfolio manager asks you to build a screen that rejects risky borrowers automatically. Which question should you ask first?",
+      "options": [
+        "Which ratios, and at what levels, make you reject a company?",
+        "Would you like the screen to cover every listed company in India?",
+        "Shall we use the standard limits most lenders apply, such as 3.0x?",
+        "Could a language model judge each company's risk instead?"
+      ],
+      "answer": 0,
+      "explain": "The reject rules are the client's credit judgement, and the screen is only as good as those ratios and levels. Offering standard limits is tempting because it sounds expert, but each lender sets its own, and a borrowed number replaces their judgement with yours."
+    },
+    {
+      "id": "d08-builder1",
+      "type": "builder",
+      "concept": "Not meaningful, not a number",
+      "kind": "choice",
+      "prompt": "Your system ranks 200 companies by net debt to EBITDA, lowest first. Top of the list, as the safest, is a company with net debt of ₹50 crore and EBITDA of −₹10 crore, at −5.0x. Which check would have caught this?",
+      "options": [
+        "Use the absolute value, so that −5.0x is ranked as 5.0x",
+        "Cap every ratio at 10.0x so outliers cannot distort the list",
+        "Leave out any company whose net debt is below zero",
+        "Mark the ratio not meaningful when EBITDA is zero or below"
+      ],
+      "answer": 3,
+      "explain": "With negative EBITDA there are no earnings to repay debt, so the ratio is not meaningful and must not be ranked as a number. Using the absolute value is tempting, but it would rank this loss-making company as moderately indebted at 5.0x, when it is the riskiest on the list."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, tell a lender whether Brew Lane's debt looks manageable, and why.",
+    "modelAnswer": "On these numbers, yes. Net debt is ₹22 crore, about 1.1 years of EBITDA. EBIT covers the interest bill five times. The ₹30 crore bank loan is long-term, and current assets of ₹18 crore cover the ₹5 crore of supplier bills 3.6 times. What I'd still check is the loan's repayment schedule, and whether cash flow after capital spending can meet it, because free cash flow was only ₹3 crore last year."
+  }
+}

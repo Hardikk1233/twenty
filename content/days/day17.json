@@ -1,0 +1,149 @@
+{
+  "day": 17,
+  "phase": 3,
+  "title": "Anatomy of a financial model",
+  "pages": {
+    "why": "A fund's investment committee meets at 9 a.m. to approve a deal, and the model behind it has 40 tabs. At 8:40, a reviewer notices that the balance sheet stops balancing in Year 3. Nobody votes until someone finds out why.",
+    "idea": "A **financial model** is a spreadsheet that turns reported figures and assumptions into forecasts and values. Most share one shape:\n\n- Inputs: figures from the filings, and assumptions such as growth rates.\n- Calculations: the three statements, projected year by year.\n- Outputs: the answers a reader wants, such as value per share.\n\nColumns run from historical years, the actuals, often marked A (FY26A), to projected years, marked E for estimate (FY27E). Projections hang on a few **drivers**, the assumptions that move everything else: revenue growth, margins, capex as a share of revenue, receivable days. Change a driver and every number that depends on it updates.\n\nA **scenario** is a full set of drivers telling one story. Most models carry three, chosen with one switch: base (most likely), bull (things go well) and bear (they go badly).\n\nConventions keep models checkable, though details vary by firm:\n\n- Blue text for inputs, black for formulas, often green for links to other sheets.\n- One formula per row, copied across every year.\n- No **hard-coded numbers** inside formulas: C5 × 1.25 hides an assumption, while C5 × (1 + C3) points to the input cell that holds it.\n\nGood models carry checks that recalculate with every change. The **balance check** confirms that assets minus liabilities and equity is zero in every year, and a cash check confirms that closing cash on the cash flow statement matches the balance sheet. A **circular reference** is a formula loop: interest depends on debt, debt on the cash needed, and that cash on interest. Many models break the loop by charging interest on the debt at the start of each year.",
+    "example": {
+      "text": "A tiny model of Brew Lane: FY26 is actual, FY27 and FY28 are projected. The two shaded rows are the drivers. In a real spreadsheet, the drivers and the FY26 actuals would be blue inputs, and every projected number a black formula. The FY27 and FY28 drivers are assumptions for teaching, not forecasts.\n\n{table}\n\nFY27 revenue = 100 × (1 + 25%) = 125, and EBITDA = 125 × 20% = 25. FY28 revenue = 125 × (1 + 20%) = 150, and EBITDA = 30.\n\nFor a bear case, set both growth inputs to 10%. FY28 revenue becomes 100 × 1.1 × 1.1 = 121 and EBITDA 24.2, without touching a formula. Had someone typed FY27 revenue as 100 × 1.25 instead of pointing at the input, the bear case would quietly show FY28 revenue of 137.5.\n\nThe balance check on FY26: assets 70 − liabilities 35 − equity 35 = 0.",
+      "table": {
+        "caption": "₹ crore unless stated; FY26 actual, FY27 and FY28 base case",
+        "columns": ["FY26", "FY27", "FY28"],
+        "rows": [
+          { "label": "Revenue growth %", "values": [25, 25, 20], "highlight": true },
+          { "label": "EBITDA margin %", "values": [20, 20, 20], "highlight": true },
+          { "label": "Revenue", "values": [100, 125, 150] },
+          { "label": "EBITDA", "values": [20, 25, 30] }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Financial model",
+        "aka": ["model"],
+        "definition": "A spreadsheet that turns reported figures and assumptions into forecasts, values or returns, through linked formulas."
+      },
+      {
+        "term": "Driver",
+        "aka": ["key assumption"],
+        "definition": "An input that moves many other numbers, such as revenue growth, a margin or capex as a share of revenue."
+      },
+      {
+        "term": "Scenario",
+        "aka": ["case"],
+        "definition": "A complete set of driver values telling one story, such as base, bull or bear, usually chosen with one switch."
+      },
+      {
+        "term": "Hard-coded number",
+        "aka": ["hard-code", "hardcode"],
+        "definition": "A number typed into a cell rather than calculated. Right for inputs; a hidden error when buried inside a formula."
+      },
+      {
+        "term": "Balance check",
+        "aka": ["balance sheet check"],
+        "definition": "A row that computes assets minus liabilities and equity for every year. Anything but zero means an error.",
+        "formula": "Assets − liabilities − equity = 0"
+      },
+      {
+        "term": "Circular reference",
+        "aka": ["circularity", "circ"],
+        "definition": "A formula that depends, through a chain of other cells, on its own result, such as interest, debt and cash."
+      }
+    ],
+    "builder": "Model review is mostly rule-based, which makes it a strong fit for an auditing agent. It can read every formula and flag what reviewers hunt for by hand:\n\n- numbers typed inside formulas;\n- a row whose formula changes partway across the years;\n- links to other files, or to empty cells;\n- balance and cash checks that are not zero.\n\nA model-building agent should obey the rules it audits: inputs in blue cells with a source note, formulas in black, nothing hard-coded. The language model chooses and documents assumptions; the spreadsheet does the arithmetic.\n\n**Check worth building:** scan every formula for typed constants other than 0, 1 and agreed units such as 12 or 365, and list each one with its cell address for a reviewer.",
+    "client": {
+      "say": "I'd like to build to your template and conventions, so your reviewers can check our work the way they check their own.",
+      "ask": "Do you have a standard model template, and what error do reviewers catch most often?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d17-concept1",
+      "type": "concept",
+      "concept": "Blue text means an input",
+      "kind": "choice",
+      "prompt": "In a model that follows the usual colour conventions, what should a cell with blue text contain?",
+      "options": [
+        "A formula linking to a cell on a different worksheet or file",
+        "A check that should always come to exactly zero in every year",
+        "A key result that appears on the summary page for readers",
+        "A typed input, such as a growth rate or a reported figure"
+      ],
+      "answer": 3,
+      "explain": "Blue marks typed inputs, so a reviewer can see at a glance which numbers need a source. A link to another sheet is the tempting pick, but it is a formula, not an input, and many firms colour links green."
+    },
+    {
+      "id": "d17-concept2",
+      "type": "concept",
+      "concept": "Scenarios change inputs, not formulas",
+      "kind": "choice",
+      "prompt": "A reviewer wants a bear case with revenue growth of 10% instead of 20%. What is the right way to build it?",
+      "options": [
+        "Copy the model and retype the revenue figure for each year by hand",
+        "Set the bear case's growth input to 10% and let formulas update",
+        "Edit each revenue formula to multiply by 1.1 instead of 1.2",
+        "Add a note on the summary page saying that revenue could be lower"
+      ],
+      "answer": 1,
+      "explain": "A scenario is a different set of inputs feeding the same formulas, so every number updates and nothing is retyped. Editing the formulas to 1.1 is tempting because it works once, but it buries the assumption where no reviewer or scenario switch can see it."
+    },
+    {
+      "id": "d17-calc1",
+      "type": "calc",
+      "concept": "Growth compounds on the new base",
+      "kind": "choice",
+      "prompt": "Brew Lane's FY26 revenue is ₹100 crore. A model's base case assumes growth of 20% in FY27 and 15% in FY28. What is FY28 revenue?",
+      "options": ["₹132.25 crore", "₹135 crore", "₹138 crore", "₹144 crore"],
+      "answer": 2,
+      "check": "revenue * 1.2 * 1.15",
+      "explain": "FY27 is 100 × 1.2 = ₹120 crore, and FY28 is 120 × 1.15 = ₹138 crore. ₹135 crore is the tempting slip: adding 20% and 15% misses the growth on FY27's larger base."
+    },
+    {
+      "id": "d17-calc2",
+      "type": "calc",
+      "concept": "Reading a balance check",
+      "kind": "number",
+      "prompt": "A model's projected FY28 balance sheet shows total assets of ₹96 crore, total liabilities of ₹40 crore and equity of ₹55 crore. What does the balance check, assets − liabilities − equity, show?",
+      "answer": 1,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "96 - 40 - 55",
+      "explain": "96 − 40 − 55 = ₹1 crore, so the model does not balance and something is broken. Waving it through as small is the tempting slip: any figure other than zero means a link or formula is wrong."
+    },
+    {
+      "id": "d17-client1",
+      "type": "client",
+      "concept": "Start from their template",
+      "kind": "choice",
+      "prompt": "A private equity associate asks, 'Could your AI build our models for us?' Which reply is best?",
+      "options": [
+        "Possibly. Is there a template, and what errors do reviewers catch?",
+        "Yes. It can build any model you need from scratch in a few minutes.",
+        "No. Models need human judgement, so AI cannot really help.",
+        "Yes, and it works out the numbers itself, so no formulas needed."
+      ],
+      "answer": 0,
+      "explain": "A template shows how they want models built, and the errors their reviewers catch show which checks would save them the most time. The quick yes is tempting, but a model built outside their template is one their reviewers will not trust or reuse."
+    },
+    {
+      "id": "d17-builder1",
+      "type": "builder",
+      "concept": "Scan formulas for typed numbers",
+      "kind": "choice",
+      "prompt": "Your auditing agent finds that FY27 revenue is =C12 × (1 + C4), pointing at the growth input, but FY28 revenue is =D12 × 1.15. Which check would catch this anywhere in the model?",
+      "options": [
+        "Confirm that FY28 revenue is higher than FY27 revenue, as expected",
+        "Ask a language model to read the formulas and judge them",
+        "Recalculate the model and compare its totals with last week's version",
+        "Flag typed numbers in formulas, and rows whose formula changes"
+      ],
+      "answer": 3,
+      "explain": "A rule that scans every formula for typed constants, and for rows whose formula changes partway across, catches this in seconds wherever it sits. Checking that revenue rises is tempting, but this model passes it while ignoring the growth input."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a new colleague what makes a financial model easy to audit.",
+    "modelAnswer": "A good model separates inputs, calculations and outputs. Inputs, like growth and margins, sit in blue cells with a source. Everything else is a black formula pointing at them, one formula copied across each row, with no numbers typed inside. Then a scenario is just a different set of inputs: switch growth from 25% to 10% and every number updates. And checks run all the time: the balance sheet must balance and cash must tie, every year. If a check isn't zero, nothing goes to the client."
+  }
+}

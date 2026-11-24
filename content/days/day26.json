@@ -1,0 +1,142 @@
+{
+  "day": 26,
+  "phase": 5,
+  "title": "Finance data and its traps",
+  "pages": {
+    "why": "A hedge fund asks your team to backtest a simple idea, replaying it on ten years of past data: buy companies whose profits beat forecasts. The backtest shows a 30% annual return. It is fiction, because the data held figures corrected months later, which no investor could have traded on at the time.",
+    "idea": "Finance data arrives as regulatory filings, company PDFs and scans, licensed databases from a **data vendor**, client spreadsheets, ledger exports and administrators' reports. Each source has traps, and most fail silently: the pipeline runs, the number looks plausible, and it is wrong.\n\n- Layout: tables that run across pages, and footnotes that change what a number means.\n- Labels: scale and currency stated once in a header, brackets for negatives, and a dash that may mean zero, not applicable or not disclosed.\n- Scope: standalone or consolidated, reported or adjusted, and periods that do not line up.\n- Time: companies restate past figures, and many databases overwrite the old ones.\n- Identity: one company under different tickers (trading symbols), names and codes over the years.\n\nTwo ideas tame the time trap. **Point-in-time data** keeps every figure as it was known on each date, including first-reported numbers that were later revised. Testing a past decision with figures published afterwards is **look-ahead bias**, and it flatters every strategy.\n\nTwo more tame identity. **Entity resolution** works out which records are the same company, despite name changes, new tickers and subsidiaries. A **corporate action**, such as a share split, bonus issue, dividend, merger or name change, affects a company's shares, prices or identity, and breaks any history that ignores it.",
+    "example": {
+      "text": "Suppose a peer café chain issues one free bonus share for every share held, from October. The company is worth the same, but there are twice as many shares, so each is worth about half.\n\n{table}\n\nThe raw prices fall from ₹210 to ₹104, about 50%. Nothing of the kind happened. The adjusted series divides every price before the bonus by 2, and shows a move from ₹105 to ₹104, a fall of about 1%.\n\nMixing the two causes quiet errors. Earnings per share was ₹10 on the old share count, which is ₹5 on the new one. A P/E using today's ₹104 and the old ₹10 gives 10.4x; the right figure is 104 ÷ 5 = 20.8x. A screen for cheap shares would buy it by mistake.\n\nStore raw prices and the corporate action separately, and adjust in code.",
+      "table": {
+        "caption": "₹ per share, month-end prices, illustrative",
+        "columns": ["Raw", "Adjusted"],
+        "rows": [
+          { "label": "July", "values": [200, 100] },
+          { "label": "August", "values": [204, 102] },
+          { "label": "September", "values": [210, 105] },
+          { "label": "October, after the bonus", "values": [104, 104], "highlight": true },
+          { "label": "November", "values": [108, 108] }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Point-in-time data",
+        "aka": ["PIT data"],
+        "definition": "Data stored as it was known on each date, keeping first-reported figures after they are revised, so past decisions can be tested fairly."
+      },
+      {
+        "term": "Look-ahead bias",
+        "definition": "Using information in a test or decision that was not available at the time, such as revised figures or results published later."
+      },
+      {
+        "term": "Entity resolution",
+        "aka": ["entity matching", "record linkage"],
+        "definition": "Working out which records refer to the same company across sources, despite different names, tickers, codes and subsidiaries."
+      },
+      {
+        "term": "Corporate action",
+        "definition": "An event a company decides on that affects its shares, price history or identity, such as a split, bonus issue, dividend, merger or name change."
+      },
+      {
+        "term": "Data vendor",
+        "aka": ["data provider", "market data vendor"],
+        "definition": "A firm that sells licensed financial and market data, such as Bloomberg, LSEG or FactSet. Licence terms limit how the data may be used."
+      }
+    ],
+    "builder": "Store every figure with its context, not just its value: scale, currency, period, standalone or consolidated, reported or adjusted, source page, and the date it became known. Store missing as empty and zero as zero, and keep the original text, so a dash never turns into a fact.\n\nGive each company one permanent internal ID, mapped to every ticker, name and code it has had, with dates. Keep raw prices and corporate actions in separate tables, and build adjusted series in code. Backtests should only see data known by each test date.\n\n**Check worth building:** compare each new figure with the same field last period. Flag any jump close to 10x, 100x or 1,000x, the signature of a scale slip such as lakh read as crore, and any per-share move that matches a split or bonus ratio.",
+    "client": {
+      "say": "The messiest documents tell me more about what to build than the clean ones do.",
+      "ask": "Can you show me the ugliest document your team has to deal with?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d26-concept1",
+      "type": "concept",
+      "concept": "Look-ahead bias",
+      "kind": "choice",
+      "prompt": "On 20 May, a company reports annual profit of ₹12 crore. In November, it restates the figure to ₹10 crore. A backtest of a decision made on 1 June uses ₹10 crore. What is wrong?",
+      "options": [
+        "Nothing: the restated figure is more accurate, so the test is better",
+        "It uses a figure no investor had on 1 June, which is look-ahead bias",
+        "It should have used the average of the two figures, ₹11 crore",
+        "Restated figures are unaudited, so a backtest can never use them"
+      ],
+      "answer": 1,
+      "explain": "On 1 June the market knew only ₹12 crore, so a fair test of that decision must use it; the restatement belongs to November. 'More accurate' is the tempting answer, but hindsight accuracy is exactly what makes a backtest beat anything a real investor could have done."
+    },
+    {
+      "id": "d26-concept2",
+      "type": "concept",
+      "concept": "Entity resolution across name changes",
+      "kind": "choice",
+      "prompt": "A company changes its name and ticker in 2023. Your screen now shows two companies: one with revenue up to 2022, and a new one with revenue from 2023. What is missing?",
+      "options": [
+        "A rule that fills the missing years with the sector's average revenue",
+        "A rule that deletes any company whose data stops partway through",
+        "Entity resolution: one permanent ID linking the old and new names",
+        "A larger model that can guess when two companies look alike"
+      ],
+      "answer": 2,
+      "explain": "Both records are one company, so the fix is an internal ID mapped to every name and ticker it has had, with dates. A larger model guessing look-alikes is tempting, but matching must be exact and dated, or one company's history merges into another's."
+    },
+    {
+      "id": "d26-calc1",
+      "type": "calc",
+      "concept": "A dash is not zero",
+      "kind": "number",
+      "prompt": "A company's quarterly results show export revenue of ₹10, ₹12, ₹14 and ₹16 crore for four quarters, and a dash for a fifth, which a footnote says means 'not disclosed'. What average quarterly export revenue should your system report, using only disclosed figures?",
+      "answer": 13,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "(10 + 12 + 14 + 16) / 4",
+      "explain": "Four quarters were disclosed, so the average is (10 + 12 + 14 + 16) ÷ 4 = ₹13 crore. Treating the dash as zero gives 52 ÷ 5 = ₹10.4 crore, which invents a quarter with no exports."
+    },
+    {
+      "id": "d26-calc2",
+      "type": "calc",
+      "concept": "P/E after a bonus issue",
+      "kind": "choice",
+      "prompt": "After a 1:1 bonus issue, which doubles the share count, a stock trades at ₹150. Last year's EPS was ₹12 on the old share count. What is the correct P/E?",
+      "options": ["6.3x", "12.5x", "25.0x", "50.0x"],
+      "answer": 2,
+      "check": "150 / (12 / 2)",
+      "explain": "Twice the shares means EPS on the new count is 12 ÷ 2 = ₹6, so P/E is 150 ÷ 6 = 25.0x. 12.5x is the tempting slip: it divides today's price by the old EPS and makes the stock look half as expensive as it is."
+    },
+    {
+      "id": "d26-client1",
+      "type": "client",
+      "concept": "Ask for the worst documents",
+      "kind": "choice",
+      "prompt": "A family office says, 'Just pull the holdings from our custodian PDFs. They're all the same format.' Which reply is best?",
+      "options": [
+        "Could you send a few from each custodian, including the messiest one?",
+        "Our system reads any PDF accurately, whatever its format or quality.",
+        "PDFs are unreliable, so please ask each custodian for a data feed.",
+        "We'd use a layout-aware vision model, with text recognition as backup."
+      ],
+      "answer": 0,
+      "explain": "Real samples, including the worst, show the layouts, scans and quirks the system must handle, and they start your test set. Promising to read any PDF is tempting, but custodian statements vary widely, and the claim fails on the first odd layout."
+    },
+    {
+      "id": "d26-builder1",
+      "type": "builder",
+      "concept": "Flag scale jumps",
+      "kind": "choice",
+      "prompt": "Your pipeline reports a borrower's total debt as ₹3,000 crore this quarter, against ₹30 crore last quarter. Nothing else in its accounts moved much. Which check would have caught this before it reached the client?",
+      "options": [
+        "Ask the model to reread the page and confirm the figure",
+        "Compare the debt with the average for the borrower's sector",
+        "Round every figure to the nearest ₹10 crore before output",
+        "Flag any figure that moves close to 10x, 100x or 1,000x"
+      ],
+      "answer": 3,
+      "explain": "A move of exactly 100x while nothing else changes is the signature of a scale slip, such as a table in lakh read as crore, and a simple rule catches it every time. Asking the model to reread is tempting, but it can repeat the same misreading, so the check is not independent."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a hedge fund analyst why your backtest uses point-in-time data.",
+    "modelAnswer": "Companies restate figures, and many databases quietly overwrite the old ones. If a test of a June decision uses a number corrected in November, it's using information nobody had in June. That's look-ahead bias, and it makes every strategy look better than it could ever have been. So we store each figure with the date it became known, and the backtest only sees what was available on each day. The returns usually come out lower, but they're returns you could actually have earned."
+  }
+}

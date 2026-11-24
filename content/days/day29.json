@@ -1,0 +1,144 @@
+{
+  "day": 29,
+  "phase": 5,
+  "title": "Discovery, scoping and closing",
+  "pages": {
+    "why": "A fund administrator asks your firm for 'AI for reconciliations' and wants a price by Friday. Quote now and you will either over-promise or price a project nobody has defined. An hour of good questions turns that wish into a six-week trial with one number both sides can measure.",
+    "idea": "**Discovery** is the set of conversations before you propose anything, to learn the work in numbers. Seven questions do most of it:\n\n- What is the workflow, step by step?\n- How many items a month, and how long does each take?\n- Who reviews the work?\n- What does an error cost?\n- Where does the data live?\n- Who approves the purchase and the tool?\n\nTurn the answers into value: hours saved, turnaround (time from input to finished output), capacity (more work from the same team) and error rate.\n\nThen scope a **pilot**: one workflow, one team, four to six weeks, a golden set, and one **success metric**, a single number with a target, agreed before you start. Write down what is out of scope. A **statement of work** (SOW) fixes all of this, with the price. Pricing shapes vary: often a fixed fee for the pilot, then per document, per user or a monthly fee.\n\nExpect objections, and answer each with evidence:\n\n- Accuracy: measure it on their golden set.\n- Security: show exactly where their data goes.\n- 'We tried a chatbot': this is a workflow with checks, not a chat.\n- Job fears: it removes re-keying, and people keep the judgement.\n- 'Our work is too bespoke': start with the part that repeats.\n- **Build versus buy**: compare total cost, time to value and who maintains it.\n\nFinally, demo on their own document, and show a check catching an error.",
+    "example": {
+      "text": "Discovery with the fund administrator produces these answers for its monthly cash reconciliations, which check that each fund's bank balance and ledger agree. The targets come from a quick test on ten past reconciliations.\n\n{table}\n\n- Hours saved: 180 − 60 = 120 a month.\n- Turnaround: 6 working days down to 2.\n- Capacity: at 1 hour each, the same 180 hours could cover 180 funds, three times today's 60.\n- Error rate: errors found after sign-off fall from 4% to 1%.\n\nThat is four results, but the pilot needs one agreed number. The administrator's real pain is its month-end deadline, so the success metric is turnaround: 2 working days or fewer by week six.",
+      "table": {
+        "caption": "Monthly reconciliation work in hours, days and %, illustrative",
+        "columns": ["Today", "Target"],
+        "rows": [
+          { "label": "Funds reconciled", "values": [60, 60] },
+          { "label": "Hours each", "values": [3, 1] },
+          { "label": "Team hours", "values": [180, 60], "rule": "subtotal" },
+          { "label": "Working days to finish", "values": [6, 2], "highlight": true },
+          { "label": "Errors found after sign-off, %", "values": [4, 1] }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Discovery",
+        "aka": ["discovery call", "requirements gathering"],
+        "definition": "Structured conversations before proposing anything, to learn a client's workflow, volumes, costs, data and decision-makers."
+      },
+      {
+        "term": "Pilot",
+        "aka": ["proof of value"],
+        "definition": "A short, real test of one workflow with one team, judged on a metric agreed in advance. A proof of concept is smaller: it tests feasibility on samples."
+      },
+      {
+        "term": "Success metric",
+        "aka": ["acceptance criterion"],
+        "definition": "The one number, with a target, that decides whether a pilot worked, agreed before it starts."
+      },
+      {
+        "term": "Statement of work",
+        "aka": ["SOW"],
+        "definition": "A document that fixes what will be delivered, by when, by whom, at what price, and what is out of scope."
+      },
+      {
+        "term": "Build versus buy",
+        "aka": ["make or buy"],
+        "definition": "The choice between building a tool in-house and buying a product or service, weighing total cost, time to value and upkeep."
+      }
+    ],
+    "builder": "A demo on clean sample files proves little: their scans, odd layouts and footnotes are where the work is. Ask for their document, run it live, and let them watch a check catch a real error, such as a subtotal that does not add up.\n\nPilots fail in two quiet ways. Nobody measured the work beforehand, so there is no baseline to beat. Or scope drifts, one 'can it also' at a time, until no result is clear.\n\nEngineer against both: measure time per item and error rate in week one, before anyone uses the tool; log every reviewer edit; and keep the out-of-scope list in the statement of work.\n\n**Check worth building:** a pilot scoreboard that computes the success metric every day from the logs, against the week-one baseline, so the decision in week six is arithmetic, not opinion.",
+    "client": {
+      "say": "Let's agree now on the one number that decides this pilot, so week six ends in a decision, not a debate.",
+      "ask": "What would have to be true after a six-week pilot for you to roll this out?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d29-concept1",
+      "type": "concept",
+      "concept": "A good success metric",
+      "kind": "choice",
+      "prompt": "Which is the best success metric for a six-week pilot that automates monthly reconciliations?",
+      "options": [
+        "Users rate the tool at least 4 out of 5 in a survey at the end",
+        "The tool processes as many reconciliations as it can in six weeks",
+        "Hours per reconciliation fall from 3 to 1 or fewer by week six",
+        "The model answers every question without ever saying 'not found'"
+      ],
+      "answer": 2,
+      "explain": "It is one number, with a target and a deadline, tied to the hours the client is paying to save. The survey score is tempting because it is a number too, but it measures how users feel, not the time or errors behind the decision to roll out."
+    },
+    {
+      "id": "d29-concept2",
+      "type": "concept",
+      "concept": "Hold the pilot scope",
+      "kind": "choice",
+      "prompt": "In week three of a pilot on statement extraction, the client asks whether the tool could also draft the commentary for their quarterly report. What should you do?",
+      "options": [
+        "Add the commentary now, since keeping the client happy matters most",
+        "Note it for after the pilot, as it is outside the agreed scope",
+        "Refuse, and explain that AI should never write client commentary",
+        "Extend the pilot by six weeks so both tasks can be tested properly"
+      ],
+      "answer": 1,
+      "explain": "The pilot answers one question with one metric, and the out-of-scope list lets new ideas wait without derailing it. Adding the commentary now is tempting, but it splits the team's effort and leaves week six with no clear result on either task."
+    },
+    {
+      "id": "d29-calc1",
+      "type": "calc",
+      "concept": "Relative fall in error rate",
+      "kind": "number",
+      "prompt": "Before a pilot, reviewers found 60 errors in 1,200 extracted fields. During the pilot, they found 18 errors in 1,200 fields. By what percentage did the error rate fall, relative to where it started?",
+      "answer": 70,
+      "tolerance": 0.1,
+      "unit": "%",
+      "check": "(60 - 18) / 60 * 100",
+      "explain": "The error rate fell from 5% to 1.5%, and (5 − 1.5) ÷ 5 = 70%, the same as (60 − 18) ÷ 60. Answering 3.5% is the common slip: that is the fall in percentage points, not the relative fall."
+    },
+    {
+      "id": "d29-calc2",
+      "type": "calc",
+      "concept": "Break-even between pricing shapes",
+      "kind": "choice",
+      "prompt": "Your firm offers a client two pricing shapes: ₹60,000 a month plus ₹20 per statement, or ₹50 per statement with no monthly fee. At what monthly volume do the two cost the client the same?",
+      "options": ["857 statements", "1,200 statements", "2,000 statements", "3,000 statements"],
+      "answer": 2,
+      "check": "60000 / (50 - 20)",
+      "explain": "The two are equal when 60,000 + 20 × volume = 50 × volume, so volume = 60,000 ÷ (50 − 20) = 2,000 statements. 1,200 is the tempting slip: it divides the monthly fee by ₹50 and forgets that the first shape also charges ₹20 per statement."
+    },
+    {
+      "id": "d29-client1",
+      "type": "client",
+      "concept": "Answer 'we tried a chatbot'",
+      "kind": "choice",
+      "prompt": "A credit fund's portfolio manager says, 'We tried a chatbot last year and it made up numbers.' Which reply is best?",
+      "options": [
+        "Fair. Let's run one of your reports and trace each number to its page.",
+        "Our model is newer, so it no longer makes up any numbers at all.",
+        "Then AI may not suit your team, and we would understand that.",
+        "We now use retrieval-augmented generation over a vector database instead."
+      ],
+      "answer": 0,
+      "explain": "The fear is invented numbers, so the convincing answer is a live test on their own document, where every figure links to its page and checks catch errors. Claiming a newer model no longer invents numbers is tempting, but it is only a promise, and they have heard promises before."
+    },
+    {
+      "id": "d29-builder1",
+      "type": "builder",
+      "concept": "Baseline before the pilot",
+      "kind": "choice",
+      "prompt": "At the end of a six-week pilot, the client says the tool 'seems useful' but will not commit. Nobody recorded how long the work took before the pilot started. What would have prevented this?",
+      "options": [
+        "A longer pilot of twelve weeks, to give users more time with the tool",
+        "A larger model, so that the outputs would impress the client's team",
+        "A more polished interface, so that users enjoyed the tool more",
+        "A week-one baseline, and a scoreboard tracking the agreed metric"
+      ],
+      "answer": 3,
+      "explain": "Without a measured starting point nobody can show what changed, so the decision falls back on impressions; a baseline and a daily scoreboard make week six a matter of arithmetic. A longer pilot is tempting, but twelve weeks without a baseline ends in the same shrug."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, tell a client's head of operations what a good six-week pilot looks like.",
+    "modelAnswer": "One workflow, one team, six weeks. In week one, we build a golden set from work your team has already checked, and we measure today's baseline: hours per item, turnaround and errors. We agree one success metric before we start, say hours per reconciliation falling from three to one, and we write down what's out of scope. A scoreboard tracks that metric every day, so at week six the decision to roll out is arithmetic, not opinion."
+  }
+}

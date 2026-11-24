@@ -1,0 +1,151 @@
+{
+  "day": 21,
+  "phase": 4,
+  "title": "Private deals: private equity, venture and M&A",
+  "pages": {
+    "why": "A London private equity fund is weighing a bid for an Indian chain of schools. In six weeks, its team must work through 4,000 pages of the company's documents, test the numbers and write a memo that decides whether ₹300 crore is invested. For every deal it closes, it walks away from dozens.",
+    "idea": "Private equity (PE) funds buy companies, usually taking control; venture capital (VC) funds buy minority stakes, under half, in young ones. They, and companies buying other companies in mergers and acquisitions (M&A), work through a funnel, roughly in this order, in which most deals drop out:\n\n- Sourcing and screening: find candidates and reject most at a glance.\n- Information memorandum: the seller's pitch, sent once the buyer signs a non-disclosure agreement (NDA) to keep it confidential.\n- **Due diligence**: detailed checks of accounts, contracts, tax and legal risks, using the **data room**, a secure online store of the company's documents.\n- Investment committee memo: the case for the deal, put to the fund's senior partners.\n- **Term sheet**: price and key terms, mostly non-binding; then final contracts and the close, when the deal completes.\n- Monitoring, then exit by a sale or a listing, often three to seven years later.\n\nA **leveraged buyout** (LBO) is a purchase paid for largely with borrowed money, which the company's own cash flows then repay. Debt magnifies results both ways: a modest rise in value can double the fund's money, and a modest fall can wipe it out.\n\nWhen a start-up raises money, its agreed value before the new money is the **pre-money valuation**; add the new money to get the post-money valuation. New shares dilute existing owners: their percentage shrinks.\n\nStrategic buyers, firms in the same business, may pay more because they expect cost savings. Financial buyers, such as PE funds, need the deal to pay off on its own, judged by IRR and **MOIC**, the multiple of money returned.",
+    "example": {
+      "text": "A fictional start-up's founders own all its shares. A venture fund invests ₹10 crore at a pre-money valuation of ₹40 crore.\n\n{table}\n\nPost-money valuation = pre-money + new money = 40 + 10 = ₹50 crore. The fund owns 10 ÷ 50 = 20%, not 10 ÷ 40 = 25%, because its own money is part of the company afterwards.\n\nThe founders are diluted from 100% to 80%, yet their stake is still worth ₹40 crore: a smaller slice of a bigger company.\n\nIf the company is later sold for ₹200 crore with no further new shares, the fund's 20% returns ₹40 crore on its ₹10 crore: a MOIC of 4.0x.",
+      "table": {
+        "caption": "₹ crore unless stated, before and after the funding round",
+        "columns": ["Before", "After"],
+        "rows": [
+          { "label": "Founders' stake", "values": [40, 40] },
+          { "label": "Fund's stake", "values": [null, 10] },
+          { "label": "Company value", "values": [40, 50], "rule": "subtotal" },
+          { "label": "Founders' ownership %", "values": [100, 80] },
+          { "label": "Fund's ownership %", "values": [null, 20], "highlight": true }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Due diligence",
+        "aka": ["DD", "diligence"],
+        "definition": "A buyer's detailed checks before a deal: accounts, contracts, customers, tax and legal risks, often with help from accountants and lawyers."
+      },
+      {
+        "term": "Data room",
+        "aka": ["virtual data room", "VDR"],
+        "definition": "A secure online store of a company's documents, opened to bidders under NDA during due diligence. Who sees what is controlled and logged."
+      },
+      {
+        "term": "Term sheet",
+        "aka": ["heads of terms"],
+        "definition": "A short summary of a deal's key terms, such as price, stake and investor rights, agreed before the final contracts. It is mostly non-binding."
+      },
+      {
+        "term": "Pre-money valuation",
+        "aka": ["pre-money"],
+        "definition": "A company's agreed value just before new money comes in. Add the new money to get the post-money valuation.",
+        "formula": "Post-money valuation − new money"
+      },
+      {
+        "term": "Leveraged buyout",
+        "aka": ["LBO", "buyout"],
+        "definition": "A purchase of a company funded largely with debt, which the company's own cash flows then repay. The debt magnifies the equity's gains and losses."
+      },
+      {
+        "term": "MOIC",
+        "aka": ["multiple on invested capital", "money multiple"],
+        "definition": "Value returned, plus value still held, divided by the amount invested. Usually quoted per deal and before fees; it ignores time, so pair it with IRR.",
+        "formula": "(Cash returned + value still held) ÷ amount invested"
+      }
+    ],
+    "builder": "Two tools fit the funnel. A screening tool reads hundreds of information memoranda against a fund's criteria, such as sector, size and margins, so people spend time only on the best. Data room question answering takes a question such as 'What happens to key contracts if the company is sold?' and answers it from thousands of pages, citing each page.\n\nThe constraints are strict. Everything is under NDA, so each deal needs its own access rights, and nothing from one deal may leak into another through a shared index, cache or prompt. Your firm may even serve two clients bidding for the same company.\n\n**Check worth building:** before an answer is shown, confirm that every cited page belongs to the current deal's data room and that the user may see it.",
+    "client": {
+      "say": "I'd like to see where your team's hours go across the funnel, so we start with the stage that costs the most.",
+      "ask": "How many deals do you review for each one you close, and where in the funnel does the time go?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d21-concept1",
+      "type": "concept",
+      "concept": "Due diligence uses the data room",
+      "kind": "choice",
+      "prompt": "A private equity fund has signed an NDA and read a company's information memorandum. Its team now wants to check the company's contracts and tax filings in detail. Which stage is this?",
+      "options": [
+        "Screening, which decides whether to look at the company at all",
+        "Drafting the term sheet, which lists the company's contracts",
+        "Monitoring, which begins as soon as the information arrives",
+        "Due diligence, working through documents in the data room"
+      ],
+      "answer": 3,
+      "explain": "Detailed checks of contracts, tax and accounts are due diligence, done on documents the seller puts in the data room. The term sheet is tempting because it also comes late in the funnel, but it sets out the deal's price and key terms, not the company's contracts."
+    },
+    {
+      "id": "d21-concept2",
+      "type": "concept",
+      "concept": "Leverage cuts both ways",
+      "kind": "choice",
+      "prompt": "A private equity fund buys a company for ₹100 crore, paying ₹30 crore itself and borrowing ₹70 crore. Why does the debt raise the fund's potential return?",
+      "options": [
+        "Its own stake is small, so a ₹30 crore rise in value doubles it",
+        "The lenders absorb any losses first if the company's value falls",
+        "Debt is free money, since the company never has to repay it",
+        "Debt makes the company's day-to-day operations more profitable"
+      ],
+      "answer": 0,
+      "explain": "If the company's value rises to ₹130 crore, the debt is still ₹70 crore, so the fund's ₹30 crore becomes ₹60 crore: 2.0x, against 1.3x without debt. Thinking lenders absorb losses first is tempting, but equity takes the first loss: a 30% fall would wipe out the fund's stake."
+    },
+    {
+      "id": "d21-calc1",
+      "type": "calc",
+      "concept": "Ownership uses post-money",
+      "kind": "number",
+      "prompt": "A venture fund invests ₹20 crore in a start-up at a pre-money valuation of ₹60 crore. What percentage of the company does it own afterwards?",
+      "answer": 25,
+      "tolerance": 0.1,
+      "unit": "%",
+      "check": "20 / (60 + 20) * 100",
+      "explain": "Post-money valuation is 60 + 20 = ₹80 crore, and the fund owns 20 ÷ 80 = 25%. 33.3% is the common slip: it divides by the pre-money value, forgetting that the fund's own money is part of the company afterwards."
+    },
+    {
+      "id": "d21-calc2",
+      "type": "calc",
+      "concept": "MOIC in a leveraged buyout",
+      "kind": "choice",
+      "prompt": "A private equity fund buys a company for ₹100 crore with ₹40 crore of its own money and ₹60 crore of debt. It sells for ₹140 crore after the company has repaid ₹20 crore of that debt. What is the fund's MOIC?",
+      "options": ["1.4x", "2.0x", "2.5x", "3.5x"],
+      "answer": 2,
+      "check": "(140 - (60 - 20)) / 40",
+      "explain": "At exit the fund gets the sale price minus the debt still owed: 140 − (60 − 20) = ₹100 crore, and 100 ÷ 40 = 2.5x. 2.0x is the tempting slip: it subtracts all ₹60 crore of debt, forgetting that ₹20 crore was repaid from the company's cash."
+    },
+    {
+      "id": "d21-client1",
+      "type": "client",
+      "concept": "Find where deal time goes",
+      "kind": "choice",
+      "prompt": "A private equity partner says, 'Our associates spend weeks in data rooms. Can your AI just read them for us?' Which reply is best?",
+      "options": [
+        "Yes, it can read the whole data room and tell you whether to do the deal.",
+        "How many deals do you review per close, and which stage takes longest?",
+        "No: data rooms are under NDA, so AI should never be used on them.",
+        "Sure, we'd embed every deal's pages into one shared index for speed."
+      ],
+      "answer": 1,
+      "explain": "Knowing the volume and where the hours go shows whether data room review is the real bottleneck, and what a pilot should target. The confident yes is tempting, but the investment decision belongs to the deal team, and promising a verdict on the deal over-promises."
+    },
+    {
+      "id": "d21-builder1",
+      "type": "builder",
+      "concept": "Isolate each deal",
+      "kind": "choice",
+      "prompt": "Your data room assistant serves two deal teams at one client. Asked about Company A's customer contracts, it cites a page from Company B's data room. What is the right fix?",
+      "options": [
+        "Add a notice asking users to check every citation themselves",
+        "Lower the model's temperature so its citations are steadier",
+        "Retrain the model on many more examples of customer contracts",
+        "Give each deal its own index and check cited pages against it"
+      ],
+      "answer": 3,
+      "explain": "A cross-deal citation is a confidentiality breach, so each deal needs its own index, and every cited page must be checked against the current deal and the user's access before display. A notice is tempting because it is quick, but it leaves the leak in place and shifts the risk onto users."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain a leveraged buyout to a new colleague in plain words.",
+    "modelAnswer": "A private equity fund buys a company with a little of its own money and a lot of borrowed money, and the company's own cash flows repay the debt. Say the fund puts in ₹30 crore and borrows ₹70 crore to buy a ₹100 crore business. If it sells for the same ₹100 crore after repaying ₹30 crore of debt, the fund gets ₹60 crore back: double its money with no growth. But debt cuts both ways: if the business stumbles, the equity is lost first."
+  }
+}

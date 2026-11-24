@@ -1,0 +1,145 @@
+{
+  "day": 14,
+  "phase": 3,
+  "title": "Enterprise value and equity value",
+  "pages": {
+    "why": "Suppose a private equity fund, which buys and runs companies, wants to take over all of Brew Lane. Its shares are worth ₹180 crore on the market, but the buyer would also take on ₹30 crore of bank debt and get ₹8 crore of cash. The price of the business and the price of its shares are different numbers, and mixing them up is one of the most common errors in valuation.",
+    "idea": "Two numbers answer 'what is this company worth?', and they answer different questions.\n\n**Market capitalisation**, or market cap, is the value of the shares: share price × shares in issue. It is equity value at today's price, the shareholders' slice only.\n\n**Enterprise value** (EV) is the value of the whole business, whoever funded it: market cap plus debt, minus cash. Think of buying a flat with ₹30 lakh of your own money and a ₹70 lakh loan. If ₹5 lakh of cash comes with the flat, its real cost is 30 + 70 − 5 = ₹95 lakh.\n\nThat gives the pairing rule. Match each value with the figure that belongs to the same people:\n\n- EV goes with figures earned before lenders are paid: revenue, EBITDA, EBIT.\n- Equity value goes with figures that belong to shareholders alone: profit after tax, EPS, book value.\n\nFirms differ on what else counts as debt, such as lease liabilities and unfunded staff pensions. Most add **non-controlling interest**: if a company owns 80% of a subsidiary (a company it controls), it reports all of that subsidiary's EBITDA, so EV must include the 20% owned by others.\n\nShare counts need care. Basic shares are those in issue today; **diluted shares** add those that employee share options (rights to buy shares at a set price) or convertible debt (loans that can turn into shares) could create. A **bonus issue** hands existing holders free shares, say one for each share held: the count doubles, the price halves, and the business is unchanged.",
+    "example": {
+      "text": "Brew Lane at its FY26 results, with the 31 March 2026 balance sheet.\n\n{table}\n\nMarket cap is ₹180 a share × 1 crore shares = ₹180 crore. Add debt of 30 and take off cash of 8: EV = ₹202 crore. Debt minus cash, ₹22 crore, is the net debt you met on Day 8.\n\nNow pair each value with the right figure:\n\n- EV ÷ EBITDA = 202 ÷ 20 = 10.1x\n- EV ÷ revenue = 202 ÷ 100 = 2.0x\n- Market cap ÷ profit after tax = 180 ÷ 9 = 20x\n- Market cap ÷ book equity = 180 ÷ 35 = 5.1x\n\nAssume Brew Lane has no share options or convertible debt, so basic and diluted shares are both 1 crore. Its balance sheet shows no non-controlling interest.",
+      "table": {
+        "caption": "₹ crore; share price at the FY26 results, balance sheet at 31 March 2026",
+        "columns": ["FY26"],
+        "rows": [
+          { "label": "Market capitalisation", "values": [180] },
+          { "label": "Debt", "values": [30] },
+          { "label": "Cash", "values": [-8] },
+          { "label": "Enterprise value", "values": [202], "rule": "total" }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Market capitalisation",
+        "aka": ["market cap", "market value of equity"],
+        "definition": "What the stock market values a company's shares at today: share price times the number of shares.",
+        "formula": "Share price × shares outstanding"
+      },
+      {
+        "term": "Enterprise value",
+        "aka": ["EV", "firm value"],
+        "definition": "The value of the whole business to all its funders. It pairs with revenue and EBITDA.",
+        "formula": "Market cap + debt − cash"
+      },
+      {
+        "term": "Diluted shares",
+        "aka": ["fully diluted shares"],
+        "definition": "Shares in issue plus those that options or convertible debt could create. Basic shares count only those in issue."
+      },
+      {
+        "term": "Non-controlling interest",
+        "aka": ["minority interest", "minorities"],
+        "definition": "The part of a subsidiary owned by outside shareholders. It is added to EV because the parent reports all of that subsidiary's EBITDA."
+      },
+      {
+        "term": "Bonus issue",
+        "aka": ["bonus shares", "stock dividend"],
+        "definition": "Free new shares given to existing shareholders in proportion to their holdings. The count rises, the price falls, and total value is unchanged."
+      }
+    ],
+    "builder": "EV joins two clocks. The share price is live, while debt and cash come from the latest balance sheet, which may be months old. Store both dates with every EV, and flag one that pairs today's price with a balance sheet older than the latest filing.\n\nShare counts break even more often. After a bonus issue or a split (one share divided into several), data feeds can update the price and the share count on different days. For a while, a new share count times an old price doubles the market cap, or the reverse halves it. Errors like this are a leading cause of wrong market caps.\n\n**Check worth building:** compute market cap only from a price and a share count stamped with the same date, and flag any daily jump that the share price alone does not explain.",
+    "client": {
+      "say": "Net debt definitions differ a lot between firms, so I'd like to match yours before we compute a single EV.",
+      "ask": "What goes into your net debt: leases, pensions, minority interests?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d14-concept1",
+      "type": "concept",
+      "concept": "Why cash is taken off",
+      "kind": "choice",
+      "prompt": "When you work out enterprise value, why do you take off the company's cash?",
+      "options": [
+        "Cash is owed to suppliers, so it is really a liability",
+        "A buyer gets the cash with the business, lowering its real cost",
+        "Cash earns no operating profit, so it is worth nothing to owners",
+        "Accounting rules require cash to be shown as a negative figure"
+      ],
+      "answer": 1,
+      "explain": "Whoever buys the whole business also gets its cash, so the true cost of the business is the price minus that cash. 'Worth nothing' is tempting because cash earns no operating profit, but cash is worth exactly its face value; EV takes it off so that only the business is being priced."
+    },
+    {
+      "id": "d14-concept2",
+      "type": "concept",
+      "concept": "Pair value with the right profit",
+      "kind": "choice",
+      "prompt": "Which ratio pairs a value with a profit that belongs to the same group of investors?",
+      "options": [
+        "Enterprise value ÷ profit after tax",
+        "Market cap ÷ EBITDA",
+        "Market cap ÷ EBIT",
+        "Enterprise value ÷ EBITDA"
+      ],
+      "answer": 3,
+      "explain": "EV is the value to lenders and shareholders together, and EBITDA is earned before either is paid, so the two match. Enterprise value ÷ profit after tax is the tempting mix-up: profit after tax is what is left once lenders have had their interest, so it belongs to shareholders alone."
+    },
+    {
+      "id": "d14-calc1",
+      "type": "calc",
+      "concept": "Enterprise value from market cap",
+      "kind": "number",
+      "prompt": "Suppose Brew Lane's share price falls from ₹180 to ₹150. It still has 1 crore shares, debt of ₹30 crore and cash of ₹8 crore. What is its enterprise value?",
+      "answer": 172,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "150 * shares + debt26 - cash26",
+      "explain": "Market cap is ₹150 × 1 crore = ₹150 crore, so EV = 150 + 30 − 8 = ₹172 crore. ₹180 crore is the common slip: it adds the debt but forgets to take off the cash."
+    },
+    {
+      "id": "d14-calc2",
+      "type": "calc",
+      "concept": "A bonus issue changes nothing",
+      "kind": "choice",
+      "prompt": "Suppose Brew Lane makes a 1:1 bonus issue, one free share for every share held. The share price adjusts from ₹180 to ₹90 and nothing else changes. What is its market cap now?",
+      "options": ["₹90 crore", "₹170 crore", "₹180 crore", "₹360 crore"],
+      "answer": 2,
+      "check": "90 * shares * 2",
+      "explain": "The share count doubles to 2 crore and the price halves to ₹90, so market cap is still 2 × 90 = ₹180 crore. ₹360 crore is the tempting slip: it multiplies the new share count by the old price."
+    },
+    {
+      "id": "d14-client1",
+      "type": "client",
+      "concept": "Agree the net debt definition",
+      "kind": "choice",
+      "prompt": "A fund manager asks you to calculate enterprise value for 30 listed retailers by Friday. Which reply is best?",
+      "options": [
+        "Will do. Should net debt include leases, pensions and minorities?",
+        "Will do. EV is just market cap plus debt, so it should be quick.",
+        "Sure, though market cap would be simpler and almost as useful here.",
+        "Will do. Would you like the values in US dollars or in rupees?"
+      ],
+      "answer": 0,
+      "explain": "Retailers rent most of their shops, so whether lease liabilities count as debt can change EV a lot, and every ratio built on it. The quick yes is tempting, but it forgets cash and assumes a definition the client may not share."
+    },
+    {
+      "id": "d14-builder1",
+      "type": "builder",
+      "concept": "Date-stamp both halves of EV",
+      "kind": "choice",
+      "prompt": "In June 2026, your system reports Brew Lane's EV as ₹205 crore: today's market cap of ₹180 crore, plus debt of ₹31 crore, minus cash of ₹6 crore. Which check would have caught the error?",
+      "options": [
+        "Confirm that EV is larger than market cap, as it normally should be",
+        "Store each input's date; flag a balance sheet older than the latest",
+        "Ask a language model whether ₹205 crore looks like a reasonable EV",
+        "Recompute EV from the same three inputs to confirm the arithmetic"
+      ],
+      "answer": 1,
+      "explain": "Debt of 31 and cash of 6 come from the 31 March 2025 balance sheet; with the latest filing, EV is 180 + 30 − 8 = ₹202 crore, so a date check on each input catches it. Recomputing is tempting, but the sum was right: the inputs were from the wrong date."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a client why Brew Lane's enterprise value is higher than its market cap.",
+    "modelAnswer": "Market cap is the value of Brew Lane's shares: ₹180 a share times 1 crore shares, so ₹180 crore. But buying the whole business means taking on its ₹30 crore of debt, and getting its ₹8 crore of cash. So enterprise value is 180 plus 30 minus 8, which is ₹202 crore. EV belongs to lenders and shareholders together, so we compare it with EBITDA: 10.1 times. Market cap belongs to shareholders, so we compare it with profit after tax: 20 times."
+  }
+}

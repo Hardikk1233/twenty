@@ -1,0 +1,152 @@
+{
+  "day": 22,
+  "phase": 4,
+  "title": "Credit and lending",
+  "pages": {
+    "why": "A private credit fund, a fund that lends directly to companies, has loans to 40 businesses in India and the UK. Every quarter each borrower sends a compliance certificate showing how it measures up against its loan's tests, and an analyst rechecks each one against that loan's own definitions. Spot trouble early and the fund can act while the borrower can still repay.",
+    "idea": "A lender's upside is capped: at best it gets back the principal, the amount lent, plus interest. Its downside is losing the principal. So a lender asks one question above all: will I be repaid, and if not, how much will I get back?\n\nThe interest rate prices that risk: a benchmark rate, roughly what the safest borrowers pay, plus a **credit spread** for the chance that this borrower fails to pay. Spreads are quoted in basis points: 100 basis points is 1%.\n\nStructure decides who gets what if things go wrong:\n\n- **Secured debt** is backed by collateral: assets the lender can take and sell if it is not paid. Unsecured debt has no claim on any particular asset.\n- **Seniority** sets the order: senior debt is repaid first, then subordinated (junior) debt, and shareholders last.\n\n**Covenants** are promises in the loan agreement. Financial covenants are tests, such as 'net debt to EBITDA no more than 2.5x', usually checked each quarter. Others forbid actions, such as borrowing more or paying dividends. Missing a payment or breaking a covenant is a **default** under the loan, though rating agencies mainly count missed payments. The lender can then demand repayment at once, but usually renegotiates, for example waiving a covenant breach for a fee or a higher rate.\n\nIf a borrower fails, the **recovery rate** is the share of the debt its lender gets back. Senior secured lenders usually recover the most.\n\nPrivate credit funds mostly make senior secured loans to mid-sized companies, often ones owned by private equity firms. Practice varies: many large loans are 'covenant-lite', with no regular tests.",
+    "example": {
+      "text": "Brew Lane owes its bank ₹30 crore and paid ₹3 crore of interest in FY26, a 10% rate. Assume the benchmark rate is 7%: the credit spread is then 3%, or 300 basis points.\n\nSuppose the loan also has two covenants, at levels assumed for this example: net debt to EBITDA no more than 2.5x, and interest cover (EBIT ÷ interest) at least 3.0x.\n\n{table}\n\nBrew Lane passes both. Headroom is how far results could fall before a breach. With net debt at ₹22 crore, the ratio reaches 2.5x if EBITDA falls to 22 ÷ 2.5 = ₹8.8 crore, a drop of (20 − 8.8) ÷ 20 = 56%. Some teams quote the gap in the ratio instead: 2.5 − 1.1 = 1.4x.\n\nNow suppose the agreement lets Brew Lane add back ₹2 crore of new-café opening costs (a hypothetical figure), counting EBITDA as if they were never spent. 'EBITDA as defined' is then ₹22 crore, and the ratio is 22 ÷ 22 = 1.0x, not 1.1x. The agreement's definition is the one that counts.",
+      "table": {
+        "caption": "₹ crore and times (x), year ended 31 March 2026; covenant levels assumed",
+        "columns": ["FY26 actual", "Covenant"],
+        "rows": [
+          { "label": "Net debt", "values": [22, null] },
+          { "label": "EBITDA", "values": [20, null] },
+          { "label": "Net debt to EBITDA (x)", "values": [1.1, 2.5], "highlight": true },
+          { "label": "EBIT", "values": [15, null] },
+          { "label": "Interest", "values": [3, null] },
+          { "label": "Interest cover (x)", "values": [5, 3], "highlight": true }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Credit spread",
+        "aka": ["spread", "loan margin"],
+        "definition": "The extra interest a borrower pays above a benchmark rate, for the risk that it fails to pay.",
+        "formula": "Loan rate − benchmark rate"
+      },
+      {
+        "term": "Secured debt",
+        "aka": ["secured loan"],
+        "definition": "Debt backed by collateral: specific assets the lender can take and sell if it is not paid."
+      },
+      {
+        "term": "Seniority",
+        "aka": ["ranking", "priority"],
+        "definition": "The order in which claims are repaid if a borrower fails: senior debt first, then subordinated debt, then shareholders."
+      },
+      {
+        "term": "Covenant",
+        "aka": ["loan covenant", "undertaking"],
+        "definition": "A promise in a loan agreement, such as not borrowing more. Financial covenants are ratio tests, measured by the agreement's own definitions."
+      },
+      {
+        "term": "Default",
+        "aka": ["event of default"],
+        "definition": "Missing a payment of interest or principal, or breaking another term such as a covenant. It lets lenders demand repayment early."
+      },
+      {
+        "term": "Recovery rate",
+        "aka": ["recovery"],
+        "definition": "The share of the amount owed that a lender gets back after a default, from selling collateral or agreeing new terms.",
+        "formula": "Amount recovered ÷ amount owed"
+      }
+    ],
+    "builder": "Covenant monitoring is a strong use case: a fund may hold 50 loans, each tested every quarter on figures the borrower supplies. The trap is that each loan agreement writes its own definitions. 'EBITDA as defined' may add back one-off costs, cap those add-backs, or leave out a subsidiary. Interest cover may use EBITDA rather than EBIT. A standard formula is wrong by default.\n\nSo extract first, then compute. A model finds each definition and quotes its clause, a person confirms it once, and code computes every test from the borrower's figures, with its headroom.\n\n**Check worth building:** recompute each covenant from the agreement's definition and compare it with the borrower's compliance certificate. Flag any difference, and any test whose headroom falls below a level the fund sets.",
+    "client": {
+      "say": "Every loan defines its own tests, so I'd compute each covenant from the agreement itself, not from a standard formula.",
+      "ask": "How do you track covenant compliance across the portfolio today?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d22-concept1",
+      "type": "concept",
+      "concept": "A lender's capped upside",
+      "kind": "choice",
+      "prompt": "Why does a lender worry more about the downside than about how fast a borrower might grow?",
+      "options": [
+        "Lenders take a share of profits, so they gain less from growth than owners do",
+        "Fast growth always uses up cash, so lenders treat any growth as a danger",
+        "Its best case is principal plus interest, but it can lose the principal",
+        "Interest rises with the borrower's profits, so growth is already rewarded"
+      ],
+      "answer": 2,
+      "explain": "However well the borrower does, the lender gets back at most its principal plus interest, yet it can lose the principal if the borrower fails. Taking a share of profits is the tempting answer, but that is what shareholders do; a lender's return is fixed by the loan."
+    },
+    {
+      "id": "d22-concept2",
+      "type": "concept",
+      "concept": "A covenant breach is a default",
+      "kind": "choice",
+      "prompt": "A borrower has paid every rupee of interest on time, but its net debt to EBITDA has risen above its 2.5x covenant. What is the usual position?",
+      "options": [
+        "It is in default, and the lender usually uses that to renegotiate",
+        "Nothing changes, because only a missed payment counts as a default",
+        "The borrower is declared insolvent and its assets are sold at once",
+        "The interest rate falls automatically, to help it get back under 2.5x"
+      ],
+      "answer": 0,
+      "explain": "Loan agreements treat a covenant breach as a default even when payments are up to date, which lets the lender demand repayment, and it usually uses that right to agree a waiver, a fee or a higher rate. 'Only a missed payment counts' is the tempting answer, but covenants exist to give the lender a say before payments are missed."
+    },
+    {
+      "id": "d22-calc1",
+      "type": "calc",
+      "concept": "Covenant headroom",
+      "kind": "number",
+      "prompt": "Brew Lane's FY26 EBIT is ₹15 crore and its interest ₹3 crore. Suppose its loan requires interest cover (EBIT ÷ interest) of at least 3.0x. If interest stays the same, by what percentage could EBIT fall before the covenant is breached?",
+      "answer": 40,
+      "tolerance": 0,
+      "unit": "%",
+      "check": "(1 - 3 * interest / ebit) * 100",
+      "explain": "The covenant is met down to EBIT of 3.0 × 3 = ₹9 crore, so EBIT can fall by 15 − 9 = ₹6 crore, which is 6 ÷ 15 = 40%. Answering 60% is the common slip: that is 9 ÷ 15, the share of EBIT left at the limit, not the fall."
+    },
+    {
+      "id": "d22-calc2",
+      "type": "calc",
+      "concept": "Seniority drives recovery",
+      "kind": "choice",
+      "prompt": "A company defaults owing ₹20 crore of senior secured debt and ₹10 crore of subordinated debt. Its assets are sold for ₹24 crore. What is the subordinated lender's recovery rate?",
+      "options": ["20%", "40%", "80%", "100%"],
+      "answer": 1,
+      "check": "(24 - 20) / 10 * 100",
+      "explain": "The senior lender is repaid its ₹20 crore first, leaving 24 − 20 = ₹4 crore for the subordinated lender: 4 ÷ 10 = 40%. 80% is the tempting slip: it shares the ₹24 crore across all ₹30 crore of debt, as if both loans ranked equally."
+    },
+    {
+      "id": "d22-client1",
+      "type": "client",
+      "concept": "Start from each loan's definitions",
+      "kind": "choice",
+      "prompt": "A partner at a private credit fund says, 'We want an AI that warns us before any borrower breaches a covenant.' Which reply is best?",
+      "options": [
+        "Great. We can calculate net debt to EBITDA for every borrower from its accounts.",
+        "Our model can predict which of your borrowers will default in the next year.",
+        "Covenants are legal terms, so your lawyers should track them, not software.",
+        "Glad to. Where do each loan's definitions live, and how do you track them today?"
+      ],
+      "answer": 3,
+      "explain": "Each loan defines its own tests, so the work starts from the agreements and the fund's current process. Calculating from the accounts is the tempting reply, but a standard formula ignores each loan's 'EBITDA as defined' and will flag the wrong borrowers."
+    },
+    {
+      "id": "d22-builder1",
+      "type": "builder",
+      "concept": "Compute from the agreement",
+      "kind": "choice",
+      "prompt": "Your system flags a borrower at 2.7x against a 2.5x maximum: net debt ₹54 crore ÷ reported EBITDA ₹20 crore. The borrower's certificate claims 2.2x. Its loan agreement lets it add back one-off costs, capped at ₹2.5 crore. Which design gives the right answer?",
+      "options": [
+        "Apply one standard EBITDA formula to every borrower, so results are consistent",
+        "Accept each borrower's certificate as filed, since the borrower knows its loan",
+        "Compute each test by its loan's definition and compare with the certificate",
+        "Ask a language model to judge whether each borrower is likely to be in breach"
+      ],
+      "answer": 2,
+      "explain": "The agreement's definition gives 54 ÷ (20 + 2.5) = 2.4x, a pass, and comparing that with the certificate flags its 2.2x, which implies add-backs above the cap. Trusting the certificate is tempting, but it would accept that overstated figure, just as one standard formula raised the false 2.7x alarm."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, explain to a new colleague how a lender looks at a loan, using Brew Lane.",
+    "modelAnswer": "A lender's upside is capped: it gets its money back with interest, nothing more. So it asks two questions: will I be repaid, and if not, how much do I get back? Brew Lane borrows ₹30 crore at 10%, a benchmark rate plus a credit spread for its risk. Covenants act as an early warning: at 1.1x net debt to EBITDA, it is well inside a limit of, say, 2.5x. And if the loan is senior and secured, the lender is first in line if things go wrong."
+  }
+}

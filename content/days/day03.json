@@ -1,0 +1,165 @@
+{
+  "day": 3,
+  "phase": 1,
+  "title": "The balance sheet",
+  "pages": {
+    "why": "A family office, the private investment team of a wealthy family, is asked to back a café chain that reports healthy profits. Before it signs, its adviser checks what the chain owns, what it owes, and when those debts fall due. A profitable company that cannot repay a loan on time is still in trouble, and the balance sheet is where you see it coming.",
+    "idea": "The **balance sheet** is a snapshot on one date, usually the last day of a year or quarter. If you think in systems: the income statement is a log of the year's events, and the balance sheet is the state of the database at midnight on 31 March.\n\nIt has three parts:\n\n- Assets: what the business owns or is owed, such as cash, **receivables** (money customers still owe), **inventory** (goods waiting to be sold) and property and equipment.\n- Liabilities: what it owes others, such as **payables** (unpaid supplier bills) and **debt** (borrowed money).\n- **Equity**: what belongs to the owners. It is share capital, the money shareholders put in, plus reserves, the profits kept in the business over the years. Indian annual reports often show reserves as other equity, and US ones as retained earnings.\n\nThe rule never breaks: assets = liabilities + equity. Every rupee the business holds came either from someone it owes or from its owners.\n\nAssets expected to turn into cash within 12 months, and liabilities due within 12 months, are current. The rest are non-current.\n\nEquity is also called book value: the owners' stake on paper. It is usually far from what the shares trade for in the market.",
+    "example": {
+      "text": "Brew Lane's balance sheet at two year-ends. Its debt is a long-term bank loan, so it is non-current; payables are its only current liability.\n\n{table}\n\nCheck the rule at 31 March 2026: assets of 70 = liabilities of 35 + equity of 35.\n\nReserves rose from 16 to 25 because Brew Lane kept all of its ₹9 crore profit and paid no dividend (a cash payout to shareholders). That is your first link between two statements.\n\nBook value per share = equity ÷ shares = ₹35 crore ÷ 1 crore = ₹35. The share price is ₹180, more than five times book value.",
+      "table": {
+        "caption": "₹ crore, as at 31 March 2025 and 2026",
+        "columns": ["2025", "2026"],
+        "rows": [
+          { "label": "Cash", "values": [6, 8] },
+          { "label": "Receivables", "values": [3, 4] },
+          { "label": "Inventory", "values": [5, 6] },
+          { "label": "Current assets", "values": [14, 18], "rule": "subtotal" },
+          { "label": "Property and equipment, net", "values": [47, 52] },
+          { "label": "Total assets", "values": [61, 70], "rule": "total" },
+          { "label": "Payables", "values": [4, 5] },
+          { "label": "Debt", "values": [31, 30] },
+          { "label": "Total liabilities", "values": [35, 35], "rule": "subtotal" },
+          { "label": "Share capital", "values": [10, 10] },
+          { "label": "Reserves", "values": [16, 25] },
+          { "label": "Total equity", "values": [26, 35], "rule": "subtotal" },
+          { "label": "Total liabilities and equity", "values": [61, 70], "rule": "total" }
+        ]
+      }
+    },
+    "terms": [
+      {
+        "term": "Balance sheet",
+        "aka": ["statement of financial position"],
+        "definition": "What a business owns and owes on one date. Assets always equal liabilities plus equity.",
+        "formula": "Assets = liabilities + equity"
+      },
+      {
+        "term": "Equity",
+        "aka": [
+          "shareholders' equity",
+          "shareholders' funds",
+          "net worth",
+          "book value",
+          "net assets"
+        ],
+        "definition": "The owners' stake: assets minus liabilities, made up of share capital plus reserves.",
+        "formula": "Share capital + reserves"
+      },
+      {
+        "term": "Receivables",
+        "aka": ["trade receivables", "debtors", "accounts receivable"],
+        "definition": "Money customers owe for goods or services already delivered."
+      },
+      {
+        "term": "Inventory",
+        "aka": ["inventories", "stock"],
+        "definition": "Goods held for sale, or materials for making them. In India and the UK, stock can mean inventory rather than shares."
+      },
+      {
+        "term": "Payables",
+        "aka": ["trade payables", "creditors", "accounts payable"],
+        "definition": "Money owed to suppliers for goods or services already received."
+      },
+      {
+        "term": "Debt",
+        "aka": ["borrowings", "loans"],
+        "definition": "Borrowed money that must be repaid with interest. Firms differ on whether lease liabilities, rent committed under long leases, count as debt."
+      }
+    ],
+    "builder": "The balance sheet hands you a free test. If an extracted balance sheet does not satisfy assets = liabilities + equity, something was misread, missed or counted twice, and no human needs to look until it fails.\n\nIt also forces a distinction your data model must keep. Cash of ₹8 crore is a balance at 31 March 2026. Revenue of ₹100 crore is a total for a year. Ratios that mix the two go wrong quietly, so store the type with every value, balance at a date or total for a period, plus the date or period itself.\n\n**Check worth building:** after every extraction, test the equation for each date, and test that the parts add up to each subtotal.",
+    "client": {
+      "say": "Your definition of debt flows into every ratio we calculate, so I'd like to start from yours.",
+      "ask": "What do you count as debt? Do lease liabilities go in?"
+    }
+  },
+  "quiz": [
+    {
+      "id": "d03-concept1",
+      "type": "concept",
+      "concept": "A balance on one date",
+      "kind": "choice",
+      "prompt": "Brew Lane's balance sheet shows cash of ₹8 crore at 31 March 2026. What does that figure describe?",
+      "options": [
+        "The cash Brew Lane held at the close of 31 March 2026",
+        "The cash Brew Lane received from customers during FY26",
+        "The profit Brew Lane earned during FY26, paid in cash",
+        "Brew Lane's average cash balance across the FY26 year"
+      ],
+      "answer": 0,
+      "explain": "A balance sheet figure is a balance on one date, here the close of 31 March 2026. Cash received during the year is tempting, but that is a total over a period, which belongs in the cash flow statement."
+    },
+    {
+      "id": "d03-concept2",
+      "type": "concept",
+      "concept": "Borrowing changes both sides",
+      "kind": "choice",
+      "prompt": "A company borrows ₹5 crore from a bank and keeps the money in its account. What happens to its balance sheet?",
+      "options": [
+        "Assets rise by ₹5 crore and equity rises by ₹5 crore",
+        "Nothing changes on the balance sheet until the money is spent",
+        "Assets rise by ₹5 crore and liabilities rise by ₹5 crore",
+        "Profit rises by ₹5 crore, which adds to its reserves"
+      ],
+      "answer": 2,
+      "explain": "Cash, an asset, rises by ₹5 crore, and debt, a liability, rises by the same amount, so the equation still balances. Equity rising is the tempting answer, but borrowed money belongs to the lender, not the owners."
+    },
+    {
+      "id": "d03-calc1",
+      "type": "calc",
+      "concept": "Current assets",
+      "kind": "number",
+      "prompt": "At 31 March 2026, Brew Lane has cash of ₹8 crore, receivables of ₹4 crore, inventory of ₹6 crore and property and equipment of ₹52 crore. What are its current assets?",
+      "answer": 18,
+      "tolerance": 0,
+      "unit": "₹ crore",
+      "check": "cash26 + receivables26 + inventory26",
+      "explain": "Current assets should turn into cash within 12 months: 8 + 4 + 6 = ₹18 crore. Adding property and equipment, to reach 70, is the common slip, but cafés and ovens are used for years, so they are non-current."
+    },
+    {
+      "id": "d03-calc2",
+      "type": "calc",
+      "concept": "Book value per share",
+      "kind": "choice",
+      "prompt": "At 31 March 2026, Brew Lane's share capital is ₹10 crore and its reserves are ₹25 crore. It has 1 crore shares. What is its book value per share?",
+      "options": ["₹10", "₹25", "₹35", "₹180"],
+      "answer": 2,
+      "check": "(shareCapital26 + reserves26) / shares",
+      "explain": "Book value per share is equity divided by shares: (10 + 25) ÷ 1 = ₹35. ₹10 is tempting because it matches share capital per share, but book value also includes ₹25 crore of profits kept in the business."
+    },
+    {
+      "id": "d03-client1",
+      "type": "client",
+      "concept": "Define debt first",
+      "kind": "choice",
+      "prompt": "A credit analyst at a lending fund says, 'Brew Lane has ₹30 crore of debt.' Which follow-up question is most useful?",
+      "options": [
+        "Is that figure from the latest balance sheet, or the year before?",
+        "Does that include lease liabilities, or only bank borrowings?",
+        "Would you like that figure converted into US dollars?",
+        "Is ₹30 crore a lot of debt for a café chain this size?"
+      ],
+      "answer": 1,
+      "explain": "Lease liabilities can change a debt figure a lot, and every ratio built on it, so confirming what is included avoids mismatched numbers later. Checking the date sounds diligent, but it leaves the bigger question open: what the client counts as debt."
+    },
+    {
+      "id": "d03-builder1",
+      "type": "builder",
+      "concept": "Balance check catches errors",
+      "kind": "choice",
+      "prompt": "Your system extracts Brew Lane's balance sheet at 31 March 2026 as: cash 8, receivables 4, inventory 6, property and equipment 52, payables 5, debt 30, share capital 10, reserves 16. What does the balance check tell you?",
+      "options": [
+        "Nothing is wrong: every figure appears on Brew Lane's balance sheet",
+        "Property and equipment must be wrong, as total assets should be 61",
+        "The check cannot run without the income statement for the year",
+        "Assets are 70 but liabilities plus equity are 61: a figure is wrong"
+      ],
+      "answer": 3,
+      "explain": "Assets add to 70 while liabilities and equity add to 61, and the ₹9 crore gap equals a year's profit, which points to reserves taken from the 2025 column. The first option is the trap: 16 really is a Brew Lane reserves figure, just from the wrong date."
+    }
+  ],
+  "speak": {
+    "prompt": "In 30 seconds, tell a fund manager why a balance sheet always balances.",
+    "modelAnswer": "Everything a business owns had to be paid for by someone. Either it was funded by people the business owes, which are liabilities, or by the owners, through money they put in or profits left in the business, which is equity. So assets always equal liabilities plus equity. Brew Lane's ₹70 crore of assets is funded by ₹35 crore of liabilities and ₹35 crore of equity. If an extracted balance sheet doesn't balance, something was misread."
+  }
+}
